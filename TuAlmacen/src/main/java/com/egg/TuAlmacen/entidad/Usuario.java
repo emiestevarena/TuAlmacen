@@ -19,6 +19,7 @@ public class Usuario {
 	 private String password;
 	 private String email;
 	 
+	 
 	 @ManyToOne
 	 private Rol rol;
 	 
