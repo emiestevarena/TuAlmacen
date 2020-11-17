@@ -56,7 +56,9 @@
         <div class="container">
             <div class="row h-100 justify-content-center text-center mb-5 col-lg">
                 <div class="col-lg-6">
-                    <form>
+                    <form action="/login" method="POST">
+
+                        <p th:if="${error !=null}" th:text="${error}"></p>
                         <div class="form-group h5">
                             <label for="email">Email</label>
                             <input type="email" placeholder="ingrese su email" class="form-control" id="email">
@@ -73,7 +75,7 @@
         </div>
     </div>
     <p><br /></p>
-    
+
     <footer class="py-5 bg-dark">
         <div class="container-fluid">
             <p class="m-0 text-center text-white">Copyright &copy; TuAlmacen</p>
