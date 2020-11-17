@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\service\UsuarioService.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\enums\Rubro.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\entidad\Producto.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\entidad\Foto.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\repositorio\UsuarioRepositorio.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\configuracion\SecurityConfiguration.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\entidad\Usuario.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\error\ErrorService.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\IndexController.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\enums\Rol.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\RegistroController.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\entidad\Pedido.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\entidad\Comentario.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\enums\Estado.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\TuAlmacenApplication.java
+=======
 /home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Rubro.java
 /home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Usuario.java
 /home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Pedido.java
@@ -10,3 +27,4 @@
 /home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Foto.java
 /home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/IndexController.java
 /home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/TuAlmacenApplication.java
+>>>>>>> 795e440c7d1be1743662b1ea07cf575f2cf0c428
