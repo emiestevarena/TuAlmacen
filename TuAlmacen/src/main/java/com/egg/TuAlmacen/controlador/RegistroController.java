@@ -7,6 +7,8 @@ package com.egg.TuAlmacen.controlador;
 
 
 import com.egg.TuAlmacen.enums.Rol;
+import com.egg.TuAlmacen.error.ErrorService;
+import com.egg.TuAlmacen.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +26,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/")
 public class RegistroController {
     
-    //@Autowired
-    //private UsuarioService usuarioService
+    @Autowired
+    private UsuarioService usuarioService;
     
     @Autowired
     public Rol rol;
@@ -47,11 +49,12 @@ public class RegistroController {
     public String registrarCliente(ModelMap modelo,
                                    @RequestParam(required=true) String nombre,
                                    @RequestParam(required=true) String password,
-                                   @RequestParam(required=true) String email){
+                                   @RequestParam(required=true) String email,
+                                   @RequestParam(required=true) String password_confirmation) throws ErrorService{
         try{
-            //usuarioService.alta(nombre,password,email,rol.USUARIO);
+            usuarioService.registrarUsuario(nombre,email,password,password_confirmation,rol.USUARIO);
             modelo.put("ok","alta exitosa");
-        }catch(Exception ex){
+        }catch(ErrorService ex){
             modelo.put("error",ex.getMessage());
         }
         return "redirect:/registro_cliente";
@@ -61,11 +64,12 @@ public class RegistroController {
     public String registrarAdmin(ModelMap modelo,
                                    @RequestParam(required=true) String nombre,
                                    @RequestParam(required=true) String password,
-                                   @RequestParam(required=true) String email){
+                                   @RequestParam(required=true) String email,
+                                   @RequestParam(required=true) String password_confirmation)throws ErrorService{
         try{
-            //usuarioService.alta(nombre,password,email,rol.ADMIN);
+             usuarioService.registrarUsuario(nombre,email,password,password_confirmation,rol.ADMIN);
             modelo.put("ok","alta exitosa");
-        }catch(Exception ex){
+        }catch(ErrorService ex){
             modelo.put("error",ex.getMessage());
         }
         return "redirect:/registro_admin";
