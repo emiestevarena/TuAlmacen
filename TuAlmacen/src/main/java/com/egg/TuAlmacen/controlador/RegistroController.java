@@ -29,16 +29,16 @@ public class RegistroController {
     public Rol rol;
     
     @GetMapping("/registro_cliente")
-    public String registroCliente(ModelMap modelo,@RequestParam(required=false) String error, @RequestParam(required=false) String OK){
+    public String registroCliente(ModelMap modelo,@RequestParam(required=false) String error, @RequestParam(required=false) String ok){
         if(error!=null&& !error.isEmpty()) modelo.put("error",error);
-        if(OK!=null&& !OK.isEmpty()) modelo.put("OK",OK);
+        if(ok!=null&& !ok.isEmpty()) modelo.put("ok",ok);
         return "registro_cliente.html";
     }
     
     @GetMapping("/registro_admin")
-    public String registroAdmin(ModelMap modelo,@RequestParam(required=false) String error, @RequestParam(required=false) String OK){
+    public String registroAdmin(ModelMap modelo,@RequestParam(required=false) String error, @RequestParam(required=false) String ok){
         if(error!=null&& !error.isEmpty()) modelo.put("error",error);
-        if(OK!=null&& !OK.isEmpty()) modelo.put("OK",OK);
+        if(ok!=null&& !ok.isEmpty()) modelo.put("ok",ok);
         return "registro_admin.html";
     }
     @PostMapping("/registrar_cliente")
@@ -48,7 +48,7 @@ public class RegistroController {
                                    @RequestParam(required=true) String email){
         try{
             //usuarioService.alta(nombre,password,email,rol.USUARIO);
-            modelo.put("OK","alta exitosa");
+            modelo.put("ok","alta exitosa");
         }catch(Exception ex){
             modelo.put("error",ex.getMessage());
         }
@@ -62,7 +62,7 @@ public class RegistroController {
                                    @RequestParam(required=true) String email){
         try{
             //usuarioService.alta(nombre,password,email,rol.ADMIN);
-            modelo.put("OK","alta exitosa");
+            modelo.put("ok","alta exitosa");
         }catch(Exception ex){
             modelo.put("error",ex.getMessage());
         }
