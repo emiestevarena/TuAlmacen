@@ -1,4 +1,4 @@
-package com.egg.TuAlmacen.entidad;
+package com.egg.TuAlmacen.enums;
 
 public enum Rol {
 

@@ -6,12 +6,15 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.egg.TuAlmacen.enums.Estado;
 
 @Entity
 public class Pedido {
@@ -29,8 +32,10 @@ public class Pedido {
 	
 	private Double precioTotal;
 	
-	@OneToOne
+	@ManyToOne
 	private Estado estado;
+	
+	private List<Integer>cantidad;
 
 	public String getId() {
 		return id;
@@ -70,6 +75,14 @@ public class Pedido {
 
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+
+	public List<Integer> getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(List<Integer> cantidad) {
+		this.cantidad = cantidad;
 	}
 	
 	

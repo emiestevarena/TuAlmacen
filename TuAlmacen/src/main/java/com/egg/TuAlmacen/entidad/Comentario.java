@@ -3,20 +3,23 @@ package com.egg.TuAlmacen.entidad;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+
 
 import org.hibernate.annotations.GenericGenerator;
 	
 	@Entity
-	public class comentarios {
+	public class Comentario {
 		
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid",strategy = "uuid2")
 	private String id;
-	@OneToOne
+	
+	@ManyToOne
 	private Producto producto;
-	@OneToOne
+	
+	@ManyToOne
 	private Usuario usuario;
 	
 	public String getId() {

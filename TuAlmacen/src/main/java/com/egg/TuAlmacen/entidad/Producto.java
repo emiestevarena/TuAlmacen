@@ -3,9 +3,12 @@ package com.egg.TuAlmacen.entidad;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.egg.TuAlmacen.enums.Rubro;
 
 @Entity
 public class Producto {
@@ -23,7 +26,7 @@ public class Producto {
 	@OneToOne
 	private Foto foto;
 	
-	@OneToOne
+	@ManyToOne
 	private Rubro rubro;
 	
 	public Producto() {

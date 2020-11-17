@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.egg.TuAlmacen.service.UsuarioService;
+
 
 
 @Configuration
@@ -23,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-		auth.userDetailsService(UsuarioService).
+		auth.userDetailsService(usuarioService).
 		passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
@@ -37,9 +39,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				.and().formLogin()
 					.loginPage("/login")
 						.loginProcessingUrl("/logincheck")
-						.usernameParameter("documento")
-						.passwordParameter("clave")
-						.defaultSuccessUrl("/index")
+						.usernameParameter("usuario")
+						.passwordParameter("password")
+						.defaultSuccessUrl("/inicio")
 						.failureUrl("/login?error=error")
 						.permitAll()
 				.and().logout()

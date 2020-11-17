@@ -3,9 +3,11 @@ package com.egg.TuAlmacen.entidad;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.egg.TuAlmacen.enums.Rol;
 @Entity
 public class Usuario {
 	
@@ -16,8 +18,10 @@ public class Usuario {
 	 private String usuario;
 	 private String password;
 	 private String email;
-	 @OneToOne
+	 
+	 @ManyToOne
 	 private Rol rol;
+	 
 	public String getId() {
 		return id;
 	}
