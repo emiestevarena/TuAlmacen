@@ -1,5 +1,6 @@
 package com.egg.TuAlmacen.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.egg.TuAlmacen.entidad.Foto;
 import com.egg.TuAlmacen.entidad.Producto;
+import com.egg.TuAlmacen.entidad.Usuario;
 import com.egg.TuAlmacen.enums.Rubro;
 import com.egg.TuAlmacen.error.ErrorService;
 import com.egg.TuAlmacen.repositorio.ProductoRepositorio;
@@ -20,6 +22,20 @@ public class ProductoService {
 	
 	@Autowired
 	private ProductoRepositorio productoRepositorio;
+	
+	
+
+
+	public Producto buscarPorId(String id) {
+		
+		return productoRepositorio.getOne(id);
+	}
+	
+	public List<Producto>findAll(){
+		
+		return productoRepositorio.findAll();
+		
+	}
 	
 	@Transactional
 	public void registrarProducto(String nombre,Double precioCompra,Integer cantidad,Double precioVenta,String descripcion,

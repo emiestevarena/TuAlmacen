@@ -44,8 +44,7 @@ public class UsuarioService implements UserDetailsService{
 	
 	public List<Usuario>findAll(){
 		
-		return usuarioRepositorio.findAll();
-		
+		return usuarioRepositorio.findAll();		
 	}
 	
 	

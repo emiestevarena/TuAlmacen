@@ -23,6 +23,20 @@ public class PedidoService {
 	@Autowired
 	private PedidoRepositorio pedidoRepositorio;
 	
+	
+	
+	
+public Pedido buscarPorId(String id) {
+		
+		return pedidoRepositorio.getOne(id);
+	}
+	
+	public List<Pedido>findAll(){
+		
+		return pedidoRepositorio.findAll();
+		
+	}
+	
 	@Transactional
 	public void registrarPedido(List<Producto> productos,Date fecha,Double precioTotal,Estado estado) throws ErrorService {
 		 

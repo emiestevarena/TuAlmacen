@@ -24,6 +24,7 @@ import org.hibernate.annotations.GenericGenerator;
 	@ManyToOne
 	private Usuario usuario;
 	
+	
 	public String getId() {
 		return id;
 	}
@@ -49,6 +50,4 @@ import org.hibernate.annotations.GenericGenerator;
 		this.comentario = comentario;
 	}
 	
-
-
 }
