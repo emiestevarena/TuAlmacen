@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\service\UsuarioService.java
 D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\enums\Rubro.java
 D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\entidad\Producto.java
@@ -13,3 +14,17 @@ D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlma
 D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\entidad\Comentario.java
 D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\enums\Estado.java
 D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\TuAlmacenApplication.java
+=======
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Rubro.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Usuario.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Pedido.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Producto.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/comentarios.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Estado.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/configuracion/SecurityConfiguration.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Rol.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/RegistroController.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Foto.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/IndexController.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/TuAlmacenApplication.java
+>>>>>>> 795e440c7d1be1743662b1ea07cf575f2cf0c428
