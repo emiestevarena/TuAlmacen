@@ -5,7 +5,10 @@
  */
 package com.egg.TuAlmacen.controlador;
 
+import com.egg.TuAlmacen.entidad.Producto;
+import com.egg.TuAlmacen.service.ProductoService;
 import com.egg.TuAlmacen.service.UsuarioService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,15 +26,15 @@ public class IndexController {
     @Autowired
     private UsuarioService usuarioService;
     
-    //@Autowired
-    //private ProductoService productoService
+    @Autowired
+    private ProductoService productoService;
     
     @GetMapping("/")
     public String index(ModelMap modelo){
         Long count = usuarioService.count();
         modelo.put("count",count);
-        //List<Producto> productos = productoService.findAll();
-        //modelo.put("productos",productos);
+        List<Producto> productos = productoService.findAll();
+        modelo.put("productos",productos);
         return "index.html";
     }
 }
