@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.egg.TuAlmacen.entidad.Foto;
+import com.egg.TuAlmacen.error.ErrorService;
+import com.egg.TuAlmacen.repositorio.FotoRepositorio;
+
 
 
 @Service
