@@ -1,6 +1,6 @@
 package com.egg.TuAlmacen.entidad;
 
-public enum Estados {
+public enum Estado {
 
 	PENDIENTE,CONFIRMADO,ANULADO
 }
