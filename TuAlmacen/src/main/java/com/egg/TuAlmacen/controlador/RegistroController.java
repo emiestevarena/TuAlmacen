@@ -52,7 +52,7 @@ public class RegistroController {
                                    @RequestParam(required=true) String email,
                                    @RequestParam(required=true) String password_confirmation) throws ErrorService{
         try{
-            usuarioService.registrarUsuario(nombre,email,password,password_confirmation,rol.USUARIO);
+            usuarioService.registrarUsuario(nombre,email,password,password_confirmation,Rol.USUARIO);
             modelo.put("ok","alta exitosa");
         }catch(ErrorService ex){
             modelo.put("error",ex.getMessage());
@@ -67,7 +67,7 @@ public class RegistroController {
                                    @RequestParam(required=true) String email,
                                    @RequestParam(required=true) String password_confirmation)throws ErrorService{
         try{
-             usuarioService.registrarUsuario(nombre,email,password,password_confirmation,rol.ADMIN);
+             usuarioService.registrarUsuario(nombre,email,password,password_confirmation,Rol.ADMIN);
             modelo.put("ok","alta exitosa");
         }catch(ErrorService ex){
             modelo.put("error",ex.getMessage());
