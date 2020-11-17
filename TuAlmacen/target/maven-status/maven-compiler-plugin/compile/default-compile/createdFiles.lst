@@ -1,0 +1,15 @@
+com\egg\TuAlmacen\controlador\RegistroController.class
+com\egg\TuAlmacen\TuAlmacenApplication.class
+com\egg\TuAlmacen\error\ErrorService.class
+com\egg\TuAlmacen\entidad\Usuario.class
+com\egg\TuAlmacen\configuracion\SecurityConfiguration.class
+com\egg\TuAlmacen\entidad\Producto.class
+com\egg\TuAlmacen\entidad\Comentario.class
+com\egg\TuAlmacen\entidad\Pedido.class
+com\egg\TuAlmacen\enums\Estado.class
+com\egg\TuAlmacen\repositorio\UsuarioRepositorio.class
+com\egg\TuAlmacen\controlador\IndexController.class
+com\egg\TuAlmacen\enums\Rubro.class
+com\egg\TuAlmacen\entidad\Foto.class
+com\egg\TuAlmacen\service\UsuarioService.class
+com\egg\TuAlmacen\enums\Rol.class
