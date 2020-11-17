@@ -38,12 +38,12 @@ public Pedido buscarPorId(String id) {
 	}
 	
 	@Transactional
-	public void registrarPedido(List<Producto> productos,Date fecha,Double precioTotal,Estado estado) throws ErrorService {
+	public void registrarPedido(List<Producto> productos,List<Integer> cantidades,Date fecha,Double precioTotal,Estado estado) throws ErrorService {
 		 
-		validar(productos,fecha,precioTotal,estado);
+		validar(productos,cantidades,fecha,precioTotal,estado);
 		
 		Pedido pedido = new Pedido();
-		
+		pedido.setCantidad(cantidades);
 		pedido.setProductos(productos);
 		pedido.setFecha(new Date());
 		pedido.setPrecioTotal(precioTotal);
@@ -54,16 +54,16 @@ public Pedido buscarPorId(String id) {
 	}
 	
 	@Transactional
-	public void modificarPedido(String id,List<Producto> productos,Date fecha,Double precioTotal,Estado estado) throws ErrorService {
+	public void modificarPedido(String id,List<Producto> productos,List<Integer> cantidades,Date fecha,Double precioTotal,Estado estado) throws ErrorService {
 		
-		validar(productos,fecha,precioTotal,estado);
+		validar(productos,cantidades,fecha,precioTotal,estado);
 		
 		Optional<Pedido> respuesta = pedidoRepositorio.findById(id);
 		
 		if(respuesta.isPresent()) {
 			
 			Pedido pedido = new Pedido();
-			
+			pedido.setCantidad(cantidades);
 			pedido.setProductos(productos);
 			pedido.setFecha(fecha);
 			pedido.setPrecioTotal(precioTotal);
@@ -91,12 +91,17 @@ public Pedido buscarPorId(String id) {
 		}
 	}
 	
-	public void validar(List<Producto> productos, Date fecha,Double precioTotal,Estado estado) throws ErrorService {
+	public void validar(List<Producto> productos,List<Integer> cantidades, Date fecha,Double precioTotal,Estado estado) throws ErrorService {
 		
 		if(productos == null || productos.isEmpty()) {
 			
 			throw new ErrorService("La lista de productos no puede estar vacía");
 		}
+		if(cantidades == null || cantidades.isEmpty()) {
+			
+			throw new ErrorService("La lista de cantidades no puede estar vacía");
+		}
+
 		if(fecha == null) {
 			
 			throw new ErrorService("La fecha no puede ser nula");
@@ -109,6 +114,7 @@ public Pedido buscarPorId(String id) {
 			
 			throw new ErrorService("El estado del pedido no puede ser nulo");
 		}
+       
 	}
 	
 }
