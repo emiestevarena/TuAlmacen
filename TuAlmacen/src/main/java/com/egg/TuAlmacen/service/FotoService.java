@@ -14,6 +14,8 @@ public class FotoService {
 	@Autowired
 	private FotoRepositorio fotoRepositorio;
 	
+	
+	
 	@Transactional
 	public Foto guardar(MultipartFile archivo)throws ErrorService{
 		
