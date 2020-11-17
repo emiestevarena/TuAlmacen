@@ -1,0 +1,127 @@
+package com.egg.TuAlmacen.service;
+
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.proyecto.demo.entidad.Foto;
+import com.proyecto.demo.entidad.Producto;
+import com.proyecto.demo.enumeracion.Rubro;
+import com.proyecto.demo.error.ErrorService;
+import com.proyecto.demo.repositorio.ProductoRepositorio;
+
+@Service
+public class ProductoService {
+	
+	@Autowired
+	private ProductoRepositorio productoRepositorio;
+	
+	@Transactional
+	public void registrarProducto(String nombre,Double precioCompra,Integer cantidad,Double precioVenta,String descripcion,
+			Foto foto,Rubro rubro) throws ErrorService {
+		
+		validar(nombre,precioCompra,cantidad,precioVenta,descripcion,foto,rubro);
+		
+		Producto producto = new Producto();
+		
+		producto.setNombre(nombre);
+		producto.setPrecioCompra(precioCompra);
+		producto.setCantidad(cantidad);
+		producto.setPrecioVenta(precioVenta);
+		producto.setDescripcion(descripcion);
+		producto.setFoto(foto);
+		producto.setRubro(rubro);
+		
+		productoRepositorio.save(producto);
+		
+		
+	}
+	
+	@Transactional
+	public void modificarProducto(String id,String nombre,Double precioCompra,Integer cantidad,Double precioVenta,String descripcion,
+			Foto foto,Rubro rubro) throws ErrorService {
+		
+		validar(nombre,precioCompra,cantidad,precioVenta,descripcion,foto,rubro);
+		
+		Optional<Producto> respuesta = productoRepositorio.findById(id);
+		
+		if(respuesta.isPresent()) {
+			
+			Producto producto = respuesta.get();
+			
+			producto.setNombre(nombre);
+			producto.setPrecioCompra(precioCompra);
+			producto.setCantidad(cantidad);
+			producto.setPrecioVenta(precioVenta);
+			producto.setDescripcion(descripcion);
+			producto.setFoto(foto);
+			producto.setRubro(rubro);
+			
+			productoRepositorio.save(producto);
+			
+			
+		}else {
+			throw new ErrorService("No se ha encontrado el producto solicitado");
+		}
+		
+	}
+	
+	@Transactional
+	public void eliminarProducto(String id) throws ErrorService {
+		
+		Optional<Producto> respuesta = productoRepositorio.findById(id);
+		
+		if(respuesta.isPresent()) {
+			
+			Producto producto = respuesta.get();
+			
+			productoRepositorio.delete(producto);
+			
+		}else {
+			throw new ErrorService("No se ha encontrado el producto solicitado");
+		}
+	}
+
+	public void validar(String nombre,Double precioCompra,Integer cantidad,Double precioVenta,String descripcion,
+			Foto foto, Rubro rubro) throws ErrorService {
+		
+		if(nombre == null || nombre.isEmpty()) {
+			
+			throw new ErrorService("El nombre no puede ser nulo");
+		}
+		
+		if(precioCompra == null || precioCompra < 0) {
+			
+			throw new ErrorService("El precio de compra no puede ser nulo");
+		}
+		
+		if(cantidad == null || cantidad < 0) {
+			
+			throw new ErrorService("La cantidad no puede ser nula");
+		}
+		
+		if(precioVenta == null || precioVenta < 0) {
+			
+			throw new ErrorService("El precio de venta no puede ser nulo");
+		}
+		
+		if(descripcion == null || descripcion.isEmpty()) {
+			
+			throw new ErrorService("La descripción no puede ser nula");
+		}
+		
+		if(foto == null) {
+			
+			throw new ErrorService("Debe ingresar una foto del producto");
+		}
+		
+		if(rubro == null) {
+			
+			throw new ErrorService("Debe indicar a que rubro pertenece el producto");
+		}
+	}
+	
+}

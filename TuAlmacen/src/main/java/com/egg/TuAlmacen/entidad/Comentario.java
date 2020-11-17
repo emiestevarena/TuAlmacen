@@ -16,6 +16,8 @@ import org.hibernate.annotations.GenericGenerator;
 	@GenericGenerator(name = "uuid",strategy = "uuid2")
 	private String id;
 	
+	private String comentario;
+	
 	@ManyToOne
 	private Producto producto;
 	
@@ -40,6 +42,13 @@ import org.hibernate.annotations.GenericGenerator;
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	public String getComentario() {
+		return comentario;
+	}
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+	
 
 
 }
