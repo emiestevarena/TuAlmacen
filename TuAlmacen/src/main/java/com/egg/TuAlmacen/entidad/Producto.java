@@ -1,6 +1,8 @@
 package com.egg.TuAlmacen.entidad;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -26,7 +28,8 @@ public class Producto {
 	@OneToOne
 	private Foto foto;
 	
-	@ManyToOne
+	//@ManyToOne
+	@Enumerated(EnumType.STRING)
 	private Rubro rubro;
 	
 	public Producto() {

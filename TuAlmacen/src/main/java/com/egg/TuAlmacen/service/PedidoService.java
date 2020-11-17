@@ -26,7 +26,7 @@ public class PedidoService {
 	
 	
 	
-public Pedido buscarPorId(String id) {
+    public Pedido buscarPorId(String id) {
 		
 		return pedidoRepositorio.getOne(id);
 	}

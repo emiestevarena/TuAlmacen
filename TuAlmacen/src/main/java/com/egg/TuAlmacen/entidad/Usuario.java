@@ -1,6 +1,8 @@
 package com.egg.TuAlmacen.entidad;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -20,7 +22,8 @@ public class Usuario {
 	 private String email;
 	 
 	 
-	 @ManyToOne
+	// @ManyToOne
+	 @Enumerated(EnumType.STRING)
 	 private Rol rol;
 	 
 	public String getId() {
@@ -47,10 +50,10 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Rol getRoles() {
+	public Rol getRol() {
 		return rol;
 	}
-	public void setRoles(Rol rol) {
+	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
 	 

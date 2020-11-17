@@ -13,6 +13,7 @@ import com.egg.TuAlmacen.entidad.Producto;
 import com.egg.TuAlmacen.entidad.Usuario;
 import com.egg.TuAlmacen.enums.Rubro;
 import com.egg.TuAlmacen.error.ErrorService;
+import com.egg.TuAlmacen.repositorio.FotoRepositorio;
 import com.egg.TuAlmacen.repositorio.ProductoRepositorio;
 
 
@@ -22,8 +23,8 @@ public class ProductoService {
 	
 	@Autowired
 	private ProductoRepositorio productoRepositorio;
-	
-	
+	@Autowired
+	private FotoRepositorio fotoRepositorio;
 
 
 	public Producto buscarPorId(String id) {
@@ -94,8 +95,8 @@ public class ProductoService {
 		
 		if(respuesta.isPresent()) {
 			
-			Producto producto = respuesta.get();
-			
+			Producto producto = respuesta.get();			
+			fotoRepositorio.delete(producto.getFoto());
 			productoRepositorio.delete(producto);
 			
 		}else {

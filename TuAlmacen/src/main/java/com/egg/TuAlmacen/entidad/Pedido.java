@@ -15,7 +15,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.egg.TuAlmacen.enums.Estado;
-
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 @Entity
 public class Pedido {
 	
@@ -32,7 +33,8 @@ public class Pedido {
 	
 	private Double precioTotal;
 	
-	@ManyToOne
+	//@ManyToOne
+	@Enumerated(EnumType.STRING)
 	private Estado estado;
 	
 	private List<Integer>cantidad;

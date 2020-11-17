@@ -60,7 +60,7 @@ public class UsuarioService implements UserDetailsService{
 		usu.setEmail(email);
 		String encriptada = new BCryptPasswordEncoder().encode(password);
 		usu.setPassword(encriptada);
-		usu.setRoles(rol);
+		usu.setRol(rol);
 		
 		usuarioRepositorio.save(usu);
 	
@@ -82,7 +82,7 @@ public class UsuarioService implements UserDetailsService{
 			usu.setEmail(email);
 			String encriptada = new BCryptPasswordEncoder().encode(password);
 			usu.setPassword(encriptada);
-			usu.setRoles(rol);
+			usu.setRol(rol);
 			
 			usuarioRepositorio.save(usu);
 			
@@ -154,7 +154,7 @@ public class UsuarioService implements UserDetailsService{
 			
 			List<GrantedAuthority> permisos = new ArrayList<>();
 			
-			GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_"+ usu.getRoles().toString() );
+			GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_"+ usu.getRol().toString() );
 			permisos.add(p1);
 			
 			
