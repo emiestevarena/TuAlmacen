@@ -7,11 +7,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.proyecto.demo.entidad.Foto;
-import com.proyecto.demo.entidad.Producto;
-import com.proyecto.demo.enumeracion.Rubro;
-import com.proyecto.demo.error.ErrorService;
-import com.proyecto.demo.repositorio.ProductoRepositorio;
+import com.egg.TuAlmacen.entidad.Foto;
+import com.egg.TuAlmacen.entidad.Producto;
+import com.egg.TuAlmacen.enums.Rubro;
+import com.egg.TuAlmacen.error.ErrorService;
+import com.egg.TuAlmacen.repositorio.ProductoRepositorio;
+
+
 
 @Service
 public class ProductoService {

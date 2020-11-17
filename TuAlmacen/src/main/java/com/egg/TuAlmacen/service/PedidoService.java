@@ -9,11 +9,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.proyecto.demo.entidad.Pedido;
-import com.proyecto.demo.entidad.Producto;
-import com.proyecto.demo.enumeracion.Estado;
-import com.proyecto.demo.error.ErrorService;
-import com.proyecto.demo.repositorio.PedidoRepositorio;
+import com.egg.TuAlmacen.entidad.Pedido;
+import com.egg.TuAlmacen.entidad.Producto;
+import com.egg.TuAlmacen.enums.Estado;
+import com.egg.TuAlmacen.error.ErrorService;
+import com.egg.TuAlmacen.repositorio.PedidoRepositorio;
+
+
 
 @Service
 public class PedidoService {
