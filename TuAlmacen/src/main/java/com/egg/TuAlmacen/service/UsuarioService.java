@@ -31,6 +31,7 @@ public class UsuarioService implements UserDetailsService{
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
 	
+	
 	public Long count() {
 		
 		return usuarioRepositorio.count();
