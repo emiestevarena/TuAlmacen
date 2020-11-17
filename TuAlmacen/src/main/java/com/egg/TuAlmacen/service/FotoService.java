@@ -22,6 +22,8 @@ public class FotoService {
 		if(archivo == null) {
 			try {
 				
+				
+				
 				Foto foto = new Foto();
 				
 				foto.setMime(archivo.getContentType());
