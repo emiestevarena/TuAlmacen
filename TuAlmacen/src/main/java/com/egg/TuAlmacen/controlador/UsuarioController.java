@@ -68,7 +68,6 @@ public class UsuarioController {
 			@RequestParam String email,
 			@RequestParam String rol) throws ErrorService {
 		
-		
 		try {
 			
 			Usuario usu = (Usuario) session.getAttribute("usuariosession"); 
@@ -99,7 +98,7 @@ public class UsuarioController {
 			
 		}
 		
-		modelo.put("mensaje", "Has modificado tu perfil exitosamente");
+		
 		
 		return "inicio.html";
 		
