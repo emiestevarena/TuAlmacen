@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.egg.TuAlmacen.entidad.Pedido;
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 
 
 
@@ -11,4 +13,6 @@ import com.egg.TuAlmacen.entidad.Pedido;
 @Repository
 public interface PedidoRepositorio extends JpaRepository<Pedido,String>{
 
+    @Query("SELECT p FROM Pedido p WHERE p.estado LIKE PENDIENTE")
+    public List<Pedido> pendientes();
 }

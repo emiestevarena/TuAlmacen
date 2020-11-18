@@ -24,7 +24,9 @@ public class PedidoService {
 	private PedidoRepositorio pedidoRepositorio;
 	
 	
-	
+    public List<Pedido> pendientes(){
+        return pedidoRepositorio.pendientes();
+    }
 	
     public Pedido buscarPorId(String id) {
 		

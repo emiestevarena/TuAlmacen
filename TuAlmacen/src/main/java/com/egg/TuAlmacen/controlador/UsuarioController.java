@@ -1,13 +1,8 @@
 package com.egg.TuAlmacen.controlador;
 
 import com.egg.TuAlmacen.entidad.Usuario;
-import com.egg.TuAlmacen.enums.Rol;
 import com.egg.TuAlmacen.error.ErrorService;
 import com.egg.TuAlmacen.service.UsuarioService;
-
-import net.bytebuddy.description.modifier.EnumerationState;
-
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -42,7 +37,6 @@ public class UsuarioController {
     @GetMapping("/inicio")
     public String inicio(ModelMap modelo){
     	
-    	modelo.put("usuario",session.getAttribute("usuariosession").toString());
         return "inicio.html";
     }
     
@@ -124,6 +118,8 @@ public class UsuarioController {
 			
 			return "redirec:/miperfil";
 		}
+		
+		
 		return "redirect:/logout";
 		
 		
