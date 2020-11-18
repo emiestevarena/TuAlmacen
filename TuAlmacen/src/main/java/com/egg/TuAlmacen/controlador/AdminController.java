@@ -30,7 +30,7 @@ public class AdminController {
     @GetMapping("/admin")
     public String admin(ModelMap modelo){
         List<Pedido> pendientes = pedidoService.pendientes();
-        modelo.put("pendientes",pendientes);
+        if(pendientes != null || !pendientes.isEmpty()) {modelo.put("pendientes",pendientes);}
         return "admin.html";
     }
 }
