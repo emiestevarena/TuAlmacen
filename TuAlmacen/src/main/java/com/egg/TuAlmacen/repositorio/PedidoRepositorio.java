@@ -13,6 +13,6 @@ import org.springframework.data.jpa.repository.Query;
 @Repository
 public interface PedidoRepositorio extends JpaRepository<Pedido,String>{
 
-    @Query("select p from pedido p where p.estado like 'PENDIENTE'")
+    @Query("SELECT p FROM Pedido p WHERE p.estado LIKE PENDIENTE")
     public List<Pedido> pendientes();
 }
