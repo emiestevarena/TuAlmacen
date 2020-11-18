@@ -129,6 +129,9 @@ public class UsuarioController {
 		}
 		return "redirect:/logout";
 		
+		
+		
+		
 	}
 
 }
