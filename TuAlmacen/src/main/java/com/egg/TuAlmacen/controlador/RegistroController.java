@@ -56,8 +56,9 @@ public class RegistroController {
             modelo.put("ok","alta exitosa");
         }catch(ErrorService ex){
             modelo.put("error",ex.getMessage());
+            return "redirect:/registro_cliente";
         }
-        return "redirect:/registro_cliente";
+        return "redirect:/login";
     }
     
     @PostMapping("/registrar_admin")
@@ -71,7 +72,8 @@ public class RegistroController {
             modelo.put("ok","alta exitosa");
         }catch(ErrorService ex){
             modelo.put("error",ex.getMessage());
+            return "redirect:/registro_admin";
         }
-        return "redirect:/registro_admin";
+        return "redirect:/login";
     }
 }
