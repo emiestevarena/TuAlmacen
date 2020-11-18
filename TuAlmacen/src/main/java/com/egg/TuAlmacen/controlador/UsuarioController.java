@@ -111,7 +111,6 @@ public class UsuarioController {
 			@RequestParam String id,HttpSession session) {
 		
 		
-		
 		try {
 			
 			Usuario usu = (Usuario) session.getAttribute("usuariosession");
@@ -119,8 +118,7 @@ public class UsuarioController {
 			usuarioService.eliminarUsuario(usu.getId());
 			
 			modelo.put("mensaje", "Ha eliminado exitosamente");
-			
-			
+		
 			
 		}catch(ErrorService e) {
 			modelo.addAttribute("error", e.getMessage());

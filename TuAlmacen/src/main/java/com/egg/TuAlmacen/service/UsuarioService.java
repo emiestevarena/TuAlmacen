@@ -67,6 +67,7 @@ public class UsuarioService implements UserDetailsService{
 		
 	}
 	
+	
 	@Transactional
 	public void modificarUsuario(String id,String usuario,String email,String password,String repetir,Rol rol) throws ErrorService {
 		
