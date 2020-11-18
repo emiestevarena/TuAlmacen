@@ -33,7 +33,6 @@ public class UsuarioController {
     @GetMapping("/inicio")
     public String inicio(ModelMap modelo){
     	
-    	modelo.put("usuario",session.getAttribute("usuariosession").toString());
         return "inicio.html";
     }
 }
