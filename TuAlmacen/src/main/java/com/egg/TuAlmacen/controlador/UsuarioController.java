@@ -1,8 +1,9 @@
 package com.egg.TuAlmacen.controlador;
 
-import com.egg.TuAlmacen.enums.Rol;
 import com.egg.TuAlmacen.service.UsuarioService;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -21,12 +22,18 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
     
+    
+    @Autowired
+    private HttpSession session;
+    
 //    @Autowired
 //    public Rol rol;
     
-    @PreAuthorize("hasRole('ROL_USUARIO')||hasRole('ROL_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USUARIO')||hasRole('ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(ModelMap modelo){
+    	
+    	modelo.put("usuario",session.getAttribute("usuariosession").toString());
         return "inicio.html";
     }
 }
