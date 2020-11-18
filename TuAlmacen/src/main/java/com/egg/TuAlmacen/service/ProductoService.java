@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.egg.TuAlmacen.entidad.Foto;
 import com.egg.TuAlmacen.entidad.Producto;
@@ -26,6 +27,8 @@ public class ProductoService {
 	@Autowired
 	private FotoRepositorio fotoRepositorio;
 
+	@Autowired
+	private FotoService fotoService;
 
 	public Producto buscarPorId(String id) {
 		
@@ -40,9 +43,9 @@ public class ProductoService {
 	
 	@Transactional
 	public void registrarProducto(String nombre,Double precioCompra,Integer cantidad,Double precioVenta,String descripcion,
-			Foto foto,Rubro rubro) throws ErrorService {
+			MultipartFile archivo,Rubro rubro) throws ErrorService {
 		
-		validar(nombre,precioCompra,cantidad,precioVenta,descripcion,foto,rubro);
+		validar(nombre,precioCompra,cantidad,precioVenta,descripcion,rubro);
 		
 		Producto producto = new Producto();
 		
@@ -51,6 +54,7 @@ public class ProductoService {
 		producto.setCantidad(cantidad);
 		producto.setPrecioVenta(precioVenta);
 		producto.setDescripcion(descripcion);
+		Foto foto = fotoService.guardar(archivo);
 		producto.setFoto(foto);
 		producto.setRubro(rubro);
 		
@@ -61,9 +65,9 @@ public class ProductoService {
 	
 	@Transactional
 	public void modificarProducto(String id,String nombre,Double precioCompra,Integer cantidad,Double precioVenta,String descripcion,
-			Foto foto,Rubro rubro) throws ErrorService {
+			MultipartFile archivo,Rubro rubro) throws ErrorService {
 		
-		validar(nombre,precioCompra,cantidad,precioVenta,descripcion,foto,rubro);
+		validar(nombre,precioCompra,cantidad,precioVenta,descripcion,rubro);
 		
 		Optional<Producto> respuesta = productoRepositorio.findById(id);
 		
@@ -76,6 +80,7 @@ public class ProductoService {
 			producto.setCantidad(cantidad);
 			producto.setPrecioVenta(precioVenta);
 			producto.setDescripcion(descripcion);
+			Foto foto = fotoService.guardar(archivo);
 			producto.setFoto(foto);
 			producto.setRubro(rubro);
 			
@@ -105,7 +110,7 @@ public class ProductoService {
 	}
 
 	public void validar(String nombre,Double precioCompra,Integer cantidad,Double precioVenta,String descripcion,
-			Foto foto, Rubro rubro) throws ErrorService {
+			 Rubro rubro) throws ErrorService {
 		
 		if(nombre == null || nombre.isEmpty()) {
 			
@@ -132,10 +137,6 @@ public class ProductoService {
 			throw new ErrorService("La descripción no puede ser nula");
 		}
 		
-		if(foto == null) {
-			
-			throw new ErrorService("Debe ingresar una foto del producto");
-		}
 		
 		if(rubro == null) {
 			
