@@ -52,15 +52,15 @@
                 <div class="col-lg-6">
                     <form action="/logincheck" method="POST">
 
-                        <p th:if="${error !=null}" th:text="usuario o contraseña invalida"></p>
+                        <!--  <p th:if="${error !=null}" th:text="${error}"></p>-->
                         <div class="form-group h5">
                             <label for="usuario">Usuario</label>
-                            <input type="text" placeholder="ingrese su nombre de usuario" class="form-control" id="usuario">
+                            <input type="text" placeholder="ingrese su nombre de usuario" class="form-control" name="usuario">
                         </div>
                         <div class="form-group h5">
                             <label for="password">Contraseña</label>
                             <input type="password" placeholder="ingrese su contraseña" class="form-control"
-                                id="password">
+                                name="password">
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>

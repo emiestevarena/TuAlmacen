@@ -21,10 +21,10 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
     
-    @Autowired
-    public Rol rol;
+//    @Autowired
+//    public Rol rol;
     
-    @PreAuthorize("hasAnyRole('ROL_USUARIO','ROL_ADMIN')")
+    @PreAuthorize("hasRole('ROL_USUARIO')||hasRole('ROL_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(ModelMap modelo){
         return "inicio.html";

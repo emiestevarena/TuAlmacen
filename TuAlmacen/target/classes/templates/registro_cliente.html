@@ -65,21 +65,21 @@
                 <form action="/registrar_cliente" method="POST">
                     <p th:if="${error !=null}" th:text="${error}" ></p>
                     <div class="form-group h5">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" placeholder="ingrese su nombre" class="form-control" id="nombre">
+                        <label for="usuario">Usuario</label>
+                        <input type="text" placeholder="ingrese su nombre" class="form-control" name="usuario">
                     </div>
                     <div class="form-group h5">
                         <label for="email">Email</label>
-                        <input type="email" placeholder="ingrese su email" class="form-control" id="email">
+                        <input type="email" placeholder="ingrese su email" class="form-control" name="email">
 
                     </div>
                     <div class="form-group h5">
                         <label for="password">Contraseña</label>
-                        <input type="password" placeholder="ingrese su contraseña" class="form-control" id="password">
+                        <input type="password" placeholder="ingrese su contraseña" class="form-control" name="password">
                     </div>
                     <div class="form-group">
                         <input type="password" placeholder="repita la contraseña" class="form-control"
-                            id="password_confirmation">
+                            name="password_confirmation">
                     </div>
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>

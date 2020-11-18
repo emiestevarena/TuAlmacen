@@ -29,8 +29,8 @@ public class RegistroController {
     @Autowired
     private UsuarioService usuarioService;
     
-    @Autowired
-    public Rol rol;
+//    @Autowired
+//    public Rol rol;
     
     @GetMapping("/registro_cliente")
     public String registroCliente(ModelMap modelo,@RequestParam(required=false) String error, @RequestParam(required=false) String ok){
@@ -47,12 +47,12 @@ public class RegistroController {
     }
     @PostMapping("/registrar_cliente")
     public String registrarCliente(ModelMap modelo,
-                                   @RequestParam(required=true) String nombre,
+                                   @RequestParam(required=true) String usuario,
                                    @RequestParam(required=true) String password,
                                    @RequestParam(required=true) String email,
                                    @RequestParam(required=true) String password_confirmation) throws ErrorService{
         try{
-            usuarioService.registrarUsuario(nombre,email,password,password_confirmation,Rol.USUARIO);
+            usuarioService.registrarUsuario(usuario,email,password,password_confirmation,Rol.USUARIO);
             modelo.put("ok","alta exitosa");
         }catch(ErrorService ex){
             modelo.put("error",ex.getMessage());
