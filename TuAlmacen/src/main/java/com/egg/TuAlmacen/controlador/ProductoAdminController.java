@@ -46,7 +46,6 @@ public class ProductoAdminController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/altaproducto")
 	public String altaproducto(ModelMap modelo,  
-			@RequestParam String id,
 			@RequestParam String nombre,
 			@RequestParam String precioCompra,
 			@RequestParam String precioVenta,
@@ -66,7 +65,6 @@ public class ProductoAdminController {
 		}catch(Exception e) {
 	
 			
-			modelo.put("id", id);
 			modelo.put("nombre", nombre);
 			modelo.put("error",e.getMessage());
 			modelo.put("precioCompra", precioCompra);

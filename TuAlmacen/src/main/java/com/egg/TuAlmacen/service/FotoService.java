@@ -23,7 +23,7 @@ public class FotoService {
 	@Transactional
 	public Foto guardar(MultipartFile archivo)throws ErrorService{
 		
-		if(archivo == null) {
+		if(archivo != null) {
 			try {
 				
 				
