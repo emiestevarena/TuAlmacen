@@ -25,106 +25,90 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-    
-    
+
     @Autowired
     private HttpSession session;
-    
+
 //    @Autowired
 //    public Rol rol;
-    
     @PreAuthorize("hasRole('ROLE_USUARIO')||hasRole('ROLE_ADMIN')")
     @GetMapping("/inicio")
-    public String inicio(ModelMap modelo){
-    	
+    public String inicio(ModelMap modelo) {
+
         return "inicio.html";
     }
-    
-    @PreAuthorize("hasRole('ROLE_USUARIO')")
-	@GetMapping("/miperfil")
-	public String miPerfil(ModelMap modelo) {
-		
-    		
-    		modelo.put("usuario",session.getAttribute("usuariosession").toString());
-			
-			return "miperfil.html";
-		
-	}
-	
-	@PreAuthorize("hasRole('ROLE_USUARIO')")
-	@PostMapping("/modificarperfil")
-	public String registro(ModelMap modelo,
-			HttpSession session,
-			@RequestParam String id,
-			@RequestParam String usuario,
-			@RequestParam String password,
-			@RequestParam String repetir,
-			@RequestParam String email,
-			@RequestParam String rol) throws ErrorService {
-		
-		try {
-			
-			Usuario usu = (Usuario) session.getAttribute("usuariosession"); 
-			
-		    usuarioService.modificarUsuario(id, usuario, email, password, repetir,usu.getRol());
-			
-			
-			modelo.put("usuario", usu);
-			session.setAttribute("usuariosession", usu);
-			
-			
-			
-		
-		}catch(ErrorService ex) {
-			
-			Usuario usu = (Usuario) session.getAttribute("usuariosession");
-			
-			modelo.addAttribute("usuario",usu);
-			modelo.put("error",ex.getMessage());
-			modelo.put("id",id);
-			modelo.put("usuario", usuario);
-			modelo.put("password", password);
-			modelo.put("repetir", repetir);
-			modelo.put("rol", rol);
-			
-			
-			return "modificarperfil.html";
-			
-		}
-		
-		
-		
-		return "inicio.html";
-		
-	}
-	
-	@PreAuthorize("hasRole('ROLE_USUARIO')")
-	@PostMapping("/bajaperfil")
-	public String bajaperfil(ModelMap modelo,
-			@RequestParam String id,HttpSession session) {
-		
-		
-		try {
-			
-			Usuario usu = (Usuario) session.getAttribute("usuariosession");
-			
-			usuarioService.eliminarUsuario(usu.getId());
-			
-			modelo.put("mensaje", "Ha eliminado exitosamente");
-		
-			
-		}catch(ErrorService e) {
-			modelo.addAttribute("error", e.getMessage());
-			
-			return "redirect:/miperfil";
-		}
-		
-		
-		return "redirect:/logout";
-		
-		
-		
-		
-	}
+
+    @PreAuthorize("hasRole('ROLE_USUARIO')||hasRole('ROLE_ADMIN')")
+    @GetMapping("/miperfil")
+    public String miPerfil(ModelMap modelo) {
+
+        modelo.put("usuario", session.getAttribute("usuariosession").toString());
+
+        return "miperfil.html";
+
+    }
+
+    @PostMapping("/modificarperfil")
+    public String registro(ModelMap modelo,
+            HttpSession session,
+            @RequestParam String id,
+            @RequestParam String usuario,
+            @RequestParam String password,
+            @RequestParam String repetir,
+            @RequestParam String email,
+            @RequestParam String rol) throws ErrorService {
+
+        try {
+
+            Usuario usu = (Usuario) session.getAttribute("usuariosession");
+
+            usuarioService.modificarUsuario(id, usuario, email, password, repetir, usu.getRol());
+
+            usu = usuarioService.buscarPorId(id);
+            
+            session.setAttribute("usuariosession", usu);
+            modelo.put("usuario", usu);
+
+        } catch (ErrorService ex) {
+
+            Usuario usu = (Usuario) session.getAttribute("usuariosession");
+
+            modelo.addAttribute("usuario", usu);
+            modelo.put("error", ex.getMessage());
+            modelo.put("id", id);
+            modelo.put("usuario", usuario);
+            modelo.put("password", password);
+            modelo.put("repetir", repetir);
+            modelo.put("rol", rol);
+
+            return "modificarperfil.html";
+
+        }
+
+        return "inicio.html";
+
+    }
+
+    @PostMapping("/bajaperfil")
+    public String bajaperfil(ModelMap modelo,
+            @RequestParam String id, HttpSession session) {
+
+        try {
+
+            Usuario usu = (Usuario) session.getAttribute("usuariosession");
+
+            usuarioService.eliminarUsuario(usu.getId());
+
+            modelo.put("mensaje", "Ha eliminado exitosamente");
+
+        } catch (ErrorService e) {
+            modelo.addAttribute("error", e.getMessage());
+
+            return "redirec:/miperfil";
+        }
+
+        return "redirect:/logout";
+
+    }
 
 }

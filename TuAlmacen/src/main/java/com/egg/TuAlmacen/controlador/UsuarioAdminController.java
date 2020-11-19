@@ -75,13 +75,10 @@ public class UsuarioAdminController {
             if(email!=null&&!email.isEmpty()){u.setEmail(email);}
             if(password!=null&&!password.isEmpty()){u.setPassword(password);}
             if(rol.equals("usuario")){u.setRol(Rol.USUARIO);}
-            if(rol.equals("admin")){u.setRol(Rol.ADMIN);}           
-           
-            if(repetir!=null&&!repetir.isEmpty()){
-                usuarioService.modificarUsuario(u.getId(),u.getUsuario(), u.getEmail(), u.getPassword(), repetir, u.getRol());
-            }else{
-                usuarioService.modificarUsuario(u.getId(),u.getUsuario(), u.getEmail(), u.getPassword(), u.getPassword(), u.getRol());
-            }
+            if(rol.equals("admin")){u.setRol(Rol.ADMIN);}
+            if(repetir!=null && !repetir.isEmpty() && repetir!=password){throw new ErrorService("las contraseñas no coinciden");}
+            usuarioService.modificarUsuario(u);
+            
             modelo.put("ok", "modificación exitosa");
         }catch(ErrorService ex){
             modelo.put("error",ex.getMessage());
