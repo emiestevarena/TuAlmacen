@@ -74,7 +74,7 @@ public class ProductoAdminController {
 			modelo.put("rubro", rubro);
 			
 			
-			return "redirect:/altaproducto";
+			return "redirect:/productos";
 		}
 		
 		modelo.put("mensaje", "Has registrado el producto exitosamente :P");
@@ -127,7 +127,7 @@ public class ProductoAdminController {
 			modelo.put("rubro", rubro);
 			
 			
-			return "redirect:/modificarproducto";
+			return "redirect:/productos";
 		}
 		
 		return "productos.html";
@@ -149,7 +149,7 @@ public class ProductoAdminController {
 			
 		}catch(ErrorService e) {
 			modelo.addAttribute("error", e.getMessage());
-			return "redirect:/bajaproducto";
+			return "redirect:/productos";
 		}
 		return "productos.html";
 		

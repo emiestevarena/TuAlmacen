@@ -120,7 +120,7 @@
                             </div>
                             <div class="form-group h5">
                                 <label for="descripcion">Descripcion</label>
-                                <textarea class="form-control" id="descripcion" rows="3" maxlength="250"></textarea>
+                                <textarea class="form-control" name="descripcion" rows="3" maxlength="250"></textarea>
                             </div>
                             <div class="form-group h5">
                                 <label for="cantidad">Cantidad</label>
@@ -140,9 +140,12 @@
                             <div>
                                 <select class="custom-select" name="rubro">
                                     <option selected>Rubro</option>
-                                    <option value="usuario">Usuario</option>
-                                    <option value="admin">Admin</option>
+                                    <option th:each="rubro : ${rubros}" th:value="${rubro}" th:text="${rubro}"></option>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="archivo">Foto</label>
+                                <input type="file" class="form-control-file" name="archivo">
                             </div>
                             <button type="submit" class="btn btn-primary mt-3">Enviar</button>
                         </form>
