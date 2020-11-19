@@ -80,7 +80,7 @@ public class ProductoAdminController {
 		modelo.put("mensaje", "Has registrado el producto exitosamente :P");
 		
 		
-		return "productos.html";
+		return "redirect:/productos";
 	}
 	
 	
@@ -130,7 +130,7 @@ public class ProductoAdminController {
 			return "redirect:/productos";
 		}
 		
-		return "productos.html";
+		return "redirect:/productos";
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -151,7 +151,7 @@ public class ProductoAdminController {
 			modelo.addAttribute("error", e.getMessage());
 			return "redirect:/productos";
 		}
-		return "productos.html";
+		return "redirect:/productos";
 		
 	}
 	
