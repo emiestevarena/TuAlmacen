@@ -15,9 +15,11 @@ import org.springframework.stereotype.Service;
 
 import com.egg.TuAlmacen.entidad.Pedido;
 import com.egg.TuAlmacen.entidad.Producto;
+import com.egg.TuAlmacen.entidad.Usuario;
 import com.egg.TuAlmacen.enums.Estado;
 import com.egg.TuAlmacen.error.ErrorService;
 import com.egg.TuAlmacen.repositorio.PedidoRepositorio;
+import com.egg.TuAlmacen.repositorio.ProductoRepositorio;
 
 
 
@@ -27,7 +29,6 @@ public class PedidoService {
 
 	@Autowired
 	private PedidoRepositorio pedidoRepositorio;
-	
 	
     public List<Pedido> pendientes(){
         return pedidoRepositorio.pendientes();
@@ -45,21 +46,32 @@ public class PedidoService {
 	}
 	
 	@Transactional
-	public void registrarPedido(List<Producto> productos,List<Integer> cantidades,Date fecha,Double precioTotal,Estado estado) throws ErrorService {
+	public void registrarPedido(List<Producto> productos,List<Integer> cantidades,Date fecha,Estado estado, Usuario usuario) throws ErrorService {
 		 
-		validar(productos,cantidades,fecha,precioTotal,estado);
+		
+		validar(productos,cantidades,fecha,estado);
 		
 		Pedido pedido = new Pedido();
 		pedido.setCantidad(cantidades);
 		pedido.setProductos(productos);
 		pedido.setFecha(new Date());
-		pedido.setPrecioTotal(precioTotal);
+		pedido.setPrecioTotal(this.calcularTotal(productos, cantidades));
 		pedido.setEstado(estado);
 		
+		pedido.setUsuario(usuario);
 		pedidoRepositorio.save(pedido);
 		
 	}
 	
+	public Double calcularTotal(List<Producto> productos,List<Integer> cantidad) {		
+		double total=0;
+		
+		for (int i=0; i<productos.size();i++) {
+			total+= productos.get(i).getPrecioVenta()*cantidad.get(i);	
+		}
+		return total;	
+	}
+
 	 public Date convertirStringADate(String fecha) {
 
 	        try {
@@ -72,19 +84,19 @@ public class PedidoService {
 	        }
 	    }
 	@Transactional
-	public void modificarPedido(String id,List<Producto> productos,List<Integer> cantidades,Date fecha,Double precioTotal,Estado estado) throws ErrorService {
+	public void modificarPedido(String id,List<Producto> productos,List<Integer> cantidades,Estado estado) throws ErrorService {
 		
-		validar(productos,cantidades,fecha,precioTotal,estado);
+		validar(productos,cantidades,new Date(),estado);
 		
 		Optional<Pedido> respuesta = pedidoRepositorio.findById(id);
 		
 		if(respuesta.isPresent()) {
 			
-			Pedido pedido = new Pedido();
+			Pedido pedido = respuesta.get();
 			pedido.setCantidad(cantidades);
 			pedido.setProductos(productos);
-			pedido.setFecha(fecha);
-			pedido.setPrecioTotal(precioTotal);
+			
+			pedido.setPrecioTotal(this.calcularTotal(productos, cantidades));
 			pedido.setEstado(estado);
 			
 			pedidoRepositorio.save(pedido);
@@ -108,8 +120,19 @@ public class PedidoService {
 			throw new ErrorService("No se encontro el pedido solicitado");
 		}
 	}
-	
-	public void validar(List<Producto> productos,List<Integer> cantidades, Date fecha,Double precioTotal,Estado estado) throws ErrorService {
+	public void verificarCantidades(List<Producto> productos,List<Integer> cantidades) {
+		for (int i=0; i<productos.size();i++) {
+			
+			if (productos.get(i).getCantidad()<=cantidades.get(i)) {
+				cantidades.set(i, productos.get(i).getCantidad());
+		
+			}					
+		}
+			
+	}
+		
+
+	public void validar(List<Producto> productos,List<Integer> cantidades, Date fecha,Estado estado) throws ErrorService {
 		
 		if(productos == null || productos.isEmpty()) {
 			
@@ -124,14 +147,12 @@ public class PedidoService {
 			
 			throw new ErrorService("La fecha no puede ser nula");
 		}
-		if(precioTotal == null || precioTotal < 0) {
-			
-			throw new ErrorService("El precio total no puede ser nulo");
-		}
+		
 		if(estado == null) {
 			
 			throw new ErrorService("El estado del pedido no puede ser nulo");
 		}
+		this.verificarCantidades(productos, cantidades);
        
 	}
 	

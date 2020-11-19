@@ -19,8 +19,7 @@ import com.egg.TuAlmacen.error.ErrorService;
 import com.egg.TuAlmacen.service.PedidoService;
 import com.egg.TuAlmacen.service.ProductoService;
 
-
-
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
@@ -44,25 +43,24 @@ public class PedidoAdminController2 {
 		modelo.put("productos", productos);	
 		Set<Estado> estado = EnumSet.allOf(Estado.class);
         modelo.put("estado", estado);
-        
-              
-        
+ 
 		return "pedido.html";
 		
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/pedido")
+	@PostMapping("/modificarpedido")
 	public String pedido(ModelMap modelo, @RequestParam String id, 
-			@RequestParam List<Producto> producto,@RequestParam List<Integer> cantidad,@RequestParam String fecha,@RequestParam String precioTotal,@RequestParam String estado
-			) throws ErrorService{
-		
+			@RequestParam List<String> idproducto,@RequestParam List<Integer> cantidad,@RequestParam String estado
+			) throws ErrorService{	
 		
 		try {
-			Date w4= pedidoService.convertirStringADate(fecha);
-			
-			pedidoService.modificarPedido(id,producto, cantidad, w4, Double.parseDouble(precioTotal), Estado.valueOf(estado));
+			List<Producto> producto= new ArrayList<>();
+			for(String i: idproducto) {
+				producto.add(productoService.buscarPorId(i));
 		
+			}	
+			pedidoService.modificarPedido(id,producto, cantidad, Estado.valueOf(estado));	
 			
 		}catch(Exception e) {
 			List<Producto> productoo = productoService.listarProducto();
@@ -73,22 +71,34 @@ public class PedidoAdminController2 {
 			
 			modelo.put("cantidad", cantidad);
 			modelo.put("error",e.getMessage());
-			modelo.put("fecha", fecha);
-			modelo.put("precioTotal", precioTotal);
-			
-			
-			
+
 			return "redirect:/pedido";
 		}
 		
 		modelo.put("mensaje", "Has modificado el pedido exitosamente :D");
 		
 		
-		return "pedido.html";
+		return "redirect:/pedido";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PostMapping("/eliminarpedido")
+	public String bajaproducto(ModelMap modelo,
+			HttpSession session,
+			@RequestParam String id) {	
+		
+		try {			
+			pedidoService.eliminarPedido(id);
 	
-	
+			modelo.put("mensaje", "Se ha eliminado el pedido exitosamente");
+			
+		}catch(ErrorService e) {
+			modelo.addAttribute("error", e.getMessage());
+			return "redirect:/pedido";
+		}
+		return "redirect:/pedido";
+		
+	}
 	
 	
 }

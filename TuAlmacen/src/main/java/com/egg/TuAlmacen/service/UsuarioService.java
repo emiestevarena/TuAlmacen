@@ -86,6 +86,10 @@ public class UsuarioService implements UserDetailsService {
         }
 
     }
+    
+   
+    
+    
 
     @Transactional
     public void modificarUsuario(Usuario u) throws ErrorService {

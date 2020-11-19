@@ -7,6 +7,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,15 +30,24 @@ public class Pedido {
 	
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
-	
+
 	private Double precioTotal;
 	
-	//@ManyToOne
+	@ManyToOne
+	private Usuario usuario;
 	@Enumerated(EnumType.STRING)
 	private Estado estado;
 	
 	@ElementCollection
 	private List<Integer>cantidad;
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public String getId() {
 		return id;
