@@ -87,78 +87,20 @@
 
         <div class="row">
 
-            <div class="col-md-4 mb-5">
+            <div th:each="producto : ${productos}" class="col-md-4 mb-5">
                 <div class="card h-100">
-                    <img class="card-img-top" src="https://placehold.it/300x200" alt="">
+                    <img class="card-img-top"
+                        th:src="@{'data:/'+${producto.foto.mime}+';base64,'+${producto.foto.getImgData()}}" alt="#" />
                     <div class="card-body">
-                        <h4 class="card-title">producto 2</h4>
-                        <p class="card-text">descripcion</p>
+                        <h4 th:text="${producto.nombre}" class="card-title"></h4>
+                        <p th:text="${producto.descripcion}" class="card-text"></p>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Lista de Productos</a>
+                        <a href="/inicio" class="btn btn-primary">Comprar</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <img class="card-img-top" src="https://placehold.it/300x200" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">producto 2</h4>
-                        <p class="card-text"> descripcion</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Lista de Productos</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <img class="card-img-top" src="https://placehold.it/300x200" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">producto 2</h4>
-                        <p class="card-text"> descripcion</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Lista de Productos</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <img class="card-img-top" src="https://placehold.it/300x200" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">producto 2</h4>
-                        <p class="card-text"> descripcion</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Lista de Productos</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <img class="card-img-top" src="https://placehold.it/300x200" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">producto 2</h4>
-                        <p class="card-text"> descripcion</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Lista de Productos</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <img class="card-img-top" src="https://placehold.it/300x200" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">producto 2</h4>
-                        <p class="card-text"> descripcion</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Lista de Productos</a>
-                    </div>
-                </div>
-            </div>
+
         </div>
         <!-- /.row -->
 

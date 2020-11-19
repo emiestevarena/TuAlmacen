@@ -33,7 +33,7 @@ public class IndexController {
     public String index(ModelMap modelo){
         Long count = usuarioService.count();
         modelo.put("count",count);
-        List<Producto> productos = productoService.findAll();
+        List<Producto> productos = productoService.listarSeis();
         modelo.put("productos",productos);
         return "index.html";
     }
