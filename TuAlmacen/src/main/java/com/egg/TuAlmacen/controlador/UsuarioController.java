@@ -1,8 +1,14 @@
 package com.egg.TuAlmacen.controlador;
 
+import com.egg.TuAlmacen.entidad.Producto;
 import com.egg.TuAlmacen.entidad.Usuario;
+import com.egg.TuAlmacen.enums.Rubro;
 import com.egg.TuAlmacen.error.ErrorService;
+import com.egg.TuAlmacen.service.ProductoService;
 import com.egg.TuAlmacen.service.UsuarioService;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,13 +33,29 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @Autowired
+    private ProductoService productoService;
+
+    @Autowired
     private HttpSession session;
 
 //    @Autowired
 //    public Rol rol;
     @PreAuthorize("hasRole('ROLE_USUARIO')||hasRole('ROLE_ADMIN')")
     @GetMapping("/inicio")
-    public String inicio(ModelMap modelo) {
+    public String inicio(ModelMap modelo, @RequestParam(required = false) String rubro) throws ErrorService {
+
+        List<Producto> productos;
+
+        Set<Rubro> rubros = EnumSet.allOf(Rubro.class);
+        modelo.put("rubros", rubros);
+
+        if (rubro != null) {
+            productos = productoService.listarProductosPorRubro(rubro);
+        } else {
+            productos = productoService.listarProducto();
+        }
+        
+        modelo.put("productos", productos);
 
         return "inicio.html";
     }
@@ -65,7 +87,7 @@ public class UsuarioController {
             usuarioService.modificarUsuario(id, usuario, email, password, repetir, usu.getRol());
 
             usu = usuarioService.buscarPorId(id);
-            
+
             session.setAttribute("usuariosession", usu);
             modelo.put("usuario", usu);
 

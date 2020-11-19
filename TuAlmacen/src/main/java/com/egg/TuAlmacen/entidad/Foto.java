@@ -1,5 +1,6 @@
 package com.egg.TuAlmacen.entidad;
 
+import java.util.Base64;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,52 +9,56 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class Foto {
 
-	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	private String id;
-	
-	private String nombre;
-	private String mime;
-	
-	@Lob @Basic(fetch = FetchType.LAZY)
-	private byte[] contenido;
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
-	public String getId() {
-		return id;
-	}
+    private String nombre;
+    private String mime;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] contenido;
 
-	public String getNombre() {
-		return nombre;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getMime() {
-		return mime;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setMime(String mime) {
-		this.mime = mime;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public byte[] getContenido() {
-		return contenido;
-	}
+    public String getMime() {
+        return mime;
+    }
 
-	public void setContenido(byte[] contenido) {
-		this.contenido = contenido;
-	}
-	
-	
-	
+    public void setMime(String mime) {
+        this.mime = mime;
+    }
+
+    public byte[] getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(byte[] contenido) {
+        this.contenido = contenido;
+    }
+
+    public String getImgData() {
+        return Base64.getMimeEncoder().encodeToString(contenido);
+    }
+
 }
