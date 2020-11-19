@@ -1,8 +1,12 @@
 package com.egg.TuAlmacen.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.transaction.Transactional;
 
@@ -14,6 +18,7 @@ import com.egg.TuAlmacen.entidad.Producto;
 import com.egg.TuAlmacen.enums.Estado;
 import com.egg.TuAlmacen.error.ErrorService;
 import com.egg.TuAlmacen.repositorio.PedidoRepositorio;
+import com.egg.costaflores.service.DiaService;
 
 
 
@@ -55,6 +60,17 @@ public class PedidoService {
 		
 	}
 	
+	 public Date convertirStringADate(String fecha) {
+
+	        try {
+	            DateFormat fechaHora = new SimpleDateFormat("yyyy-MM-dd");
+	            Date convertido = fechaHora.parse(fecha);
+	            return convertido;
+	        } catch (java.text.ParseException ex) {
+	            Logger.getLogger(PedidoService.class.getName()).log(Level.SEVERE, null, ex);
+	            return null;
+	        }
+	    }
 	@Transactional
 	public void modificarPedido(String id,List<Producto> productos,List<Integer> cantidades,Date fecha,Double precioTotal,Estado estado) throws ErrorService {
 		

@@ -1,8 +1,12 @@
 package com.egg.TuAlmacen.controlador;
 
+import com.egg.TuAlmacen.entidad.Producto;
 import com.egg.TuAlmacen.entidad.Usuario;
 import com.egg.TuAlmacen.error.ErrorService;
+import com.egg.TuAlmacen.service.ProductoService;
 import com.egg.TuAlmacen.service.UsuarioService;
+
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,6 +29,8 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private ProductoService productoService;
 
     @Autowired
     private HttpSession session;
@@ -34,7 +40,9 @@ public class UsuarioController {
     @PreAuthorize("hasRole('ROLE_USUARIO')||hasRole('ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(ModelMap modelo) {
-
+    	List<Producto> productos = productoService.findAll();
+        modelo.put("productos",productos);
+        
         return "inicio.html";
     }
 
