@@ -11,11 +11,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.egg.TuAlmacen.entidad.Foto;
 import com.egg.TuAlmacen.entidad.Producto;
-import com.egg.TuAlmacen.entidad.Usuario;
 import com.egg.TuAlmacen.enums.Rubro;
 import com.egg.TuAlmacen.error.ErrorService;
 import com.egg.TuAlmacen.repositorio.FotoRepositorio;
 import com.egg.TuAlmacen.repositorio.ProductoRepositorio;
+
+
 
 
 
@@ -40,6 +41,24 @@ public class ProductoService {
 		return productoRepositorio.findAll();
 		
 	}
+	
+	@Transactional
+	public List<Producto>listarProducto() throws ErrorService{
+		
+		List<Producto> respuesta = productoRepositorio.findAll();
+		
+		if(respuesta != null) {
+			
+			return respuesta;
+			
+		}else {
+			throw new ErrorService("No se encontro productos");
+		}
+		
+	
+		
+	}
+	
 	
 	@Transactional
 	public void registrarProducto(String nombre,Double precioCompra,Integer cantidad,Double precioVenta,String descripcion,

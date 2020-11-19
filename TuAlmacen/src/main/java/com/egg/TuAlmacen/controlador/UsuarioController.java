@@ -116,7 +116,7 @@ public class UsuarioController {
 		}catch(ErrorService e) {
 			modelo.addAttribute("error", e.getMessage());
 			
-			return "redirec:/miperfil";
+			return "redirect:/miperfil";
 		}
 		
 		
