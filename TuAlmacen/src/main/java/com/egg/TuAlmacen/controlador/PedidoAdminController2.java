@@ -19,8 +19,7 @@ import com.egg.TuAlmacen.error.ErrorService;
 import com.egg.TuAlmacen.service.PedidoService;
 import com.egg.TuAlmacen.service.ProductoService;
 
-import edu.egg.entidades.Autor;
-import edu.egg.entidades.Editorial;
+
 
 import java.util.Date;
 import java.util.EnumSet;
@@ -46,7 +45,8 @@ public class PedidoAdminController2 {
 		Set<Estado> estado = EnumSet.allOf(Estado.class);
         modelo.put("estado", estado);
         
-                
+              
+        
 		return "pedido.html";
 		
 	}
@@ -54,14 +54,14 @@ public class PedidoAdminController2 {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/pedido")
 	public String pedido(ModelMap modelo, @RequestParam String id, 
-			@RequestParam List<Producto> producto,@RequestParam List<Integer> cantidades,@RequestParam String fecha,@RequestParam String precioTotal,@RequestParam String estado
+			@RequestParam List<Producto> producto,@RequestParam List<Integer> cantidad,@RequestParam String fecha,@RequestParam String precioTotal,@RequestParam String estado
 			) throws ErrorService{
 		
 		
 		try {
 			Date w4= pedidoService.convertirStringADate(fecha);
 			
-			pedidoService.modificarPedido(id,producto, cantidades, w4, Double.parseDouble(precioTotal), Estado.valueOf(estado));
+			pedidoService.modificarPedido(id,producto, cantidad, w4, Double.parseDouble(precioTotal), Estado.valueOf(estado));
 		
 			
 		}catch(Exception e) {
@@ -71,7 +71,7 @@ public class PedidoAdminController2 {
 	        modelo.put("productos", productoo);
 	        modelo.put("estados", estadoo);
 			
-			modelo.put("cantidad", cantidades);
+			modelo.put("cantidad", cantidad);
 			modelo.put("error",e.getMessage());
 			modelo.put("fecha", fecha);
 			modelo.put("precioTotal", precioTotal);
