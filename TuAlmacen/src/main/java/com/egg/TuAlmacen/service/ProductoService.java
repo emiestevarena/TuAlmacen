@@ -124,6 +124,10 @@ public class ProductoService {
     public List<Producto> listarProductosPorRubro(String rubro) {
         return productoRepositorio.buscarPorRubro(Rubro.valueOf(rubro));
     }
+    
+    public List<Producto> listarSeis() {
+        return productoRepositorio.buscarPrimeroRubro();
+    }
 
     public void validar(String nombre, Double precioCompra, Integer cantidad, Double precioVenta, String descripcion,
             Rubro rubro) throws ErrorService {
