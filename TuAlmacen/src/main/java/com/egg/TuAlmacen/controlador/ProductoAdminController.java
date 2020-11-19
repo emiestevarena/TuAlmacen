@@ -16,8 +16,11 @@ import com.egg.TuAlmacen.entidad.Producto;
 import com.egg.TuAlmacen.enums.Rubro;
 import com.egg.TuAlmacen.error.ErrorService;
 import com.egg.TuAlmacen.service.ProductoService;
+import java.util.EnumSet;
+import java.util.Set;
+import org.springframework.stereotype.Controller;
 
-
+@Controller
 public class ProductoAdminController {
 
 	@Autowired
@@ -32,7 +35,10 @@ public class ProductoAdminController {
 		List<Producto> productos = productoService.listarProducto();
 		
 		modelo.put("productos", productos);
-		
+
+                Set<Rubro> rubros = EnumSet.allOf(Rubro.class);
+                modelo.put("rubros", rubros);
+                
 		return "productos.html";
 		
 	}
