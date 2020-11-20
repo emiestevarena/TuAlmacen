@@ -59,6 +59,21 @@ public class ComentarioService {
 		
 	}
 	
+	
+	 @Transactional
+	    public List<Comentario> listarComentario() throws ErrorService {
+
+	        List<Comentario> respuesta = comentarioRepositorio.findAll();
+
+	        if (respuesta != null) {
+
+	            return respuesta;
+
+	        } else {
+	            throw new ErrorService("No se encontro comentario");
+	        }
+
+	    }
 	@Transactional
 	public void modificarComentario(String id,String comentario,String idProducto, String idUsuario) throws ErrorService {
 		
