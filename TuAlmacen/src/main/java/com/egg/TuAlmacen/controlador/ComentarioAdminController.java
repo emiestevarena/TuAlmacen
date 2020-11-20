@@ -25,7 +25,6 @@ import com.egg.TuAlmacen.service.PedidoService;
 import com.egg.TuAlmacen.service.ProductoService;
 import com.egg.TuAlmacen.service.UsuarioService;
 
-import edu.egg.entidades.Editorial;
 
 import java.util.ArrayList;
 import java.util.EnumSet;

@@ -46,10 +46,10 @@ public class PedidoService {
 	}
 	
 	@Transactional
-	public void registrarPedido(List<Producto> productos,List<Integer> cantidades,Date fecha,Estado estado, Usuario usuario) throws ErrorService {
+	public void registrarPedido(List<Producto> productos,List<Integer> cantidades,Estado estado, Usuario usuario) throws ErrorService {
 		 
 		
-		validar(productos,cantidades,fecha,estado);
+		validar(productos,cantidades,estado);
 		
 		Pedido pedido = new Pedido();
 		pedido.setCantidad(cantidades);
@@ -86,7 +86,7 @@ public class PedidoService {
 	@Transactional
 	public void modificarPedido(String id,List<Producto> productos,List<Integer> cantidades,Estado estado) throws ErrorService {
 		
-		validar(productos,cantidades,new Date(),estado);
+		validar(productos,cantidades,estado);
 		
 		Optional<Pedido> respuesta = pedidoRepositorio.findById(id);
 		
@@ -163,7 +163,7 @@ public class PedidoService {
             
         }
         
-	public void validar(List<Producto> productos,List<Integer> cantidades, Date fecha,Estado estado) throws ErrorService {
+	public void validar(List<Producto> productos,List<Integer> cantidades,Estado estado) throws ErrorService {
 		
 		if(productos == null || productos.isEmpty()) {
 			
@@ -174,10 +174,6 @@ public class PedidoService {
 			throw new ErrorService("La lista de cantidades no puede estar vacía");
 		}
 
-		if(fecha == null) {
-			
-			throw new ErrorService("La fecha no puede ser nula");
-		}
 		
 		if(estado == null) {
 			
