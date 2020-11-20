@@ -25,7 +25,6 @@ import com.egg.TuAlmacen.service.PedidoService;
 import com.egg.TuAlmacen.service.ProductoService;
 import com.egg.TuAlmacen.service.UsuarioService;
 
-import edu.egg.entidades.Editorial;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -53,7 +52,7 @@ public class ComentarioAdminController {
     }
    
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/bajacomentario")
+	@PostMapping("/bajacomentario_admin")
 	public String bajaproducto(ModelMap modelo,
 			HttpSession session,
 			@RequestParam String id) {
@@ -71,7 +70,7 @@ public class ComentarioAdminController {
 		
 	}
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/modificarcomentario")
+	@PostMapping("/modificarcomentario_admin")
 	public String modificacionproducto(ModelMap modelo,
 			HttpSession session,
 			@RequestParam String id,@RequestParam String comentario,@RequestParam String idProducto,@RequestParam String idUsuario) {

@@ -1,9 +1,11 @@
 package com.egg.TuAlmacen.controlador;
 
+import com.egg.TuAlmacen.entidad.Pedido;
 import com.egg.TuAlmacen.entidad.Producto;
 import com.egg.TuAlmacen.entidad.Usuario;
 import com.egg.TuAlmacen.enums.Rubro;
 import com.egg.TuAlmacen.error.ErrorService;
+import com.egg.TuAlmacen.service.PedidoService;
 import com.egg.TuAlmacen.service.ProductoService;
 import com.egg.TuAlmacen.service.UsuarioService;
 import java.util.EnumSet;
@@ -35,6 +37,8 @@ public class UsuarioController {
     private UsuarioService usuarioService;
     @Autowired
     private ProductoService productoService;
+    @Autowired
+    private PedidoService pedidoService;
 
     @Autowired
     private HttpSession session;
@@ -53,8 +57,16 @@ public class UsuarioController {
         } else {
             productos = productoService.listarProducto();
         }
-        
+
         modelo.put("productos", productos);
+
+        Integer largoCarrito = 0;
+        Usuario u = (Usuario) session.getAttribute("usuariosession");
+        Pedido p = pedidoService.carrito(u.getId());
+        if (p != null) {
+            largoCarrito = p.getProductos().size();
+        }
+        modelo.put("largocarrito", largoCarrito);
 
         return "inicio.html";
     }
@@ -132,5 +144,4 @@ public class UsuarioController {
 
     }
 
-    
 }

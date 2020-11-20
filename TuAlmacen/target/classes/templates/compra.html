@@ -60,30 +60,27 @@
     <!-- Page Content -->
     <div class="container mt-5">
 
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">nombre</th>
-                    <th scope="col">cantidad</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:if="${productos.empty}">
-                    <td colspan="2"> No hay productos añadidos </td>
-                </tr>
-                <tr>
-                    <td th:each="producto : ${productos}"></td>
-                    <!-- <td>
-                        <a th:href="@{/libro/modificar(isbn=__${libro.isbn}__)}">Modificar</a>
-                        <form action="/libro/eliminar" method="POST">
-                            <input type="hidden" th:value="${libro.isbn}" name="isbn"></input>
-                            <button type="submit" class="btn btn-link">Eliminar</button>
-                        </form>
-                    </td> -->
-                </tr>
-            </tbody>
-        </table>
+        <div class="row">
 
+            <div th:each="producto : ${listacarrito}" class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="#" th:text="${producto[1]}"></a>
+                  </h4>
+                  <h6>Cantidad: <span th:text="${producto[2]}"></span></h6>
+                  <h5>$<span th:text="${producto[3]}"></span></h5>
+                </div>
+                <div class="card-footer">
+                  <form action="/quitar" method="POST">
+                    <input type="hidden" name="id" th:value="${producto[0]}">
+                    <input type="hidden" name="idUsuario" th:value="${session.usuariosession.id}">
+                    <button type="submit" class="btn btn-primary">Quitar</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
 
     <footer>

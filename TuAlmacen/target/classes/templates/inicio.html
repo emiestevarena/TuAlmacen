@@ -29,7 +29,7 @@
             <a class="nav-link" href="/inicio">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/inicio/comprar">Comprar</a>
+            <a class="nav-link" href="/compra">Carrito(<span th:text="${largocarrito}"></span>)</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/inicio/miscompras">Mis Compras</a>
@@ -118,12 +118,13 @@
                 </h4>
                 <h5>$<span th:text="${producto.precioVenta}"></span></h5>
                 <p class="card-text" th:text="${producto.descripcion}"></p>
+                <h6>Stock: <span th:text="${producto.cantidad}"></span></h6>
               </div>
               <div class="card-footer">
                 <form action="/agregar" method="POST">
                   <input type="hidden" name="id" th:value="${producto.id}">
                   <input type="hidden" name="idUsuario" th:value="${session.usuariosession.id}">
-                  <input type="number" name="cantidad" placeholder="cantidad" required>
+                  <input type="number" name="cantidad" th:max="${producto.cantidad}" placeholder="cantidad" required>
                   <button type="submit" class="btn btn-primary">Agregar</button>
                 </form>
               </div>
