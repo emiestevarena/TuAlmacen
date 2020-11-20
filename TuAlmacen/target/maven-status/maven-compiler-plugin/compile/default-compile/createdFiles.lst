@@ -1,6 +1,7 @@
 com\egg\TuAlmacen\controlador\RegistroController.class
 com\egg\TuAlmacen\service\ComentarioService.class
 com\egg\TuAlmacen\error\ErrorService.class
+com\egg\TuAlmacen\controlador\UsuarioAdminController.class
 com\egg\TuAlmacen\configuracion\SecurityConfiguration.class
 com\egg\TuAlmacen\controlador\AdminController.class
 com\egg\TuAlmacen\repositorio\FotoRepositorio.class
@@ -11,6 +12,7 @@ com\egg\TuAlmacen\service\FotoService.class
 com\egg\TuAlmacen\controlador\LoginController.class
 com\egg\TuAlmacen\repositorio\PedidoRepositorio.class
 com\egg\TuAlmacen\TuAlmacenApplication.class
+com\egg\TuAlmacen\controlador\ProductoAdminController.class
 com\egg\TuAlmacen\controlador\UsuarioController.class
 com\egg\TuAlmacen\entidad\Usuario.class
 com\egg\TuAlmacen\service\ProductoService.class
@@ -19,6 +21,7 @@ com\egg\TuAlmacen\controlador\ErroresController.class
 com\egg\TuAlmacen\entidad\Comentario.class
 com\egg\TuAlmacen\entidad\Pedido.class
 com\egg\TuAlmacen\enums\Estado.class
+com\egg\TuAlmacen\controlador\PedidoAdminController2.class
 com\egg\TuAlmacen\repositorio\UsuarioRepositorio.class
 com\egg\TuAlmacen\repositorio\ProductoRepositorio.class
 com\egg\TuAlmacen\repositorio\ComentarioRepositorio.class

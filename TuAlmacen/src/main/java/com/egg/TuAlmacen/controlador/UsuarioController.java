@@ -36,16 +36,11 @@ public class UsuarioController {
     @Autowired
     private ProductoService productoService;
 
-  
-
     @Autowired
     private HttpSession session;
 
-//    @Autowired
-//    public Rol rol;
     @PreAuthorize("hasRole('ROLE_USUARIO')||hasRole('ROLE_ADMIN')")
     @GetMapping("/inicio")
-
     public String inicio(ModelMap modelo, @RequestParam(required = false) String rubro) throws ErrorService {
 
         List<Producto> productos;
@@ -60,7 +55,6 @@ public class UsuarioController {
         }
         
         modelo.put("productos", productos);
-
 
         return "inicio.html";
     }
@@ -138,4 +132,5 @@ public class UsuarioController {
 
     }
 
+    
 }
