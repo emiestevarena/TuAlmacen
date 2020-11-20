@@ -147,16 +147,46 @@ public class PedidoService {
         @Transactional
         public void agregar(Pedido pedido, Producto producto, Integer cantidad){
             
+            boolean x = false;
+            
             List<Producto> productos = pedido.getProductos();
-            
-            productos.add(producto);
-            
-            pedido.setProductos(productos);
-            
             List<Integer> cantidades = pedido.getCantidad();
             
-            cantidades.add(cantidad);
+            for (int i = 0; i<productos.size(); i++) {
+                if(productos.get(i).equals(producto)){
+                    x = true;
+                    cantidades.set(i, cantidad + cantidades.get(i));
+                    break;
+                }
+            }
             
+            if(!x){
+                productos.add(producto);
+                cantidades.add(cantidad);
+            }
+            
+            pedido.setProductos(productos);
+            pedido.setCantidad(cantidades);
+            
+            pedidoRepositorio.save(pedido);
+            
+        }
+        
+        @Transactional
+        public void quitar(Pedido pedido, Producto producto){
+            
+            List<Producto> productos = pedido.getProductos();
+            List<Integer> cantidades = pedido.getCantidad();
+            
+            for (int i = 0; i<productos.size(); i++) {
+                if(productos.get(i).equals(producto)){
+                    productos.remove(i);
+                    cantidades.remove(i);
+                    break;
+                }
+            }
+            
+            pedido.setProductos(productos);
             pedido.setCantidad(cantidades);
             
             pedidoRepositorio.save(pedido);
