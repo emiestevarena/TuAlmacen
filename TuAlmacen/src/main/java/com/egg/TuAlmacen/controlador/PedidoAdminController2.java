@@ -38,11 +38,10 @@ public class PedidoAdminController2 {
 	@GetMapping("/pedido")
 	public String pedido(ModelMap modelo) throws ErrorService {
 		
-
 		List<Producto> productos = productoService.listarProducto();
 		modelo.put("productos", productos);	
 		Set<Estado> estado = EnumSet.allOf(Estado.class);
-        modelo.put("estado", estado);
+                modelo.put("estado", estado);
  
 		return "pedido.html";
 		

@@ -131,7 +131,38 @@ public class PedidoService {
 			
 	}
 		
-
+        public Pedido carrito(String id){
+            return pedidoRepositorio.carrito(id);
+        }
+        
+        @Transactional
+        public void miCarrito(Usuario usuario, Producto producto, Integer cantidad){
+            Pedido p = new Pedido();
+            p.setUsuario(usuario);
+            p.setEstado(Estado.CARRITO);
+            p.setFecha(new Date());
+            this.agregar(p, producto, cantidad);
+        }
+        
+        @Transactional
+        public void agregar(Pedido pedido, Producto producto, Integer cantidad){
+            
+            List<Producto> productos = pedido.getProductos();
+            
+            productos.add(producto);
+            
+            pedido.setProductos(productos);
+            
+            List<Integer> cantidades = pedido.getCantidad();
+            
+            cantidades.add(cantidad);
+            
+            pedido.setCantidad(cantidades);
+            
+            pedidoRepositorio.save(pedido);
+            
+        }
+        
 	public void validar(List<Producto> productos,List<Integer> cantidades, Date fecha,Estado estado) throws ErrorService {
 		
 		if(productos == null || productos.isEmpty()) {
