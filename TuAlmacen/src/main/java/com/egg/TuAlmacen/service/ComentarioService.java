@@ -42,6 +42,13 @@ public class ComentarioService {
 		
 	}
 	
+	public List<Comentario>comentarioPorProducto(String id){
+		
+		return comentarioRepositorio.comentarioporproducto(id);
+	
+		
+	}
+	
 	@Transactional
 	public void registrarComentario(String comentario,String idProducto, String idUsuario
 			) throws ErrorService {

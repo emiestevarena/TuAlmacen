@@ -46,7 +46,7 @@ public class PedidoService {
     @Transactional
     public void registrarPedido(List<Producto> productos, List<Integer> cantidades, Date fecha, Estado estado, Usuario usuario) throws ErrorService {
 
-        validar(productos, cantidades, fecha, estado);
+        validar(productos, cantidades, estado);
 
         Pedido pedido = new Pedido();
         pedido.setCantidad(cantidades);
@@ -65,74 +65,92 @@ public class PedidoService {
 
         for (int i = 0; i < productos.size(); i++) {
             total += productos.get(i).getPrecioVenta() * cantidad.get(i);
+		
+	}
+	return total;
+	}
+	
+	@Transactional
+	public void registrarPedido(List<Producto> productos,List<Integer> cantidades,Estado estado, Usuario usuario) throws ErrorService {
+		 
+		
+		validar(productos,cantidades,estado);
+		
+		Pedido pedido = new Pedido();
+		pedido.setCantidad(cantidades);
+		pedido.setProductos(productos);
+		pedido.setFecha(new Date());
+		pedido.setPrecioTotal(this.calcularTotal(productos, cantidades));
+		pedido.setEstado(estado);
+		
+		pedido.setUsuario(usuario);
+		pedidoRepositorio.save(pedido);
+		
+	}
+	
+	 public Date convertirStringADate(String fecha) {
+
+	        try {
+	            DateFormat fechaHora = new SimpleDateFormat("yyyy-MM-dd");
+	            Date convertido = fechaHora.parse(fecha);
+	            return convertido;
+	        } catch (java.text.ParseException ex) {
+	            Logger.getLogger(PedidoService.class.getName()).log(Level.SEVERE, null, ex);
+	            return null;
+	        }
+	    }
+	@Transactional
+	public void modificarPedido(String id,List<Producto> productos,List<Integer> cantidades,Estado estado) throws ErrorService {
+		
+		validar(productos,cantidades,estado);
+		
+		Optional<Pedido> respuesta = pedidoRepositorio.findById(id);
+		
+		if(respuesta.isPresent()) {
+			
+			Pedido pedido = respuesta.get();
+			pedido.setCantidad(cantidades);
+			pedido.setProductos(productos);
+			
+			pedido.setPrecioTotal(this.calcularTotal(productos, cantidades));
+			pedido.setEstado(estado);
+			
+			pedidoRepositorio.save(pedido);
+			
+		}
+	}
+	
+	@Transactional
+	public void eliminarPedido(String id) throws ErrorService {
+		
+		Optional<Pedido> respuesta = pedidoRepositorio.findById(id);
+		
+		if(respuesta.isPresent()) {
+			
+			Pedido pedido = respuesta.get();
+			
+			pedidoRepositorio.delete(pedido);
+			
+		}else {
+			
+			throw new ErrorService("No se encontro el pedido solicitado");
+		}
+	}
+	public void verificarCantidades(List<Producto> productos,List<Integer> cantidades) {
+		for (int i=0; i<productos.size();i++) {
+			
+			if (productos.get(i).getCantidad()<=cantidades.get(i)) {
+				cantidades.set(i, productos.get(i).getCantidad());
+		
+			}					
+		}
+			
+	}
+		
+        public Pedido carrito(String id){
+            return pedidoRepositorio.carrito(id);
         }
-        return total;
-    }
 
-    public Date convertirStringADate(String fecha) {
-
-        try {
-            DateFormat fechaHora = new SimpleDateFormat("yyyy-MM-dd");
-            Date convertido = fechaHora.parse(fecha);
-            return convertido;
-        } catch (java.text.ParseException ex) {
-            Logger.getLogger(PedidoService.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-    }
-
-    @Transactional
-    public void modificarPedido(String id, List<Producto> productos, List<Integer> cantidades, Estado estado) throws ErrorService {
-
-        validar(productos, cantidades, new Date(), estado);
-
-        Optional<Pedido> respuesta = pedidoRepositorio.findById(id);
-
-        if (respuesta.isPresent()) {
-
-            Pedido pedido = respuesta.get();
-            pedido.setCantidad(cantidades);
-            pedido.setProductos(productos);
-
-            pedido.setPrecioTotal(this.calcularTotal(productos, cantidades));
-            pedido.setEstado(estado);
-
-            pedidoRepositorio.save(pedido);
-
-        }
-    }
-
-    @Transactional
-    public void eliminarPedido(String id) throws ErrorService {
-
-        Optional<Pedido> respuesta = pedidoRepositorio.findById(id);
-
-        if (respuesta.isPresent()) {
-
-            Pedido pedido = respuesta.get();
-
-            pedidoRepositorio.delete(pedido);
-
-        } else {
-
-            throw new ErrorService("No se encontro el pedido solicitado");
-        }
-    }
-
-    public void verificarCantidades(List<Producto> productos, List<Integer> cantidades) {
-        for (int i = 0; i < productos.size(); i++) {
-
-            if (productos.get(i).getCantidad() <= cantidades.get(i)) {
-                cantidades.set(i, productos.get(i).getCantidad());
-
-            }
-        }
-
-    }
-
-    public Pedido carrito(String id) {
-        return pedidoRepositorio.carrito(id);
-    }
 
     @Transactional
     public void miCarrito(Usuario usuario, Producto producto, Integer cantidad) {
@@ -217,28 +235,25 @@ public class PedidoService {
 
     }
 
-    public void validar(List<Producto> productos, List<Integer> cantidades, Date fecha, Estado estado) throws ErrorService {
 
-        if (productos == null || productos.isEmpty()) {
+	public void validar(List<Producto> productos,List<Integer> cantidades,Estado estado) throws ErrorService {
+		
+		if(productos == null || productos.isEmpty()) {
+			
+			throw new ErrorService("La lista de productos no puede estar vacía");
+		}
+		if(cantidades == null || cantidades.isEmpty()) {
+			
+			throw new ErrorService("La lista de cantidades no puede estar vacía");
+		}
 
-            throw new ErrorService("La lista de productos no puede estar vacía");
-        }
-        if (cantidades == null || cantidades.isEmpty()) {
-
-            throw new ErrorService("La lista de cantidades no puede estar vacía");
-        }
-
-        if (fecha == null) {
-
-            throw new ErrorService("La fecha no puede ser nula");
-        }
-
-        if (estado == null) {
-
-            throw new ErrorService("El estado del pedido no puede ser nulo");
-        }
-        this.verificarCantidades(productos, cantidades);
-
-    }
-
+		
+		if(estado == null) {
+			
+			throw new ErrorService("El estado del pedido no puede ser nulo");
+		}
+		this.verificarCantidades(productos, cantidades);
+       
+	}
+	
 }
