@@ -17,6 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.egg.TuAlmacen.enums.Estado;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
+import javax.persistence.ManyToMany;
 @Entity
 public class Pedido {
 	
@@ -25,7 +26,7 @@ public class Pedido {
 	@GenericGenerator(name = "uuid",strategy = "uuid2")
 	private String id;
 	
-	@OneToMany
+	@ManyToMany
 	private List<Producto> productos;
 	
 	@Temporal(TemporalType.DATE)
