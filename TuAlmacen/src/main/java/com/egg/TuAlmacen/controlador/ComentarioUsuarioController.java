@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.egg.TuAlmacen.entidad.Comentario;
+import com.egg.TuAlmacen.entidad.Producto;
 import com.egg.TuAlmacen.error.ErrorService;
 import com.egg.TuAlmacen.service.ComentarioService;
+import com.egg.TuAlmacen.service.ProductoService;
 
 @Controller
 public class ComentarioUsuarioController {
@@ -22,11 +25,17 @@ public class ComentarioUsuarioController {
 	@Autowired
 	private ComentarioService comentarioService;
 	
+	@Autowired
+	private ProductoService productoService;
+	
 	@PreAuthorize("hasRole('ROLE_USUARIO')")
-	@PostMapping("/comentarioproducto")
-	public String comentariosproducto(ModelMap modelo) throws ErrorService{
+	@GetMapping("/comentarioproducto/{idproducto}")
+	public String comentariosproducto(ModelMap modelo,@PathVariable String idproducto) throws ErrorService{
 
-				List<Comentario> comentario = comentarioService.listarComentario();
+				Producto producto = productoService.buscarPorId(idproducto);
+				modelo.put("producto", producto);
+				
+				List<Comentario> comentario = comentarioService.comentarioPorProducto(idproducto);
 				
 				modelo.put("comentario", comentario);
 		        return "comentarios.html";
