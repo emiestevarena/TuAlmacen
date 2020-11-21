@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.egg.TuAlmacen.entidad.Producto;
 import com.egg.TuAlmacen.entidad.Usuario;
+import com.egg.TuAlmacen.enums.Estado;
 import com.egg.TuAlmacen.enums.Rubro;
 import com.egg.TuAlmacen.error.ErrorService;
 import com.egg.TuAlmacen.service.PedidoService;
@@ -123,4 +124,24 @@ public class PedidoController {
 
         return "redirect:/inicio";
     }
+    
+    @PreAuthorize("hasRole('ROLE_USUARIO')")
+	@GetMapping("/miscompras")
+	public String miscompras(ModelMap modelo) throws ErrorService {
+		
+
+		List<Producto> productos = productoService.listarProducto();
+		
+	
+		Set<Estado> estado = EnumSet.allOf(Estado.class);
+		
+        modelo.put("estados", estado);
+		
+		modelo.put("productos", productos);
+
+               
+                
+		return "miscompras.html";
+		
+	}
 }
