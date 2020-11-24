@@ -66,8 +66,10 @@ public class ProductoService {
         producto.setCantidad(cantidad);
         producto.setPrecioVenta(precioVenta);
         producto.setDescripcion(descripcion);
-        Foto foto = fotoService.guardar(archivo);
-        producto.setFoto(foto);
+        if (archivo != null) {
+            Foto foto = fotoService.guardar(archivo);
+            producto.setFoto(foto);
+        }
         producto.setRubro(rubro);
 
         productoRepositorio.save(producto);
@@ -124,7 +126,7 @@ public class ProductoService {
     public List<Producto> listarProductosPorRubro(String rubro) {
         return productoRepositorio.buscarPorRubro(Rubro.valueOf(rubro));
     }
-    
+
     public List<Producto> listarSeis() {
         return productoRepositorio.buscarPrimeroRubro();
     }
