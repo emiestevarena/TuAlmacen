@@ -47,31 +47,7 @@ public class PedidoController {
     @Autowired
     private HttpSession session;
 
-    @PostMapping("/agregar")
-    public String agregar(@RequestParam String idUsuario, @RequestParam String id, @RequestParam Integer cantidad) throws ErrorService {
-
-        try{
-        System.out.println("AASDGFBQALWIEGASDFJHADF");
-
-        Pedido pedido = pedidoService.carrito(idUsuario);
-        System.out.println("BUSCO CARRITO");
-
-        Producto producto = productoService.buscarPorId(id);
-
-        if (pedido == null) {
-            System.out.println("ADENTRO DEL IF NULL PEDIDO");
-            pedidoService.miCarrito(usuarioService.buscarPorId(idUsuario), producto, cantidad);
-        } else {
-
-            System.out.println("ELSE DEL IF NULL PEDIDO");
-
-            pedidoService.agregar(pedido, producto, cantidad);
-        }
-        }catch(ErrorService ex){
-            return "redirect:/inicio?error=stock";
-        }
-        return "redirect:/inicio";
-    }
+    
 
     @GetMapping("/compra")
     public String compra(ModelMap modelo) {
