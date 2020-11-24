@@ -45,7 +45,7 @@ public class UsuarioController {
 
     @PreAuthorize("hasRole('ROLE_USUARIO')||hasRole('ROLE_ADMIN')")
     @GetMapping("/inicio")
-    public String inicio(ModelMap modelo, @RequestParam(required = false) String rubro, @RequestParam(required = false) String error) {
+    public String inicio(ModelMap modelo, @RequestParam(required = false) String rubro) {
         
         try{
         List<Producto> productos;
@@ -75,6 +75,33 @@ public class UsuarioController {
         return "inicio.html";
     }
 
+    @PostMapping("/agregar")
+    public String agregar(ModelMap modelo, @RequestParam String idUsuario, @RequestParam String id, @RequestParam Integer cantidad) throws ErrorService {
+
+        try{
+        System.out.println("AASDGFBQALWIEGASDFJHADF");
+
+        Pedido pedido = pedidoService.carrito(idUsuario);
+        System.out.println("BUSCO CARRITO");
+
+        Producto producto = productoService.buscarPorId(id);
+
+        if (pedido == null) {
+            System.out.println("ADENTRO DEL IF NULL PEDIDO");
+            pedidoService.miCarrito(usuarioService.buscarPorId(idUsuario), producto, cantidad);
+        } else {
+
+            System.out.println("ELSE DEL IF NULL PEDIDO");
+
+            pedidoService.agregar(pedido, producto, cantidad);
+        }
+        }catch(ErrorService ex){
+            modelo.put("error", ex.getMessage());
+            return inicio(modelo, null);
+        }
+        return "redirect:/inicio";
+    }
+    
     @PreAuthorize("hasRole('ROLE_USUARIO')||hasRole('ROLE_ADMIN')")
     @GetMapping("/miperfil")
     public String miPerfil(ModelMap modelo) {
