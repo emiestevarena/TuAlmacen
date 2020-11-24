@@ -45,8 +45,9 @@ public class UsuarioController {
 
     @PreAuthorize("hasRole('ROLE_USUARIO')||hasRole('ROLE_ADMIN')")
     @GetMapping("/inicio")
-    public String inicio(ModelMap modelo, @RequestParam(required = false) String rubro) throws ErrorService {
-
+    public String inicio(ModelMap modelo, @RequestParam(required = false) String rubro, @RequestParam(required = false) String error) {
+        
+        try{
         List<Producto> productos;
 
         Set<Rubro> rubros = EnumSet.allOf(Rubro.class);
@@ -59,7 +60,7 @@ public class UsuarioController {
         }
 
         modelo.put("productos", productos);
-
+        
         Integer largoCarrito = 0;
         Usuario u = (Usuario) session.getAttribute("usuariosession");
         Pedido p = pedidoService.carrito(u.getId());
@@ -67,7 +68,10 @@ public class UsuarioController {
             largoCarrito = p.getProductos().size();
         }
         modelo.put("largocarrito", largoCarrito);
-
+        }catch(ErrorService ex){
+            modelo.put("error", ex.getMessage());
+            return "inicio.html";
+        }
         return "inicio.html";
     }
 

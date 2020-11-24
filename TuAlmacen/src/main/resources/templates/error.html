@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="d-flex justify-content-center mt-3">
+        <h2 class="display-4" th:text="${codigo}"></h2>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3">
+        <p class="diplay-4" th:text="${mensaje == null ? 'Intenta nuevamente' : mensaje}"></p>
+    </div>
+</body>
+</html>

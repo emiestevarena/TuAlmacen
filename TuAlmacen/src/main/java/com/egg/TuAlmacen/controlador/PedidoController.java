@@ -24,9 +24,12 @@ import com.egg.TuAlmacen.service.PedidoService;
 import com.egg.TuAlmacen.service.ProductoService;
 import com.egg.TuAlmacen.service.UsuarioService;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -45,8 +48,9 @@ public class PedidoController {
     private HttpSession session;
 
     @PostMapping("/agregar")
-    public String agregar(@RequestParam String idUsuario, @RequestParam String id, @RequestParam Integer cantidad) {
+    public String agregar(@RequestParam String idUsuario, @RequestParam String id, @RequestParam Integer cantidad) throws ErrorService {
 
+        try{
         System.out.println("AASDGFBQALWIEGASDFJHADF");
 
         Pedido pedido = pedidoService.carrito(idUsuario);
@@ -63,7 +67,9 @@ public class PedidoController {
 
             pedidoService.agregar(pedido, producto, cantidad);
         }
-
+        }catch(ErrorService ex){
+            return "redirect:/inicio?error=stock";
+        }
         return "redirect:/inicio";
     }
 
@@ -124,24 +130,41 @@ public class PedidoController {
 
         return "redirect:/inicio";
     }
-    
+
     @PreAuthorize("hasRole('ROLE_USUARIO')")
-	@GetMapping("/miscompras")
-	public String miscompras(ModelMap modelo) throws ErrorService {
-		
+    @GetMapping("/miscompras")
+    public String miscompras(ModelMap modelo, @RequestParam(required = false) String estado) {
 
-		List<Producto> productos = productoService.listarProducto();
-		
-	
-		Set<Estado> estado = EnumSet.allOf(Estado.class);
-		
-        modelo.put("estados", estado);
-		
-		modelo.put("productos", productos);
+        Usuario u = (Usuario) session.getAttribute("usuariosession");
+        
+        List<Pedido> pedidos = pedidoService.mispedidos(u.getId());
 
-               
-                
-		return "miscompras.html";
-		
-	}
+        Set<Estado> estados = EnumSet.allOf(Estado.class);
+        
+        if (estado != null) {
+            pedidos = pedidoService.listarPedidosPorEstado(u.getId(), Estado.valueOf(estado));
+        } else {
+            pedidos = pedidoService.listarPedidosPorEstado(u.getId(), Estado.PENDIENTE);
+        }
+        
+        modelo.put("estados", estados);
+
+        modelo.put("pedidos", pedidos);
+
+        return "miscompras.html";
+    }
+    
+    @PostMapping("/anularpedido")
+    public String anularPedido(@RequestParam String id){
+        
+        Pedido p = pedidoService.buscarPorId(id);
+        
+        try {
+            pedidoService.anular(p);
+        } catch (Exception ex) {
+            Logger.getLogger(PedidoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "redirect:/miscompras";
+    } 
 }

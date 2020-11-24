@@ -28,11 +28,11 @@
           <li class="nav-item active">
             <a class="nav-link" href="/inicio">Inicio</a>
           </li>
-          <li class="nav-item">
+          <li th:if="${largocarrito > 0}" class="nav-item">
             <a class="nav-link" href="/compra">Carrito(<span th:text="${largocarrito}"></span>)</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/inicio/miscompras">Mis Compras</a>
+            <a class="nav-link" href="/miscompras">Mis Compras</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/miperfil">Mi perfil</a>
@@ -48,7 +48,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="/usuarios">Usuarios</a>
               <a class="dropdown-item" href="/productos">Productos</a>
-              <a class="dropdown-item" href="#">Pedidos</a>
+              <a class="dropdown-item" href="/pedido">Pedidos</a>
               <a class="dropdown-item" href="#">Comentarios</a>
             </div>
           </div>
@@ -59,6 +59,8 @@
 
   <!-- Page Content -->
   <div class="container mt-5">
+
+    
 
     <div class="row">
 
@@ -104,8 +106,27 @@
           </a>
         </div>
 
-        <div class="row">
 
+        <div th:if="${error == stock}" class="modal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Error</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Las cantidades superan al stock</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
           <div th:each="producto : ${productos}" class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
               <!-- <a href="#"><img class="card-img-top" th:src="${producto.foto}" alt=""></a> -->
@@ -119,6 +140,7 @@
                 <h5>$<span th:text="${producto.precioVenta}"></span></h5>
                 <p class="card-text" th:text="${producto.descripcion}"></p>
                 <h6>Stock: <span th:text="${producto.cantidad}"></span></h6>
+                
               </div>
               <div class="card-footer">
                 <form action="/agregar" method="POST">
