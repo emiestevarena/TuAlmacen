@@ -1,17 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+  <div th:replace="fragments :: head_principal"></div>
+
 </head>
+
 <body>
-    <div class="d-flex justify-content-center mt-3">
+
+    <div th:replace="fragments :: nav_error"></div>
+
+    <p><br></p>
+    <p><br></p>
+    
+    <div class="d-flex justify-content-center mt-6">
         <h2 class="display-4" th:text="${codigo}"></h2>
     </div>
 
     <div class="d-flex justify-content-center mt-3">
         <p class="diplay-4" th:text="${mensaje == null ? 'Intenta nuevamente' : mensaje}"></p>
     </div>
+
+    <div th:replace="fragments :: footer_principal"></div>
+
+    <div th:replace="fragments :: scripts_bootstrap"></div>
 </body>
 </html>
