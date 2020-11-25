@@ -18,7 +18,7 @@ public class NotificacionMail {
         SimpleMailMessage mensaje = new SimpleMailMessage();
 
         mensaje.setTo(mail);
-        mensaje.setFrom("tinderdemascotas@gmail.com");
+        mensaje.setFrom("tualmacenegg@gmail.com");
         mensaje.setSubject(titulo);
         mensaje.setText(cuerpo);
 

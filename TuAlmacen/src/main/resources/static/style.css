@@ -1,8 +1,38 @@
-#iconos{
+/* #iconos{
     position: fixed;
     bottom: 0px;
     z-index: 5000;
     margin-left: 10px;
     background: transparent;
     
+} */
+/* .map-responsive{
+
+    overflow:hidden;
+
+    padding-bottom:60%;
+
+    position:relative;
+
+    height:0;
+
 }
+
+.map-responsive iframe{
+
+    left:0;
+
+    top:0;
+
+    height:100%;
+
+    width:100%;
+
+    position:absolute;
+
+} */
+
+iframe {
+    max-width: 100%;
+    max-height: 100%
+   }
