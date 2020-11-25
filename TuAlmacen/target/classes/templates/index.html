@@ -23,75 +23,78 @@
         </div>
     </header>
 
-    <div class="container">
+    <main role="main" class="flex-shrink-0">
+        
+        <div class="container">
 
-        <div class="row">
-            <div class="col-md-8 mb-5">
-                <h2>Como funciona?</h2>
-                <hr>
-                <p>Descripcion de funcionalidad.....</p>
-                <p>sigue la Descripcion.</p>
-                <a class="btn btn-primary btn-lg" href="/login">Ingresa</a>
-            </div>
-            <div class="col-md-4 mb-5">
-                <h2>Contacto</h2>
-                <hr>
-                <address>
-                    <strong>TuAlmacen</strong>
-                    <br>1234 Direccion, Mendoza
-                    <br>Beverly Hills, CA 90210
-                    <br>
-                </address>
-                <address>
-                    <abbr title="Phone">teléfono:</abbr>
-                    (123) 456-7890
-                    <br>
-                    <abbr title="Email">Email:</abbr>
-                    <a href="mailto:#">tualmacenegg@gmail.com</a>
-                </address>
-                <div id="iconos">
-                    <a href="https://facebook.com/"><img src="/img/face_logo.jpeg" width="25" height="25" /></a>
-                    <a href="https://instagram.com/"><img src="/img/insta_logo.jpeg" width="25" height="25" /></a>
-                    <a href="https://twitter.com/"><img src="/img/twitter_logo.jpeg" width="25" height="25" /></a>
-                </div>
-
-
-            </div>
             <div class="row">
-                <div class="col ml-3">
+                <div class="col-md-8 mb-5">
+                    <h2>Como funciona?</h2>
                     <hr>
-                    <h2>Encontranos</h2>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.3657995851795!2d55.2197175167746!3d25.123320972264818!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6bd2d5d46d3d%3A0x1652d005a4c9590c!2sAmazon%20Warehouse!5e0!3m2!1ses!2sar!4v1606339886631!5m2!1ses!2sar"
-                        width="1200" height="400" frameborder="0" style="border:0;" allowfullscreen=""
-                        aria-hidden="false" tabindex="0"></iframe>
+                    <p>Descripcion de funcionalidad.....</p>
+                    <p>sigue la Descripcion.</p>
+                    <a class="btn btn-primary btn-lg" href="/login">Ingresa</a>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h2>Contacto</h2>
+                    <hr>
+                    <address>
+                        <strong>TuAlmacen</strong>
+                        <br>1234 Direccion, Mendoza
+                        <br>Beverly Hills, CA 90210
+                        <br>
+                    </address>
+                    <address>
+                        <abbr title="Phone">teléfono:</abbr>
+                        (123) 456-7890
+                        <br>
+                        <abbr title="Email">Email:</abbr>
+                        <a href="mailto:#">tualmacenegg@gmail.com</a>
+                    </address>
+                    <div id="iconos">
+                        <a href="https://facebook.com/"><img src="/img/face_logo.jpeg" width="25" height="25" /></a>
+                        <a href="https://instagram.com/"><img src="/img/insta_logo.jpeg" width="25" height="25" /></a>
+                        <a href="https://twitter.com/"><img src="/img/twitter_logo.jpeg" width="25" height="25" /></a>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col ml-3">
+                        <hr>
+                        <h2>Encontranos</h2>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.3657995851795!2d55.2197175167746!3d25.123320972264818!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6bd2d5d46d3d%3A0x1652d005a4c9590c!2sAmazon%20Warehouse!5e0!3m2!1ses!2sar!4v1606339886631!5m2!1ses!2sar"
+                            width="1200" height="400" frameborder="0" style="border:0;" allowfullscreen=""
+                            aria-hidden="false" tabindex="0"></iframe>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <h2>Conocé nuestros Productos</h2>
-        <hr>
+            <h2>Conocé nuestros Productos</h2>
+            <hr>
 
-        <div class="row">
+            <div class="row">
 
-            <div th:each="producto : ${productos}" class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <img class="card-img-top"
-                        th:src="@{'data:/'+${producto.foto.mime}+';base64,'+${producto.foto.getImgData()}}" alt="#" />
-                    <div class="card-body">
-                        <h4 th:text="${producto.nombre}" class="card-title"></h4>
-                        <p th:text="${producto.descripcion}" class="card-text"></p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="/inicio" class="btn btn-primary">Comprar</a>
+                <div th:each="producto : ${productos}" class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <img class="card-img-top"
+                            th:src="@{'data:/'+${producto.foto.mime}+';base64,'+${producto.foto.getImgData()}}"
+                            alt="#" />
+                        <div class="card-body">
+                            <h4 th:text="${producto.nombre}" class="card-title"></h4>
+                            <p th:text="${producto.descripcion}" class="card-text"></p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="/inicio" class="btn btn-primary">Comprar</a>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
         </div>
-
-    </div>
-
+    </main>
 
     <div th:replace="fragments :: footer_principal"></div>
 

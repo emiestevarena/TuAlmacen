@@ -80,6 +80,13 @@ public class PedidoController {
         modelo.put("listacarrito", lista);
         modelo.put("total", total);
 
+        Integer largoCarrito = 0;
+      
+        if (pedido != null) {
+            largoCarrito = pedido.getProductos().size();
+        }
+        modelo.put("largocarrito", largoCarrito);
+        
         return "compra.html";
     }
 
@@ -113,6 +120,8 @@ public class PedidoController {
 
         Usuario u = (Usuario) session.getAttribute("usuariosession");
         
+        Pedido carrito = pedidoService.carrito(u.getId());
+        
         List<Pedido> pedidos = pedidoService.mispedidos(u.getId());
 
         Set<Estado> estados = EnumSet.allOf(Estado.class);
@@ -127,6 +136,13 @@ public class PedidoController {
 
         modelo.put("pedidos", pedidos);
 
+        Integer largoCarrito = 0;
+        
+        if (carrito != null) {
+            largoCarrito = carrito.getProductos().size();
+        }
+        modelo.put("largocarrito", largoCarrito);
+        
         return "miscompras.html";
     }
     
