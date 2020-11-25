@@ -116,13 +116,15 @@
                     </thead> -->
                     <tbody th:each="comentario : ${comentarios}">
                       <tr>
-                        <td th:text="comentario.usuario.usuario"></td>
+                        <td th:text="${comentario.usuario.usuario}"></td>
                       </tr>
                       <tr>
-                        <td th:text="comentario.comentario"></td>
+                        <td th:text="${comentario.comentario}"></td>
                       </tr>
                       <tr th:if="${session.usuariosession.id} == ${comentario.usuario.id}">
-                        <form action="/editar" method="POST">
+                        <td>
+                            
+                            <form action="/editar" method="POST">
                             <input type="hidden" name="id" th:value="${comentario.id}">
                             <input type="hidden" name="idUsuario" th:value="${session.usuariosession.id}">
                             <input type="hidden" name="idProducto" th:value="${comentario.producto.id}">
@@ -133,7 +135,7 @@
                         <form action="/borrar" method="POST">
                             <input type="hidden" name="id" th:value="${comentario.id}">
                             <button type="submit" class="btn btn-primary">Eliminar</button>
-                        </form>
+                        </form></td>
                       </tr>
                     </tbody>
                   </table>
