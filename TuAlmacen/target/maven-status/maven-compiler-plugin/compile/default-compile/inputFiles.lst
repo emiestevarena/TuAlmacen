@@ -25,6 +25,7 @@ D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlma
 D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\repositorio\UsuarioRepositorio.java
 D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\configuracion\SecurityConfiguration.java
 D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\ErroresController.java
+D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\service\NotificacionMail.java
 D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\repositorio\PedidoRepositorio.java
 D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\enums\Rol.java
 D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\UsuarioAdminController.java
