@@ -261,6 +261,8 @@ public class PedidoService {
         pedido.setPrecioTotal(total);
         pedido.setEstado(Estado.PENDIENTE);
 
+        notificacionMail.enviar("Su pedido fue enviado y se encuentra pendiente de aprobacion " , "Tu Almacen", pedido.getUsuario().getEmail());
+        
         pedidoRepositorio.save(pedido);
 
     }

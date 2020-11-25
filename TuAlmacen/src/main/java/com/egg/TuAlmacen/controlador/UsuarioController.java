@@ -106,8 +106,18 @@ public class UsuarioController {
     @GetMapping("/miperfil")
     public String miPerfil(ModelMap modelo) {
 
-        modelo.put("usuario", session.getAttribute("usuariosession").toString());
+        Usuario u = (Usuario) session.getAttribute("usuariosession");
+        Pedido pedido = pedidoService.carrito(u.getId());
+        
+        modelo.put("usuario", u);
 
+        Integer largoCarrito = 0;
+      
+        if (pedido != null) {
+            largoCarrito = pedido.getProductos().size();
+        }
+        modelo.put("largocarrito", largoCarrito);
+        
         return "miperfil.html";
 
     }
