@@ -47,7 +47,8 @@ public class ComentarioAdminController {
 
 		List<Comentario> comentario = comentarioService.listarComentario();
 		
-		modelo.put("comentario", comentario);
+		modelo.put("comentarios", comentario);
+                
         return "comentarios.html";
     }
    
@@ -64,9 +65,9 @@ public class ComentarioAdminController {
 			
 		}catch(ErrorService e) {
 			modelo.addAttribute("error", e.getMessage());
-			return "redirect:/productos";
+			return "redirect:/comentarios";
 		}
-		return "redirect:/productos";
+		return "redirect:/comentarios";
 		
 	}
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -85,9 +86,9 @@ public class ComentarioAdminController {
 			
 		}catch(ErrorService e) {
 			modelo.addAttribute("error", e.getMessage());
-			return "redirect:/productos";
+			return "redirect:/comentarios";
 		}
-		return "redirect:/productos";
+		return "redirect:/comentarios";
 		
 	}
 	   

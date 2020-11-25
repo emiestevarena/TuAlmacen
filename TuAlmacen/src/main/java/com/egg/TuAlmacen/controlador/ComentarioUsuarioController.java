@@ -98,9 +98,9 @@ public class ComentarioUsuarioController {
 
         } catch (ErrorService e) {
             modelo.addAttribute("error", e.getMessage());
-            return "redirect:/productos";
+            return "redirect:/comentarioproducto/"+idProducto;
         }
-        return "redirect:/productos";
+        return "redirect:/comentarioproducto/"+idProducto;
 
     }
 
@@ -110,15 +110,16 @@ public class ComentarioUsuarioController {
             HttpSession session,
             @RequestParam String id) {
 
+            Comentario comentario = comentarioService.buscarPorId(id);
         try {
             comentarioService.eliminarComentario(id);
             modelo.put("mensaje", "Se ha eliminado el comentario exitosamente");
 
         } catch (ErrorService e) {
             modelo.addAttribute("error", e.getMessage());
-            return "redirect:/productos";
+            return "redirect:/comentarioproducto/"+comentario.getProducto().getId();
         }
-        return "redirect:/productos";
+        return "redirect:/comentarioproducto/"+comentario.getProducto().getId();
 
     }
 
