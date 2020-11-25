@@ -30,6 +30,9 @@ public class UsuarioService implements UserDetailsService {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
+    @Autowired
+    private NotificacionMail notificacionMail;
+
     public Long count() {
 
         return usuarioRepositorio.count();
@@ -60,6 +63,8 @@ public class UsuarioService implements UserDetailsService {
 
         usuarioRepositorio.save(usu);
 
+        notificacionMail.enviar("Bienvedidos a la Tu Almacen Se ha regitrardo exitosamente", "Tu Almacen", usu.getEmail());
+
     }
 
     @Transactional
@@ -86,10 +91,6 @@ public class UsuarioService implements UserDetailsService {
         }
 
     }
-    
-   
-    
-    
 
     @Transactional
     public void modificarUsuario(Usuario u) throws ErrorService {

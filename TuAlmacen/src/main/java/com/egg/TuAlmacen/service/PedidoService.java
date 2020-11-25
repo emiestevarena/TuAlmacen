@@ -32,6 +32,9 @@ public class PedidoService {
     @Autowired
     private ProductoService productoService;
 
+    @Autowired
+    private NotificacionMail notificacionMail;
+    
     public List<Pedido> pendientes() {
         return pedidoRepositorio.pendientes();
     }
@@ -267,6 +270,7 @@ public class PedidoService {
         try {
             p.setEstado(Estado.ANULADO);
             pedidoRepositorio.save(p);
+            notificacionMail.enviar("Su pedido se ha anulado " , "Tu Almacen", p.getUsuario().getEmail());
         } catch (Exception ex) {
             throw new Exception(ex.getMessage());
         }
@@ -277,6 +281,7 @@ public class PedidoService {
         try {
             p.setEstado(Estado.CONFIRMADO);
             pedidoRepositorio.save(p);
+            notificacionMail.enviar("Su pedido fue confirmado y el monto a pagar es $ "+p.getPrecioTotal()+" gracias por su compra. " , "Tu Almacen", p.getUsuario().getEmail());
         } catch (Exception ex) {
             throw new Exception(ex.getMessage());
         }
