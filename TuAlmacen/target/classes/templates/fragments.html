@@ -38,7 +38,6 @@
                                 <a class="dropdown-item" href="/pedido">Pedidos</a>
                                 <a class="dropdown-item" href="/comentarios">Comentarios</a>
                             </div>
-                        </div>
                     </ul>
                 </div>
             </div>
@@ -82,8 +81,15 @@
                                 <a class="dropdown-item" href="/comentarios">Comentarios</a>
                             </div>
                         </div>
-                        <input id="searchbar" onkeyup="search_animal()" type="text" name="search"
-                            placeholder="Search animals..">
+                        <form method="POST" action="/buscar">
+                            <input type="text" list="lista" name="producto">
+                            <datalist  id="lista">
+                                <option th:each="producto: ${productos}"  th:text="${producto.nombre}">
+                                </option>
+                            </datalist>
+                            <button class="btn btn-secondary" type="submit">Ir</button>
+                        </form>
+                        
                     </ul>
                 </div>
             </div>

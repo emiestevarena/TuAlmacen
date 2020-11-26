@@ -37,6 +37,14 @@ public class ProductoService {
         return productoRepositorio.findAll();
 
     }
+    
+    public Producto buscarPorNombre(String nombre){
+        return productoRepositorio.buscarPorNombre(nombre);
+    }
+    
+    public List<Producto> buscarPorRubro(Rubro rubro){
+        return productoRepositorio.buscarPorRubro(rubro);
+    };
 
     @Transactional
     public List<Producto> listarProducto() throws ErrorService {

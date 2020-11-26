@@ -56,7 +56,7 @@ public class ComentarioUsuarioController {
         }
         modelo.put("largocarrito", largoCarrito);
 
-        List<Producto> productos = productoService.findAll();
+        List<Producto> productos = productoService.buscarPorRubro(producto.getRubro());
         Integer index = productos.indexOf(producto);
         Integer size = productos.size();
 
@@ -73,6 +73,16 @@ public class ComentarioUsuarioController {
         return "producto.html";
     }
 
+    @PostMapping("/buscar")
+    public String buscar(@RequestParam String producto){
+        Producto p = productoService.buscarPorNombre(producto);
+        if (p!=null){
+            return "redirect:/comentarioproducto/"+p.getId();
+        }else{
+            return null;
+        }
+    }
+    
     @PreAuthorize("hasRole('ROLE_USUARIO')")
     @PostMapping("/comentar")
     public String comentar(ModelMap modelo,
