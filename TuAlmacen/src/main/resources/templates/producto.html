@@ -11,8 +11,6 @@
 
     <div th:replace="fragments :: nav_logueado"></div>
 
-    <!-- Page Content -->
-    <p><hr></p>
     <div class="container mt-5">
 
         <h3 style="color: red" th:if="${error !=null}" th:text="${error}"></h3>
@@ -52,51 +50,56 @@
                                 placeholder="danos tu comentario" required></textarea>
                             <button type="submit" class="btn btn-success mt-1">Comentar</button>
                         </form>
+                        <a th:if="${anterior!=null}" th:text="${anterior.nombre}" th:href="@{/comentarioproducto/} +${anterior.id}"></a>
+                        <a th:if="${siguiente!=null}" th:text="${siguiente.nombre}" th:href="@{/comentarioproducto/} +${anterior.id}"></a>
+
                     </div>
-                    <!-- <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div> -->
+                    
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
 
                 <h3>COMENTARIOS</h3>
-
+        
                 <table class="table table-bordered">
                     <!-- <thead>
-                      <tr>
-                        <th scope="col"></th>
-                      </tr>
-                    </thead> -->
+                              <tr>
+                                <th scope="col"></th>
+                              </tr>
+                            </thead> -->
                     <tbody th:each="comentario : ${comentarios}">
-                      <tr>
-                        <td th:text="${comentario.usuario.usuario}"></td>
-                      </tr>
-                      <tr>
-                        <td th:text="${comentario.comentario}"></td>
-                      </tr>
-                      <tr th:if="${session.usuariosession.id} == ${comentario.usuario.id}">
-                        <td>
-                            
-                            <form action="/editar" method="POST">
-                            <input type="hidden" name="id" th:value="${comentario.id}">
-                            <input type="hidden" name="idUsuario" th:value="${session.usuariosession.id}">
-                            <input type="hidden" name="idProducto" th:value="${comentario.producto.id}">
-                            <textarea class="form-control" rows="3" type="text" name="comentario" maxlength="250"
-                                th:placeholder="${comentario.comentario}" required></textarea>
-                            <button type="submit" class="btn btn-primary">Modificar</button>
-                        </form>
-                        <form action="/borrar" method="POST">
-                            <input type="hidden" name="id" th:value="${comentario.id}">
-                            <button type="submit" class="btn btn-primary">Eliminar</button>
-                        </form></td>
-                      </tr>
+                        <tr>
+                            <td th:text="${comentario.usuario.usuario}"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="${comentario.comentario}"></td>
+                        </tr>
+                        <tr th:if="${session.usuariosession.id} == ${comentario.usuario.id}">
+                            <td>
+        
+                                <form action="/editar" method="POST">
+                                    <input type="hidden" name="id" th:value="${comentario.id}">
+                                    <input type="hidden" name="idUsuario" th:value="${session.usuariosession.id}">
+                                    <input type="hidden" name="idProducto" th:value="${comentario.producto.id}">
+                                    <textarea class="form-control" rows="3" type="text" name="comentario" maxlength="250"
+                                        th:placeholder="${comentario.comentario}" required></textarea>
+                                    <button type="submit" class="btn btn-primary">Modificar</button>
+                                </form>
+                                <form action="/borrar" method="POST">
+                                    <input type="hidden" name="id" th:value="${comentario.id}">
+                                    <button type="submit" class="btn btn-primary">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
                     </tbody>
-                  </table>
-
+                </table>
+        
             </div>
         </div>
-        <!-- /.row -->
+    </div>
+    
+    </div>
+    <!-- /.row -->
 
     </div>
     <!-- /.col-lg-9 -->

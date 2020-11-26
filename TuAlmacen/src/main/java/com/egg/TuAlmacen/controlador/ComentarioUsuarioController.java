@@ -56,6 +56,20 @@ public class ComentarioUsuarioController {
         }
         modelo.put("largocarrito", largoCarrito);
 
+        List<Producto> productos = productoService.findAll();
+        Integer index = productos.indexOf(producto);
+        Integer size = productos.size();
+
+        if (index > 0) {
+            Producto anterior = productos.get(index - 1);
+            modelo.put("anterior", anterior);
+        }
+
+        if (index < size - 1) {
+            Producto siguiente = productos.get(index + 1);
+            modelo.put("siguiente", siguiente);
+        }
+
         return "producto.html";
     }
 
@@ -75,9 +89,9 @@ public class ComentarioUsuarioController {
 
         } catch (ErrorService e) {
             modelo.addAttribute("error", e.getMessage());
-            return "redirect:/comentarioproducto/"+idProducto;
+            return "redirect:/comentarioproducto/" + idProducto;
         }
-        return "redirect:/comentarioproducto/"+idProducto;
+        return "redirect:/comentarioproducto/" + idProducto;
 
     }
 
@@ -98,9 +112,9 @@ public class ComentarioUsuarioController {
 
         } catch (ErrorService e) {
             modelo.addAttribute("error", e.getMessage());
-            return "redirect:/comentarioproducto/"+idProducto;
+            return "redirect:/comentarioproducto/" + idProducto;
         }
-        return "redirect:/comentarioproducto/"+idProducto;
+        return "redirect:/comentarioproducto/" + idProducto;
 
     }
 
@@ -110,16 +124,16 @@ public class ComentarioUsuarioController {
             HttpSession session,
             @RequestParam String id) {
 
-            Comentario comentario = comentarioService.buscarPorId(id);
+        Comentario comentario = comentarioService.buscarPorId(id);
         try {
             comentarioService.eliminarComentario(id);
             modelo.put("mensaje", "Se ha eliminado el comentario exitosamente");
 
         } catch (ErrorService e) {
             modelo.addAttribute("error", e.getMessage());
-            return "redirect:/comentarioproducto/"+comentario.getProducto().getId();
+            return "redirect:/comentarioproducto/" + comentario.getProducto().getId();
         }
-        return "redirect:/comentarioproducto/"+comentario.getProducto().getId();
+        return "redirect:/comentarioproducto/" + comentario.getProducto().getId();
 
     }
 
