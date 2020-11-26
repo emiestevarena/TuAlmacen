@@ -50,9 +50,11 @@
                                 placeholder="danos tu comentario" required></textarea>
                             <button type="submit" class="btn btn-success mt-1">Comentar</button>
                         </form>
-                        <a th:if="${anterior!=null}" th:text="${anterior.nombre}" th:href="@{/comentarioproducto/} +${anterior.id}"></a>
-                        <a th:if="${siguiente!=null}" th:text="${siguiente.nombre}" th:href="@{/comentarioproducto/} +${anterior.id}"></a>
-
+                        <div>
+                            <h4>Productos similares</h4>
+                            <a th:if="${anterior!=null}" th:text="${anterior.nombre}" th:href="@{/comentarioproducto/} +${anterior.id}"></a>
+                            <a th:if="${siguiente!=null}" th:text="${siguiente.nombre}" th:href="@{/comentarioproducto/} +${siguiente.id}"></a>
+                        </div>
                     </div>
                     
                 </div>

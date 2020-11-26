@@ -146,7 +146,7 @@ public class UsuarioService implements UserDetailsService {
             throw new ErrorService("La clave no tiene que ser nula");
         }
 
-        if (password == null || usuario.isEmpty() || usuario.length() <= 6) {
+        if (password == null || usuario.isEmpty() || password.length() <= 6) {
 
             throw new ErrorService("La clave tiene que tener como mínimo 6 dígitos");
 

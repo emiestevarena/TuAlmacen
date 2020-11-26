@@ -56,7 +56,7 @@ public class RegistroController {
             modelo.put("ok","alta exitosa");
         }catch(ErrorService ex){
             modelo.put("error",ex.getMessage());
-            return "redirect:/registro_cliente";
+            return "redirect:/registro_cliente?error="+ex.getMessage();
         }
         return "redirect:/login";
     }
