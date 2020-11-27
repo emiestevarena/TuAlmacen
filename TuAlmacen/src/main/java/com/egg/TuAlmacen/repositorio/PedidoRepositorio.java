@@ -31,4 +31,6 @@ public interface PedidoRepositorio extends JpaRepository<Pedido,String>{
     @Query("SELECT p FROM Pedido p, IN(p.usuario) u WHERE p.estado LIKE :estado ORDER BY p.fecha")
     public List<Pedido> pedidosPorEstado(@Param("estado") Estado estado);
 
+    @Query("SELECT u.nombre, COUNT(*) FROM Pedido p, IN(p.productos) u WHERE p.estado LIKE 'CONFIRMADO' ORDER BY COUNT(*)")
+    public List<String[]> pedidoDeProductos();
 }
