@@ -9,7 +9,7 @@
 
 <body>
 
-  <div th:replace="fragments :: nav_logueado"></div>
+  <div th:replace="fragments :: nav_logueado_con_js"></div>
 
   <div class="container mt-5">
 
@@ -24,7 +24,7 @@
             <tbody >
               <tr th:each="venta : ${masvendidos}">
                 <td th:text="${venta.producto.nombre}"></td>
-                <td th:text="${venta.cantidad}"></td>
+                <td th:text="${venta.vendidos}"></td>
  
               </tr>
             </tbody>
