@@ -1,5 +1,6 @@
 com\egg\TuAlmacen\controlador\RegistroController.class
 com\egg\TuAlmacen\error\ErrorService.class
+com\egg\TuAlmacen\service\NotificacionMail.class
 com\egg\TuAlmacen\configuracion\SecurityConfiguration.class
 com\egg\TuAlmacen\controlador\AdminController.class
 com\egg\TuAlmacen\controlador\IndexController.class
@@ -24,6 +25,7 @@ com\egg\TuAlmacen\controlador\LoginController.class
 com\egg\TuAlmacen\controlador\PedidoController.class
 com\egg\TuAlmacen\controlador\UsuarioController.class
 com\egg\TuAlmacen\entidad\Usuario.class
+com\egg\TuAlmacen\controlador\ComentarioUsuarioController.class
 com\egg\TuAlmacen\entidad\Producto.class
 com\egg\TuAlmacen\controlador\ErroresController.class
 com\egg\TuAlmacen\entidad\Pedido.class
