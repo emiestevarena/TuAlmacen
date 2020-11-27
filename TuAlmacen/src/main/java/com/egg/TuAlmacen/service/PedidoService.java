@@ -19,6 +19,7 @@ import com.egg.TuAlmacen.entidad.Usuario;
 import com.egg.TuAlmacen.enums.Estado;
 import com.egg.TuAlmacen.enums.Rubro;
 import com.egg.TuAlmacen.error.ErrorService;
+import com.egg.TuAlmacen.formato.Ventas;
 import com.egg.TuAlmacen.repositorio.PedidoRepositorio;
 import com.egg.TuAlmacen.repositorio.ProductoRepositorio;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class PedidoService {
 
     @Autowired
     private NotificacionMail notificacionMail;
-    
+
     public List<Pedido> pendientes() {
         return pedidoRepositorio.pendientes();
     }
@@ -198,7 +199,7 @@ public class PedidoService {
     }
 
     @Transactional
-    public void agregar(Pedido pedido, Producto producto, Integer cantidad) throws ErrorService{
+    public void agregar(Pedido pedido, Producto producto, Integer cantidad) throws ErrorService {
         if (this.verificarCantidades(producto, cantidad)) {
             boolean x = false;
 
@@ -261,8 +262,8 @@ public class PedidoService {
         pedido.setPrecioTotal(total);
         pedido.setEstado(Estado.PENDIENTE);
 
-        notificacionMail.enviar("Su pedido fue enviado y se encuentra pendiente de aprobacion " , "Tu Almacen", pedido.getUsuario().getEmail());
-        
+        notificacionMail.enviar("Su pedido fue enviado y se encuentra pendiente de aprobacion ", "Tu Almacen", pedido.getUsuario().getEmail());
+
         pedidoRepositorio.save(pedido);
 
     }
@@ -272,7 +273,7 @@ public class PedidoService {
         try {
             p.setEstado(Estado.ANULADO);
             pedidoRepositorio.save(p);
-            notificacionMail.enviar("Su pedido se ha anulado " , "Tu Almacen", p.getUsuario().getEmail());
+            notificacionMail.enviar("Su pedido se ha anulado ", "Tu Almacen", p.getUsuario().getEmail());
         } catch (Exception ex) {
             throw new Exception(ex.getMessage());
         }
@@ -283,7 +284,7 @@ public class PedidoService {
         try {
             p.setEstado(Estado.CONFIRMADO);
             pedidoRepositorio.save(p);
-            notificacionMail.enviar("Su pedido fue confirmado y el monto a pagar es $ "+p.getPrecioTotal()+" gracias por su compra. " , "Tu Almacen", p.getUsuario().getEmail());
+            notificacionMail.enviar("Su pedido fue confirmado y el monto a pagar es $ " + p.getPrecioTotal() + " gracias por su compra. ", "Tu Almacen", p.getUsuario().getEmail());
         } catch (Exception ex) {
             throw new Exception(ex.getMessage());
         }
@@ -319,6 +320,34 @@ public class PedidoService {
 
     public List mispedidos(String idUsuario) {
         return pedidoRepositorio.mispedidos(idUsuario);
+    }
+
+    public List<Ventas> masVendidos() throws ErrorService {
+        List<Ventas> masVendidos = new ArrayList<>();
+        List<Producto> productos = productoService.listarProducto();
+        List<Pedido> confirmados = pedidoRepositorio.pedidosPorEstado(Estado.CONFIRMADO);
+        for (Producto p : productos) {
+            Ventas v = new Ventas();
+            v.setProducto(p);
+            v.setVendidos(0);
+            for (Pedido pedido : confirmados) {
+                if (pedido.getProductos().contains(p)) {
+                    v.setVendidos(v.getVendidos() + pedido.getCantidad().get(pedido.getProductos().indexOf(p)));
+                }
+            }
+            masVendidos.add(v);
+        }
+	for(int i=0;i<masVendidos.size();i++){
+		for(int j=i+1;j<masVendidos.size();j++){
+			Ventas actual = masVendidos.get(i);
+			Ventas siguiente = masVendidos.get(j); 
+			if(actual.getVendidos()<siguiente.getVendidos()){
+				masVendidos.set(i,siguiente);
+				masVendidos.set(j,actual);
+			}
+		}
+	}
+        return masVendidos;
     }
 
 }
