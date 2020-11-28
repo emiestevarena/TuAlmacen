@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class PedidoController {
+public class PedidoUsuarioController {
 
     @Autowired
     private ProductoService productoService;
@@ -48,7 +48,7 @@ public class PedidoController {
     private HttpSession session;
 
     
-
+    @PreAuthorize("hasRole('ROLE_USUARIO')||hasRole('ROLE_ADMIN')")
     @GetMapping("/compra")
     public String compra(ModelMap modelo) {
 
@@ -114,7 +114,7 @@ public class PedidoController {
         return "redirect:/inicio";
     }
 
-    @PreAuthorize("hasRole('ROLE_USUARIO')")
+    @PreAuthorize("hasRole('ROLE_USUARIO')||hasRole('ROLE_ADMIN')")
     @GetMapping("/miscompras")
     public String miscompras(ModelMap modelo, @RequestParam(required = false) String estado) {
 
@@ -154,7 +154,7 @@ public class PedidoController {
         try {
             pedidoService.anular(p);
         } catch (Exception ex) {
-            Logger.getLogger(PedidoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PedidoUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return "redirect:/miscompras";

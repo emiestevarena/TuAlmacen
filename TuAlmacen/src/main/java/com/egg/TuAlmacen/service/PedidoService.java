@@ -337,17 +337,29 @@ public class PedidoService {
             }
             masVendidos.add(v);
         }
-	for(int i=0;i<masVendidos.size();i++){
-		for(int j=i+1;j<masVendidos.size();j++){
-			Ventas actual = masVendidos.get(i);
-			Ventas siguiente = masVendidos.get(j); 
-			if(actual.getVendidos()<siguiente.getVendidos()){
-				masVendidos.set(i,siguiente);
-				masVendidos.set(j,actual);
-			}
-		}
-	}
+        for (int i = 0; i < masVendidos.size(); i++) {
+            for (int j = i + 1; j < masVendidos.size(); j++) {
+                Ventas actual = masVendidos.get(i);
+                Ventas siguiente = masVendidos.get(j);
+                if (actual.getVendidos() < siguiente.getVendidos()) {
+                    masVendidos.set(i, siguiente);
+                    masVendidos.set(j, actual);
+                }
+            }
+        }
         return masVendidos;
+    }
+
+    public Double ganancias(Date start, Date end) {
+        List<Pedido> ventas = pedidoRepositorio.ventasEfectivasPorPeriodo(start, end);
+        Double ganancias = 0.0;
+        for (Pedido p : ventas) {
+            for (int i = 0; i < p.getProductos().size(); i++) {
+                Double spread = p.getProductos().get(i).getPrecioVenta() - p.getProductos().get(i).getPrecioCompra();
+                ganancias += spread * p.getCantidad().get(i);
+            }
+        }
+        return ganancias;
     }
 
 }

@@ -29,22 +29,16 @@ public class RegistroController {
     @Autowired
     private UsuarioService usuarioService;
     
-//    @Autowired
-//    public Rol rol;
-    
     @GetMapping("/registro_cliente")
-    public String registroCliente(ModelMap modelo,@RequestParam(required=false) String error, @RequestParam(required=false) String ok){
-        if(error!=null&& !error.isEmpty()) modelo.put("error",error);
-        if(ok!=null&& !ok.isEmpty()) modelo.put("ok",ok);
+    public String registroCliente(ModelMap modelo){
         return "registro_cliente.html";
     }
     
     @GetMapping("/registro_admin")
-    public String registroAdmin(ModelMap modelo,@RequestParam(required=false) String error, @RequestParam(required=false) String ok){
-        if(error!=null&& !error.isEmpty()) modelo.put("error",error);
-        if(ok!=null&& !ok.isEmpty()) modelo.put("ok",ok);
+    public String registroAdmin(ModelMap modelo){
         return "registro_admin.html";
     }
+    
     @PostMapping("/registrar_cliente")
     public String registrarCliente(ModelMap modelo,
                                    @RequestParam(required=true) String usuario,
@@ -53,12 +47,12 @@ public class RegistroController {
                                    @RequestParam(required=true) String password_confirmation) throws ErrorService{
         try{
             usuarioService.registrarUsuario(usuario,email,password,password_confirmation,Rol.USUARIO);
-            modelo.put("ok","alta exitosa");
+//            modelo.put("ok","alta exitosa");
         }catch(ErrorService ex){
             modelo.put("error",ex.getMessage());
-            return "redirect:/registro_cliente?error="+ex.getMessage();
+            return this.registroCliente(modelo);
         }
-        return "redirect:/login";
+        return "redirect:/login?ok=alta exitosa";
     }
     
     @PostMapping("/registrar_admin")
@@ -69,11 +63,10 @@ public class RegistroController {
                                    @RequestParam(required=true) String password_confirmation)throws ErrorService{
         try{
              usuarioService.registrarUsuario(nombre,email,password,password_confirmation,Rol.ADMIN);
-            modelo.put("ok","alta exitosa");
         }catch(ErrorService ex){
             modelo.put("error",ex.getMessage());
-            return "redirect:/registro_admin";
+            return this.registroAdmin(modelo);
         }
-        return "redirect:/login";
+        return "redirect:/login?ok=alta exitosa";
     }
 }

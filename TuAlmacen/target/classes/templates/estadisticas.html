@@ -9,32 +9,62 @@
 
 <body>
 
-  <div th:replace="fragments :: nav_logueado_con_js"></div>
+  <div th:replace="fragments :: nav_logueado"></div>
 
   <div class="container mt-5">
-
     <div class="row">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Producto</th>
-                <th scope="col">Cantidad Vendida</th>
-              </tr>
-            </thead>
-            <tbody >
-              <tr th:each="venta : ${masvendidos}">
-                <td th:text="${venta.producto.nombre}"></td>
-                <td th:text="${venta.vendidos}"></td>
- 
-              </tr>
-            </tbody>
-          </table>
-     
+      <h2 class="mt-4">Estadisticas generales</h2>
+      <table class="table table-bordered mt-3">
+        <thead>
+          <tr>
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad Vendida</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="venta : ${masvendidos}">
+            <div th:if="${venta.vendidos} > 0">
+              <td th:text="${venta.producto.nombre}"></td>
+              <td th:text="${venta.vendidos}"></td>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+      <!-- <p>&#10148;</p> -->
     </div>
-
   </div>
 
-
+  <div class="container">
+    <div class="row">
+      <form action="/ganancias" method="POST">
+        <label>Fecha inicial</label>
+        <input name="start" type="date" value="2020-01-01">
+        <label>Fecha final</label>
+        <input name="end" type="date" value="2020-01-30">
+        <button type="submit">Consultar</button>
+      </form>
+      <p>Ganancias del periodo: $<span th:text="${ganancias}"></span></p>
+      
+      <!-- <table class="table table-bordered mt-3">
+        <thead>
+          <tr>
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad Vendida</th>
+            <th scope="col">Utilidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="venta : ${masvendidos}">
+            <div th:if="${venta.vendidos} > 0">
+              <td th:text="${venta.producto.nombre}"></td>
+              <td th:text="${venta.vendidos}"></td>
+            </div>
+          </tr>
+        </tbody>
+      </table> -->
+      <!-- <p>&#10148;</p> -->
+    </div>
+  </div>
 
   <div th:replace="fragments :: footer_principal"></div>
 

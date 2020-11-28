@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class PedidoAdminController2 {
+public class PedidoAdminController {
 
     @Autowired
     private ProductoService productoService;
@@ -53,9 +53,8 @@ public class PedidoAdminController2 {
 
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/modificarpedido")
-    public String pedido(ModelMap modelo, @RequestParam String id,
+    public String pedidoModificar(ModelMap modelo, @RequestParam String id,
             @RequestParam List<String> idproducto, @RequestParam List<Integer> cantidad, @RequestParam String estado
     ) throws ErrorService {
 
@@ -68,27 +67,26 @@ public class PedidoAdminController2 {
             pedidoService.modificarPedido(id, producto, cantidad, Estado.valueOf(estado));
 
         } catch (Exception e) {
-            List<Producto> productoo = productoService.listarProducto();
+            List<Producto> productos = productoService.listarProducto();
 
             Set<Estado> estadoo = EnumSet.allOf(Estado.class);
-            modelo.put("productos", productoo);
+            modelo.put("productos", productos);
             modelo.put("estados", estadoo);
 
             modelo.put("cantidad", cantidad);
             modelo.put("error", e.getMessage());
 
-            return "redirect:/pedido";
+            return this.pedido(modelo, null);
         }
 
         modelo.put("mensaje", "Has modificado el pedido exitosamente :D");
 
-        return "redirect:/pedido";
+        return this.pedido(modelo, null);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/eliminarpedido")
     public String bajaproducto(ModelMap modelo,
-            @RequestParam String id) {
+            @RequestParam String id) throws ErrorService {
 
         try {
             pedidoService.eliminarPedido(id);
@@ -97,16 +95,15 @@ public class PedidoAdminController2 {
 
         } catch (ErrorService e) {
             modelo.addAttribute("error", e.getMessage());
-            return "redirect:/pedido";
+            return this.pedido(modelo, null);
         }
-        return "redirect:/pedido";
+        return this.pedido(modelo, null);
 
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/confirmarpedido")
     public String confirmarpedido(ModelMap modelo,
-            @RequestParam String id) {
+            @RequestParam String id) throws ErrorService {
 
         Pedido p = pedidoService.buscarPorId(id);
 
@@ -117,24 +114,24 @@ public class PedidoAdminController2 {
 
         } catch (Exception e) {
             modelo.addAttribute("error", e.getMessage());
-            return "redirect:/pedido";
+            return this.pedido(modelo, null);
         }
-        return "redirect:/pedido";
+        return this.pedido(modelo, null);
 
     }
     
     @PostMapping("/anularpedidoadmin")
-    public String anularPedido(@RequestParam String id){
+    public String anularPedido(ModelMap modelo, @RequestParam String id) throws ErrorService{
         
         Pedido p = pedidoService.buscarPorId(id);
         
         try {
             pedidoService.anular(p);
         } catch (Exception ex) {
-            Logger.getLogger(PedidoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PedidoUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return "redirect:/pedido";
+        return this.pedido(modelo, null);
     } 
 
 }

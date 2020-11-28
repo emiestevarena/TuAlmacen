@@ -19,8 +19,7 @@ import com.egg.TuAlmacen.service.UsuarioService;
 @EnableGlobalMethodSecurity(prePostEnabled=true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
-	@Autowired
-	
+	@Autowired	
 	public UsuarioService usuarioService;
 	
 	@Autowired

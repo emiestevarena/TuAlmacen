@@ -39,7 +39,6 @@ public class UsuarioController {
     private ProductoService productoService;
     @Autowired
     private PedidoService pedidoService;
-
     @Autowired
     private HttpSession session;
 
@@ -79,20 +78,14 @@ public class UsuarioController {
     public String agregar(ModelMap modelo, @RequestParam String idUsuario, @RequestParam String id, @RequestParam Integer cantidad) throws ErrorService {
 
         try{
-        System.out.println("AASDGFBQALWIEGASDFJHADF");
 
         Pedido pedido = pedidoService.carrito(idUsuario);
-        System.out.println("BUSCO CARRITO");
 
         Producto producto = productoService.buscarPorId(id);
 
         if (pedido == null) {
-            System.out.println("ADENTRO DEL IF NULL PEDIDO");
             pedidoService.miCarrito(usuarioService.buscarPorId(idUsuario), producto, cantidad);
         } else {
-
-            System.out.println("ELSE DEL IF NULL PEDIDO");
-
             pedidoService.agregar(pedido, producto, cantidad);
         }
         }catch(ErrorService ex){
@@ -155,11 +148,11 @@ public class UsuarioController {
             modelo.put("repetir", repetir);
             modelo.put("rol", rol);
 
-            return "modificarperfil.html";
+            return this.miPerfil(modelo);
 
         }
 
-        return "inicio.html";
+        return this.miPerfil(modelo);
 
     }
 
@@ -173,12 +166,10 @@ public class UsuarioController {
 
             usuarioService.eliminarUsuario(usu.getId());
 
-            modelo.put("mensaje", "Ha eliminado exitosamente");
-
         } catch (ErrorService e) {
             modelo.addAttribute("error", e.getMessage());
 
-            return "redirect:/miperfil";
+            return this.miPerfil(modelo);
         }
 
         return "redirect:/logout";

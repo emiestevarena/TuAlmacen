@@ -16,10 +16,11 @@ public class LoginController {
 
     
     @GetMapping("/login")
-    public String login(ModelMap modelo, @RequestParam(required=false) String error) {
+    public String login(ModelMap modelo, @RequestParam(required=false) String error, @RequestParam(required=false) String ok) {
         if (error != null) {
             modelo.put("error", "Usuario y contraseñas incorrectos");
         }
+        modelo.put("ok", ok);
         return "login.html";
     }
     
