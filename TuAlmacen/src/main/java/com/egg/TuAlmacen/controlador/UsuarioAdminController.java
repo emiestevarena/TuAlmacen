@@ -32,13 +32,11 @@ public class UsuarioAdminController {
     
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/usuarios")
-    public String usuarios(ModelMap modelo,
-                           @RequestParam(required=false) String error,
-                           @RequestParam(required=false) String ok){
+    public String usuarios(ModelMap modelo){
+        
         List<Usuario> usuarios = usuarioService.findAll();
         modelo.put("usuarios",usuarios);
-        if(error!=null){modelo.put("error", error);}
-        if(ok!=null){modelo.put("ok", ok);}
+        
         return "usuarios.html";
     }
     
@@ -57,8 +55,9 @@ public class UsuarioAdminController {
             modelo.put("ok", "alta exitosa");
         }catch(ErrorService ex){
             modelo.put("error",ex.getMessage());
+            return this.usuarios(modelo);
         }
-        return "redirect:/usuarios";
+        return this.usuarios(modelo);
     }
     
     @PostMapping("/modificarusuario")
@@ -82,8 +81,9 @@ public class UsuarioAdminController {
             modelo.put("ok", "modificación exitosa");
         }catch(ErrorService ex){
             modelo.put("error",ex.getMessage());
+            return this.usuarios(modelo);
         }
-        return "redirect:/usuarios";
+        return this.usuarios(modelo);
     }
     
     @PostMapping("/bajausuario")
@@ -92,8 +92,9 @@ public class UsuarioAdminController {
             usuarioService.eliminarUsuario(id);
             modelo.put("ok", "baja exitosa");
         }catch(ErrorService ex){
-              modelo.put("error",ex.getMessage());
+            modelo.put("error",ex.getMessage());
+            return this.usuarios(modelo);
         }
-        return "redirect:/usuarios";
+        return this.usuarios(modelo);
     }
 }

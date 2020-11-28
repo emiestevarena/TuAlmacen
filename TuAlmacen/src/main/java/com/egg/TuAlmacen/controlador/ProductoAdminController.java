@@ -23,138 +23,117 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class ProductoAdminController {
 
-	@Autowired
-	private ProductoService productoService;
+    @Autowired
+    private ProductoService productoService;
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/productos")
+    public String productos(ModelMap modelo) throws ErrorService {
+
+        List<Producto> productos = productoService.listarProducto();
+
+        modelo.put("productos", productos);
+
+        Set<Rubro> rubros = EnumSet.allOf(Rubro.class);
+        modelo.put("rubros", rubros);
+
+        return "productos.html";
+
+    }
+
+    @PostMapping("/altaproducto")
+    public String altaproducto(ModelMap modelo,
+            @RequestParam String nombre,
+            @RequestParam String precioCompra,
+            @RequestParam String precioVenta,
+            @RequestParam String cantidad,
+            @RequestParam String descripcion,
+            @RequestParam String rubro,
+            MultipartFile archivo) throws ErrorService {
+
+        try {
+
+            productoService.registrarProducto(nombre, Double.parseDouble(precioCompra),
+                    Integer.parseInt(cantidad), Double.parseDouble(precioVenta),
+                    descripcion, archivo, Rubro.valueOf(rubro));
+
+        } catch (Exception e) {
+
+            modelo.put("nombre", nombre);
+            modelo.put("error", e.getMessage());
+            modelo.put("precioCompra", precioCompra);
+            modelo.put("precioVenta", precioVenta);
+            modelo.put("cantidad", cantidad);
+            modelo.put("descripcion", descripcion);
+            modelo.put("rubro", rubro);
+
+            return this.productos(modelo);
+        }
+
+        modelo.put("mensaje", "Has registrado el producto exitosamente :P");
+
+        return this.productos(modelo);
+    }
+
+    @PostMapping("/modificarproducto")
+    public String modificarproducto(ModelMap modelo,
+            @RequestParam String id,
+            @RequestParam String nombre,
+            @RequestParam String precioCompra,
+            @RequestParam String precioVenta,
+            @RequestParam String cantidad,
+            @RequestParam String descripcion,
+            @RequestParam String rubro,
+            MultipartFile archivo) throws ErrorService {
+
+        try {
+
+            productoService.modificarProducto(id, nombre, Double.parseDouble(precioCompra),
+                    Integer.parseInt(cantidad), Double.parseDouble(precioVenta),
+                    descripcion, archivo, Rubro.valueOf(rubro));
 
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/productos")
-	public String altaproducto(ModelMap modelo) throws ErrorService {
-		
+        } catch (Exception e) {
 
-		List<Producto> productos = productoService.listarProducto();
-		
-		modelo.put("productos", productos);
+            List<Producto> productos = productoService.listarProducto();
 
-                Set<Rubro> rubros = EnumSet.allOf(Rubro.class);
-                modelo.put("rubros", rubros);
-                
-		return "productos.html";
-		
-	}
-	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/altaproducto")
-	public String altaproducto(ModelMap modelo,  
-			@RequestParam String nombre,
-			@RequestParam String precioCompra,
-			@RequestParam String precioVenta,
-			@RequestParam String cantidad,
-			@RequestParam String descripcion,
-			@RequestParam String rubro,
-			MultipartFile archivo) throws ErrorService{
-		
-		
-		try {
-			
-			productoService.registrarProducto(nombre,Double.parseDouble(precioCompra),
-					Integer.parseInt(cantidad),Double.parseDouble(precioVenta),
-					descripcion, archivo,Rubro.valueOf(rubro));
-		
-		
-		}catch(Exception e) {
-	
-			
-			modelo.put("nombre", nombre);
-			modelo.put("error",e.getMessage());
-			modelo.put("precioCompra", precioCompra);
-			modelo.put("precioVenta", precioVenta);
-			modelo.put("cantidad", cantidad);
-			modelo.put("descripcion", descripcion);
-			modelo.put("rubro", rubro);
-			
-			
-			return "redirect:/productos";
-		}
-		
-		modelo.put("mensaje", "Has registrado el producto exitosamente :P");
-		
-		
-		return "redirect:/productos";
-	}
-	
-	
-	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/modificarproducto")
-	public String modificarproducto(ModelMap modelo,
-			@RequestParam String id,
-			@RequestParam String nombre,
-			@RequestParam String precioCompra,
-			@RequestParam String precioVenta,
-			@RequestParam String cantidad,
-			@RequestParam String descripcion,
-			@RequestParam String rubro,
-			MultipartFile archivo) throws ErrorService {
-		
-			
-		
-		try {
-			
-			
-			productoService.modificarProducto(id,nombre,Double.parseDouble(precioCompra),
-					Integer.parseInt(cantidad),Double.parseDouble(precioVenta),
-					descripcion, archivo,Rubro.valueOf(rubro));
-			
-			
-			modelo.put("mensaje", "Se ha modificado el producto exitosamente maquina ");
-		
-		}catch(Exception e) {
-			
-			
+            modelo.put("productos", productos);
 
-			List<Producto> productos = productoService.listarProducto();
-			
-			modelo.put("productos", productos);
-			
-			modelo.put("id", id);
-			modelo.put("nombre", nombre);
-			modelo.put("error",e.getMessage());
-			modelo.put("precioCompra", precioCompra);
-			modelo.put("precioVenta", precioVenta);
-			modelo.put("cantidad", cantidad);
-			modelo.put("descripcion", descripcion);
-			modelo.put("rubro", rubro);
-			
-			
-			return "redirect:/productos";
-		}
-		
-		return "redirect:/productos";
-	}
-	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/bajaproducto")
-	public String bajaproducto(ModelMap modelo,
-			HttpSession session,
-			@RequestParam String id) {
-		
-		
-		try {
-			
-			productoService.eliminarProducto(id);
-			
-	
-			modelo.put("mensaje", "Se ha eliminado el producto exitosamente");
-			
-		}catch(ErrorService e) {
-			modelo.addAttribute("error", e.getMessage());
-			return "redirect:/productos";
-		}
-		return "redirect:/productos";
-		
-	}
-	
-	
-	
+            modelo.put("id", id);
+            modelo.put("nombre", nombre);
+            modelo.put("error", e.getMessage());
+            modelo.put("precioCompra", precioCompra);
+            modelo.put("precioVenta", precioVenta);
+            modelo.put("cantidad", cantidad);
+            modelo.put("descripcion", descripcion);
+            modelo.put("rubro", rubro);
+
+            return this.productos(modelo);
+        }
+        
+        modelo.put("mensaje", "Se ha modificado el producto exitosamente maquina ");
+
+        return this.productos(modelo);
+    }
+
+    @PostMapping("/bajaproducto")
+    public String bajaproducto(ModelMap modelo,
+            HttpSession session,
+            @RequestParam String id) throws ErrorService {
+
+        try {
+
+            productoService.eliminarProducto(id);
+
+
+        } catch (ErrorService e) {
+            modelo.addAttribute("error", e.getMessage());
+            return this.productos(modelo);
+        }
+        
+        modelo.put("mensaje", "Se ha eliminado el producto exitosamente");
+            
+        return this.productos(modelo);
+    }
+
 }

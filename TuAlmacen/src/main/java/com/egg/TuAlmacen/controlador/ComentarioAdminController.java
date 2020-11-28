@@ -44,7 +44,7 @@ public class ComentarioAdminController {
     
     @GetMapping("/comentarios")
     public String comentarios(ModelMap modelo) throws ErrorService{
-
+        
 		List<Comentario> comentario = comentarioService.listarComentario();
 		
 		modelo.put("comentarios", comentario);
@@ -56,7 +56,7 @@ public class ComentarioAdminController {
 	@PostMapping("/bajacomentario_admin")
 	public String bajaproducto(ModelMap modelo,
 			HttpSession session,
-			@RequestParam String id) {
+			@RequestParam String id) throws ErrorService {
 		
 		
 		try {			
@@ -65,7 +65,7 @@ public class ComentarioAdminController {
 			
 		}catch(ErrorService e) {
 			modelo.addAttribute("error", e.getMessage());
-			return "redirect:/comentarios";
+			return this.comentarios(modelo);
 		}
 		return "redirect:/comentarios";
 		
@@ -74,7 +74,7 @@ public class ComentarioAdminController {
 	@PostMapping("/modificarcomentario_admin")
 	public String modificacionproducto(ModelMap modelo,
 			HttpSession session,
-			@RequestParam String id,@RequestParam String comentario,@RequestParam String idProducto,@RequestParam String idUsuario) {
+			@RequestParam String id,@RequestParam String comentario,@RequestParam String idProducto,@RequestParam String idUsuario) throws ErrorService {
 		
 		
 		try {
@@ -86,7 +86,7 @@ public class ComentarioAdminController {
 			
 		}catch(ErrorService e) {
 			modelo.addAttribute("error", e.getMessage());
-			return "redirect:/comentarios";
+			return this.comentarios(modelo);
 		}
 		return "redirect:/comentarios";
 		

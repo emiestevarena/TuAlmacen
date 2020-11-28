@@ -37,7 +37,7 @@ public class ComentarioUsuarioController {
     @Autowired
     private HttpSession session;
 
-    @PreAuthorize("hasRole('ROLE_USUARIO')")
+    @PreAuthorize("hasRole('ROLE_USUARIO')||hasRole('ROLE_ADMIN')")
     @GetMapping("/comentarioproducto/{idproducto}")
     public String comentariosproducto(ModelMap modelo, @PathVariable String idproducto) throws ErrorService {
 
@@ -74,22 +74,21 @@ public class ComentarioUsuarioController {
     }
 
     @PostMapping("/buscar")
-    public String buscar(@RequestParam String producto){
+    public String buscar(ModelMap modelo, @RequestParam String producto) throws ErrorService{
         Producto p = productoService.buscarPorNombre(producto);
         if (p!=null){
-            return "redirect:/comentarioproducto/"+p.getId();
+            return this.comentariosproducto(modelo, p.getId());
         }else{
             return null;
         }
     }
     
-    @PreAuthorize("hasRole('ROLE_USUARIO')")
     @PostMapping("/comentar")
     public String comentar(ModelMap modelo,
             HttpSession session,
             @RequestParam String comentario,
             @RequestParam String idProducto,
-            @RequestParam String idUsuario) {
+            @RequestParam String idUsuario) throws ErrorService {
 
         try {
 
@@ -99,20 +98,19 @@ public class ComentarioUsuarioController {
 
         } catch (ErrorService e) {
             modelo.addAttribute("error", e.getMessage());
-            return "redirect:/comentarioproducto/" + idProducto;
+            return this.comentariosproducto(modelo, idProducto);
         }
-        return "redirect:/comentarioproducto/" + idProducto;
+        return this.comentariosproducto(modelo, idProducto);
 
     }
 
-    @PreAuthorize("hasRole('ROLE_USUARIO')")
     @PostMapping("/editar")
     public String editar(ModelMap modelo,
             HttpSession session,
             @RequestParam String id,
             @RequestParam String comentario,
             @RequestParam String idProducto,
-            @RequestParam String idUsuario) {
+            @RequestParam String idUsuario) throws ErrorService {
 
         try {
 
@@ -122,17 +120,16 @@ public class ComentarioUsuarioController {
 
         } catch (ErrorService e) {
             modelo.addAttribute("error", e.getMessage());
-            return "redirect:/comentarioproducto/" + idProducto;
+            return this.comentariosproducto(modelo, idProducto);
         }
-        return "redirect:/comentarioproducto/" + idProducto;
+        return this.comentariosproducto(modelo, idProducto);
 
     }
 
-    @PreAuthorize("hasRole('ROLE_USUARIO')")
     @PostMapping("/borrar")
     public String borrar(ModelMap modelo,
             HttpSession session,
-            @RequestParam String id) {
+            @RequestParam String id) throws ErrorService {
 
         Comentario comentario = comentarioService.buscarPorId(id);
         try {
@@ -141,9 +138,9 @@ public class ComentarioUsuarioController {
 
         } catch (ErrorService e) {
             modelo.addAttribute("error", e.getMessage());
-            return "redirect:/comentarioproducto/" + comentario.getProducto().getId();
+            return this.comentariosproducto(modelo, comentario.getProducto().getId());
         }
-        return "redirect:/comentarioproducto/" + comentario.getProducto().getId();
+        return this.comentariosproducto(modelo, comentario.getProducto().getId());
 
     }
 
