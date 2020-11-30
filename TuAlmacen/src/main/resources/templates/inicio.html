@@ -18,10 +18,10 @@
       <div class="col-lg-3">
 
         <h1 class="my-4 h4 ml-1" th:text="${session.usuariosession.usuario}"></h1>
-        <div class="list-group">
-          <div th:each="rubro : ${rubros}">
-            <a th:href="@{/inicio(rubro=__${rubro.toString()}__)}" class="list-group-item list-group-item-action"><span
-                th:text="${rubro}"></span></a>
+        <div class="list-group h5" >
+          <div th:each="rubro : ${rubros}" style="margin:5px;" class="d-flex flex-column bd-highlight mb-3">
+            <a th:href="@{/inicio(rubro=__${rubro.toString()}__)}" th:class="${rubro.toString()}"><span
+                th:text="${rubro}" class="text-center"></span></a>
           </div>
         </div>
 
