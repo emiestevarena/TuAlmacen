@@ -36,7 +36,7 @@ public class EstadisticasController {
         }
         modelo.put("ganancias", ganancias);
         return this.estadisticas(modelo);
-
+        
     }
 
 }

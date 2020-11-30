@@ -11,22 +11,21 @@
 
     <div th:replace="fragments :: nav_logueado"></div>
 
-    <div class="container mt-5">
-
+    <div class="container mt-5 h-100">
+        <p><br /></p>
         <h3 style="color: red" th:if="${error !=null}" th:text="${error}"></h3>
 
 
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100">
-                    <!-- <a href="#"><img class="card-img-top" th:src="${producto.foto}" alt=""></a> -->
-                    <a href="#"><img class="card-img-top"
+                    <a th:href="@{/comentarioproducto/} +${producto.id}"><img class="card-img-top"
                             th:src="@{'data:/'+${producto.foto.mime}+';base64,'+${producto.foto.getImgData()}}"
-                            alt="#" />
+                            alt="#" style="width: 100%; height: 250px; object-fit: scale-down;"/>
                     </a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#" th:text="${producto.nombre}"></a>
+                            <a th:href="@{/comentarioproducto/} +${producto.id}" th:text="${producto.nombre}"></a>
                         </h4>
                         <h5>$<span th:text="${producto.precioVenta}"></span></h5>
                         <p class="card-text" th:text="${producto.descripcion}"></p>
@@ -52,39 +51,32 @@
                         </form>
                         <div>
                             <h4>Productos similares</h4>
-                            <a th:if="${anterior!=null}" th:text="${anterior.nombre}" th:href="@{/comentarioproducto/} +${anterior.id}"></a>
-                            <a th:if="${siguiente!=null}" th:text="${siguiente.nombre}" th:href="@{/comentarioproducto/} +${siguiente.id}"></a>
+                            <a th:if="${anterior!=null}" th:text="${anterior.nombre}"
+                                th:href="@{/comentarioproducto/} +${anterior.id}"></a>
+                            <a th:if="${siguiente!=null}" th:text="${siguiente.nombre}"
+                                th:href="@{/comentarioproducto/} +${siguiente.id}"></a>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
 
                 <h3>COMENTARIOS</h3>
-        
+
                 <table class="table table-bordered">
-                    <!-- <thead>
-                              <tr>
-                                <th scope="col"></th>
-                              </tr>
-                            </thead> -->
                     <tbody th:each="comentario : ${comentarios}">
                         <tr>
-                            <td th:text="${comentario.usuario.usuario}"></td>
-                        </tr>
-                        <tr>
-                            <td th:text="${comentario.comentario}"></td>
+                            <td><span class="font-weight-bold" th:text="${comentario.usuario.usuario}"></span>: <span class="" th:text="${comentario.comentario}"></span></td>
                         </tr>
                         <tr th:if="${session.usuariosession.id} == ${comentario.usuario.id}">
                             <td>
-        
-                                <form action="/editar" method="POST">
+                                <form action="/editar" method="POST" class="mb-1">
                                     <input type="hidden" name="id" th:value="${comentario.id}">
                                     <input type="hidden" name="idUsuario" th:value="${session.usuariosession.id}">
                                     <input type="hidden" name="idProducto" th:value="${comentario.producto.id}">
-                                    <textarea class="form-control" rows="3" type="text" name="comentario" maxlength="250"
-                                        th:placeholder="${comentario.comentario}" required></textarea>
+                                    <textarea class="form-control mb-1" rows="3" type="text" name="comentario"
+                                        maxlength="250" th:placeholder="${comentario.comentario}" required></textarea>
                                     <button type="submit" class="btn btn-primary">Modificar</button>
                                 </form>
                                 <form action="/borrar" method="POST">
@@ -95,11 +87,11 @@
                         </tr>
                     </tbody>
                 </table>
-        
+
             </div>
         </div>
     </div>
-    
+
     </div>
     <!-- /.row -->
 

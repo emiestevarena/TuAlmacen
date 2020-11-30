@@ -11,14 +11,10 @@
 
     <div th:replace="fragments :: nav_logueado"></div>
 
-    <header class="py-5 mb-5">
-        <div class="container h-100">
-        </div>
-    </header>
-
-    <div class="container">
-
-        <div class="row h-100 align-items-center justify-content-center text-center mb-5 mt-5 col-lg">
+    <div class="container h-100">
+        <p><br /></p>
+        <p><br /></p>
+        <div class="row align-items-center justify-content-center text-center mb-5 mt-5 col-lg">
             <div class="col-lg-6">
                 <form action="/modificarperfil" method="POST">
                     <p th:if="${error !=null}" th:text="${error}"></p>
@@ -50,8 +46,6 @@
                 </form>
             </div>
         </div>
-        <p><br /></p>
-
     </div>
 
     <div th:replace="fragments :: footer_principal"></div>

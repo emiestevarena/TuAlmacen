@@ -13,7 +13,7 @@
 
   <div class="container mt-5">
     <div class="row">
-      <h2 class="mt-4">Estadisticas generales</h2>
+      <h2 class="mt-4">Cantidad de productos vendidos</h2>
       <table class="table table-bordered mt-3">
         <thead>
           <tr>
@@ -30,39 +30,30 @@
           </tr>
         </tbody>
       </table>
-      <!-- <p>&#10148;</p> -->
     </div>
   </div>
 
-  <div class="container">
+  <div class="container h-100">
+    <div class="row">
+      <h2 class="mt-4 mb-3">Consultar ganancias</h2>
+    </div>
     <div class="row">
       <form action="/ganancias" method="POST">
-        <label>Fecha inicial</label>
-        <input name="start" type="date" value="2020-01-01">
-        <label>Fecha final</label>
-        <input name="end" type="date" value="2020-01-30">
-        <button type="submit">Consultar</button>
+        <div class="row">
+          <div class="col">
+            <label for="start" class="font-weight-normal">Fecha inicial</label>
+            <input name="start" type="date" value="2020-01-01" class="form-control">
+          </div>
+          <div class="col">
+            <label for="end" class="font-weight-normal">Fecha final</label>
+            <input name="end" type="date" value="2020-01-30" class="form-control">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-dark mt-3">Consultar</button>
       </form>
-      <p>Ganancias del periodo: $<span th:text="${ganancias}"></span></p>
-      
-      <!-- <table class="table table-bordered mt-3">
-        <thead>
-          <tr>
-            <th scope="col">Producto</th>
-            <th scope="col">Cantidad Vendida</th>
-            <th scope="col">Utilidad</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="venta : ${masvendidos}">
-            <div th:if="${venta.vendidos} > 0">
-              <td th:text="${venta.producto.nombre}"></td>
-              <td th:text="${venta.vendidos}"></td>
-            </div>
-          </tr>
-        </tbody>
-      </table> -->
-      <!-- <p>&#10148;</p> -->
+    </div>
+    <div class="row mt-3">
+      <h4>Ganancias del periodo: $<span th:text="${ganancias}"></span></h4>
     </div>
   </div>
 

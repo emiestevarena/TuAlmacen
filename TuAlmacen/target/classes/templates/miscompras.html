@@ -11,66 +11,63 @@
 
     <div th:replace="fragments :: nav_logueado"></div>
 
-    <!-- Page Content -->
-    <div class="container mt-5">
+    <div class="container mt-5 h-100">
         <div class="row">
-            <div class="col-lg-3">
-
+            <div class="col-lg-3 mb-4">
                 <h1 class="my-4 h4 ml-1" th:text="${session.usuariosession.usuario}"></h1>
                 <div class="list-group">
                     <div th:each="estado : ${estados}">
-                        <a th:href="@{/miscompras(estado=__${estado.toString()}__)}" class="list-group-item"><span
+                        <a th:href="@{/miscompras(estado=__${estado.toString()}__)}" class="list-group-item list-group-item-action"><span
                                 th:text="${estado}"></span></a>
                     </div>
                 </div>
-
             </div>
-
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Cantidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <tr th:each="pedido : ${pedidos}">
-                        <td><span th:text="${pedido.estado.toString()}"></span></td>
-                        <td><span th:text="${pedido.fecha}"></span></td>
-                        <td><span th:text="${pedido.precioTotal}"></span></td>
-                        <td>
-                            <div th:each="producto : ${pedido.productos}">
-                                <ul>
-                                    <li><span th:text="${producto.nombre}"></li>
-                                </ul>
-
-                            </div>
-                        </td>
-                        <td>
-                            <div th:each="cantidad : ${pedido.cantidad}">
-                                <ul>
-                                    <li><span th:text="${cantidad}"></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td th:if="${pedido.estado.toString() == 'PENDIENTE'}">
-                            <form action="/anularpedido" method="POST">
-                                <input type="hidden" name="id" th:value="${pedido.id}">
-                                <button type="submit">Anular</button>
-                            </form>
-                        </td>
-                    </tr>
-
-
-                </tbody>
-            </table>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="pedido : ${pedidos}">
+                            <td><span th:text="${pedido.estado.toString()}"></span></td>
+                            <td><span th:text="${pedido.fecha}"></span></td>
+                            <td><span th:text="${pedido.precioTotal}"></span></td>
+                            <td>
+                                <div th:each="producto : ${pedido.productos}">
+                                    <ul>
+                                        <li><span th:text="${producto.nombre}"></li>
+                                    </ul>
+    
+                                </div>
+                            </td>
+                            <td>
+                                <div th:each="cantidad : ${pedido.cantidad}">
+                                    <ul>
+                                        <li><span th:text="${cantidad}"></li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td th:if="${pedido.estado.toString() == 'PENDIENTE'}">
+                                <form action="/anularpedido" method="POST">
+                                    <input type="hidden" name="id" th:value="${pedido.id}">
+                                    <button class="btn btn-danger" type="submit">Anular</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <!-- /.container -->
 
     <div th:replace="fragments :: footer_principal"></div>
 
