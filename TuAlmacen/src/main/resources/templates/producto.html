@@ -51,28 +51,40 @@
                         </form>
                         <div>
                             <h4>Productos similares</h4>
-                            <div class="d-flex flex-column">
-                                <div class="container2">
-                                    <div class="anterior" th:if="${anterior!=null}">
-                                        
-                                        <div class="centered">
-                                            <a th:text="${anterior.nombre}"
-                                                th:href="@{/comentarioproducto/} +${anterior.id}"
-                                                style="color: black;">
-                                            </a>    
+                            
+                            <div  >
+                                <div class="d-flex flex-column" style="opacity: 10">
+                                    <div class="container2">
+                                        <div class="" th:if="${anterior!=null}" >
+
+                                            <div class="centered  text-capitalize text-decoration-none" >
+                                                <a  th:text="${anterior.nombre}"
+                                                    th:href="@{/comentarioproducto/} +${anterior.id}"
+                                                    style="color: black; font: bold; text-decoration: none; font-size: larger ;">
+                                                </a>    
+                                            </div>
+                                            <a th:href="@{/comentarioproducto/} +${anterior.id}"><img th:src="@{'data:/'+${anterior.foto.mime}+';base64,'+${anterior.foto.getImgData()}}"
+                                                style="  width: 50px; height: 65px; margin-right:  250px ;  "  /></a>
                                         </div>
-                                        <img th:src="@{'data:/'+${anterior.foto.mime}+';base64,'+${anterior.foto.getImgData()}}"
-                                            style="width: 100%; height: 65px; object-fit: none;" />
                                     </div>
                                 </div>
-                            </div>
-                            <div class="d-flex flex-column">
-                                <button th:if="${siguiente!=null}" th:class="${producto.rubro.toString()}">
-                                    <a class="text-uppercase font-weight-bold text-decoration-none"
-                                        th:text="${siguiente.nombre}" th:href="@{/comentarioproducto/} +${siguiente.id}"
-                                        style="color: white;"></a>
-                                </button>
-                            </div>
+                                <div class="d-flex flex-column">
+                                    <div class="container2">
+                                        <div class="" th:if="${siguiente!=null}" >
+
+                                            <div class="centered text-capitalize text-decoration-none" >
+                                                <a  th:text="${siguiente.nombre}"
+                                                    th:href="@{/comentarioproducto/} +${siguiente.id}"
+                                                    style="color: black; font: bold; text-decoration: none; font-size: larger ;">
+                                                </a>    
+                                            </div>
+                                            <a th:href="@{/comentarioproducto/} +${siguiente.id}"><img th:src="@{'data:/'+${siguiente.foto.mime}+';base64,'+${siguiente.foto.getImgData()}}"
+                                                style="  width: 50px; height: 65px; margin-right:  250px ;  "  /></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>    
                         </div>
                     </div>
 
