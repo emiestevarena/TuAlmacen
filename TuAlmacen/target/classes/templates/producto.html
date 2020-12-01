@@ -20,8 +20,8 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100">
                     <a th:href="@{/comentarioproducto/} +${producto.id}"><img class="card-img-top"
-                            th:src="@{'data:/'+${producto.foto.mime}+';base64,'+${producto.foto.getImgData()}}"
-                            alt="#" style="width: 100%; height: 250px; object-fit: scale-down;"/>
+                            th:src="@{'data:/'+${producto.foto.mime}+';base64,'+${producto.foto.getImgData()}}" alt="#"
+                            style="width: 100%; height: 250px; object-fit: scale-down;" />
                     </a>
                     <div class="card-body">
                         <h4 class="card-title">
@@ -51,10 +51,20 @@
                         </form>
                         <div>
                             <h4>Productos similares</h4>
-                            <a th:if="${anterior!=null}" th:text="${anterior.nombre}"
-                                th:href="@{/comentarioproducto/} +${anterior.id}"></a>
-                            <a th:if="${siguiente!=null}" th:text="${siguiente.nombre}"
-                                th:href="@{/comentarioproducto/} +${siguiente.id}"></a>
+                            <div class="d-flex flex-column">
+                                <button th:if="${anterior!=null}" th:class="${producto.rubro.toString()}">
+                                    <a class="text-uppercase font-weight-bold text-decoration-none"
+                                        th:text="${anterior.nombre}" th:href="@{/comentarioproducto/} +${anterior.id}"
+                                        style="color: white;"></a>
+                                </button>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <button th:if="${siguiente!=null}" th:class="${producto.rubro.toString()}">
+                                    <a class="text-uppercase font-weight-bold text-decoration-none"
+                                        th:text="${siguiente.nombre}" 
+                                        style="color: white;"></a>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -67,7 +77,8 @@
                 <table class="table table-bordered">
                     <tbody th:each="comentario : ${comentarios}">
                         <tr>
-                            <td><span class="font-weight-bold" th:text="${comentario.usuario.usuario}"></span>: <span class="" th:text="${comentario.comentario}"></span></td>
+                            <td><span class="font-weight-bold" th:text="${comentario.usuario.usuario}"></span>: <span
+                                    class="" th:text="${comentario.comentario}"></span></td>
                         </tr>
                         <tr th:if="${session.usuariosession.id} == ${comentario.usuario.id}">
                             <td>
