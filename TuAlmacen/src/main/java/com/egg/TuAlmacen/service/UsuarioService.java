@@ -103,7 +103,7 @@ public class UsuarioService implements UserDetailsService {
 
             Usuario usu = respuesta.get();
 
-            if (u.getPassword() != usu.getPassword()) {
+            if (!u.getPassword().equals(usu.getPassword())) {
                 String encriptada = new BCryptPasswordEncoder().encode(u.getPassword());
                 u.setPassword(encriptada);
             }
