@@ -103,4 +103,16 @@ datalist {
   .ALIMENTOS:hover, .BEBIDAS:hover, .LIMPIEZA:hover, .ELECTRODOMESTICOS:hover, .HERRAMIENTAS:hover, .OTROS:hover{ color: #a3f4f5; text-decoration:none;}    
    
   
-  
+.barra {
+  background-color: orange;
+  padding-left: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: black;
+  font-weight: bold;
+}
+
+.barra:hover {
+  background-color: orangered;
+  color: black;
+}

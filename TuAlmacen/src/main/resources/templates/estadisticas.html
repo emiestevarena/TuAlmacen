@@ -13,19 +13,21 @@
 
   <div class="container mt-5">
     <div class="row">
-      <h2 class="mt-4">Cantidad de productos vendidos</h2>
-      <table class="table table-bordered mt-3">
+      <h2 class="mt-4">Cantidad productos vendidos</h2>
+      <table class="table table mt-3">
         <thead>
-          <tr>
-            <th scope="col">Producto</th>
-            <th scope="col">Cantidad Vendida</th>
+          <tr class="d-flex">
+            <th class="col-3">Producto</th>
+            <th class="col-2">Unidades vendidas</th>
+            <th class="col-7">Porcentaje</th>
           </tr>
         </thead>
         <tbody>
-          <tr th:each="venta : ${masvendidos}">
+          <tr class="d-flex" th:each="venta : ${masvendidos}">
             <div th:if="${venta.vendidos} > 0">
-              <td th:text="${venta.producto.nombre}"></td>
-              <td th:text="${venta.vendidos}"></td>
+              <td class="col-3" th:text="${venta.producto.nombre}"></td>
+              <td class="col-2" th:text="${venta.vendidos}"></td>
+              <td class="col-7"><span class="barra" th:style="'padding-right:'+ ${(venta.vendidos*100)/total}+'%;'" th:text="${(venta.vendidos*100)/total}+'%'"></span></td>
             </div>
           </tr>
         </tbody>
@@ -46,14 +48,14 @@
           </div>
           <div class="col">
             <label for="end" class="font-weight-normal">Fecha final</label>
-            <input name="end" type="date" value="2020-01-30" class="form-control">
+            <input  name="end" type="date" value="2020-01-30" class="form-control">
           </div>
         </div>
         <button type="submit" class="btn btn-dark mt-3">Consultar</button>
       </form>
     </div>
     <div class="row mt-3">
-      <h4>Ganancias del periodo: $<span th:text="${ganancias}"></span></h4>
+      <h4>Ganancias del periodo<span th:if="${startF!=null}" th:text="' de ' + ${startF} + ' a ' + ${endF}"></span>: $<span th:text="${ganancias}"></span></h4>
     </div>
   </div>
 

@@ -67,7 +67,7 @@
                             <input type="hidden" name="id" th:value="${pedido.id}">
                             <button class="btn btn-primary"type="submit">Anular</button>
                         </form>
-                        <form class="mb-1" th:unless="${#strings.endsWith(estadop, 'CONFIRMADO')}" action="/confirmarpedido" method="POST">
+                        <form class="mb-1" th:unless="${#strings.endsWith(estadop, 'CONFIRMADO') or #strings.endsWith(estadop, 'ANULADO')}" action="/confirmarpedido" method="POST">
                             <input type="hidden" name="id" th:value="${pedido.id}">
                             <button class="btn btn-success" type="submit">Confirmar</button>
                         </form>

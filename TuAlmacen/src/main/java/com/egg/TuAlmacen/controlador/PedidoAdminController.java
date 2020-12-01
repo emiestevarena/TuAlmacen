@@ -44,6 +44,7 @@ public class PedidoAdminController {
             modelo.put("estadop", estado);
             pedidos = pedidoService.listarPedidosPorEstado(Estado.valueOf(estado));
         } else {
+            modelo.put("estadop", "adsfadfa");
             pedidos = pedidoService.listarPedidosPorEstado(Estado.PENDIENTE);
         }
         modelo.put("pedidos", pedidos);
