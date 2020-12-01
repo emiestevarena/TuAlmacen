@@ -11,8 +11,7 @@
 
   <div th:replace="fragments :: nav_logueado"></div>
 
-  <!-- Page Content -->
-  <div class="container mt-5">
+  <div class="container mt-5 h-100">
 
     <div class="row">
 
@@ -21,14 +20,14 @@
             <h1 class="my-4 h4 ml-1" th:text="${session.usuariosession.usuario}"></h1>
             <div class="list-group">
                 <div th:each="estado : ${estados}">
-                    <a th:href="@{/pedido(estado=__${estado.toString()}__)}" class="list-group-item"><span
+                    <a th:href="@{/pedido(estado=__${estado.toString()}__)}" class="list-group-item list-group-item-action"><span
                             th:text="${estado}"></span></a>
                 </div>
             </div>
 
         </div>
 
-        <table class="table table-striped">
+        <table class="table table-striped mt-4">
             <thead>
                 <tr>
                     <th scope="col">Nombre de usuario</th>
@@ -37,6 +36,7 @@
                     <th scope="col">Total</th>
                     <th scope="col">Producto</th>
                     <th scope="col">Cantidad</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -58,21 +58,20 @@
                         <div th:each="cantidad : ${pedido.cantidad}">
                             <ul>
                                 <li><span th:text="${cantidad}"></span>
-                                    <!-- <span th:if="${cantidad} > ${producto.cantidad}" style="color: red;" th:text="excede la cantidad en stock"></span> -->
                                 </li>
                             </ul>
                         </div>
                     </td>
                     <td>
-                        <form action="/anularpedidoadmin" method="POST">
+                        <form class="mb-1" th:unless="${#strings.endsWith(estadop, 'ANULADO')}" action="/anularpedidoadmin" method="POST">
                             <input type="hidden" name="id" th:value="${pedido.id}">
                             <button class="btn btn-primary"type="submit">Anular</button>
                         </form>
-                        <form action="/confirmarpedido" method="POST">
+                        <form class="mb-1" th:unless="${#strings.endsWith(estadop, 'CONFIRMADO') or #strings.endsWith(estadop, 'ANULADO')}" action="/confirmarpedido" method="POST">
                             <input type="hidden" name="id" th:value="${pedido.id}">
                             <button class="btn btn-success" type="submit">Confirmar</button>
                         </form>
-                        <form action="/eliminarpedido" method="POST">
+                        <form class="mb-1" action="/eliminarpedido" method="POST">
                             <input type="hidden" name="id" th:value="${pedido.id}">
                             <button class="btn btn-danger"type="submit">Eliminar</button>
                         </form>
@@ -87,7 +86,6 @@
 
 
   </div>
-  <!-- /.container -->
 
   <div th:replace="fragments :: footer_principal"></div>
 

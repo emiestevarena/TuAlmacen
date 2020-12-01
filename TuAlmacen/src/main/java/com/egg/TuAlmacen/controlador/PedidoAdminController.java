@@ -41,14 +41,16 @@ public class PedidoAdminController {
     public String pedido(ModelMap modelo, @RequestParam(required = false) String estado) throws ErrorService {
         List<Pedido> pedidos = new ArrayList<Pedido>();
         if (estado != null) {
+            modelo.put("estadop", estado);
             pedidos = pedidoService.listarPedidosPorEstado(Estado.valueOf(estado));
         } else {
+            modelo.put("estadop", "adsfadfa");
             pedidos = pedidoService.listarPedidosPorEstado(Estado.PENDIENTE);
         }
         modelo.put("pedidos", pedidos);
         Set<Estado> estados = EnumSet.allOf(Estado.class);
         modelo.put("estados", estados);
-
+        
         return "pedido.html";
 
     }
