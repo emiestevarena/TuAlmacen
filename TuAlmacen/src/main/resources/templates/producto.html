@@ -18,7 +18,7 @@
 
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100">
+                <div class="card">
                     <a th:href="@{/comentarioproducto/} +${producto.id}"><img class="card-img-top"
                             th:src="@{'data:/'+${producto.foto.mime}+';base64,'+${producto.foto.getImgData()}}" alt="#"
                             style="width: 100%; height: 250px; object-fit: scale-down;" />
@@ -52,16 +52,24 @@
                         <div>
                             <h4>Productos similares</h4>
                             <div class="d-flex flex-column">
-                                <button th:if="${anterior!=null}" th:class="${producto.rubro.toString()}">
-                                    <a class="text-uppercase font-weight-bold text-decoration-none"
-                                        th:text="${anterior.nombre}" th:href="@{/comentarioproducto/} +${anterior.id}"
-                                        style="color: white;"></a>
-                                </button>
+                                <div class="container2">
+                                    <div class="anterior" th:if="${anterior!=null}">
+                                        
+                                        <div class="centered">
+                                            <a th:text="${anterior.nombre}"
+                                                th:href="@{/comentarioproducto/} +${anterior.id}"
+                                                style="color: black;">
+                                            </a>    
+                                        </div>
+                                        <img th:src="@{'data:/'+${anterior.foto.mime}+';base64,'+${anterior.foto.getImgData()}}"
+                                            style="width: 100%; height: 65px; object-fit: none;" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="d-flex flex-column">
                                 <button th:if="${siguiente!=null}" th:class="${producto.rubro.toString()}">
                                     <a class="text-uppercase font-weight-bold text-decoration-none"
-                                        th:text="${siguiente.nombre}" 
+                                        th:text="${siguiente.nombre}" th:href="@{/comentarioproducto/} +${siguiente.id}"
                                         style="color: white;"></a>
                                 </button>
                             </div>
@@ -101,6 +109,7 @@
 
             </div>
         </div>
+
     </div>
 
     </div>
@@ -115,7 +124,7 @@
     </div>
     <!-- /.container -->
 
-    <div th:replace="fragments :: footer_principal"></div>
+    <!-- <div th:replace="fragments :: footer_principal"></div> -->
 
     <div th:replace="fragments :: scripts_bootstrap"></div>
 
