@@ -2,6 +2,8 @@ package com.egg.TuAlmacen.service;
 
 import java.util.Locale;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -31,6 +33,20 @@ public class NotificacionMail {
         mailSender.send(mensaje);
     }
    
+    @Transactional
+    public void contactar(String mensaje, String asunto,Usuario u) {    	
+    	String usuario="usuario: " + u.getUsuario() + "\n";
+    	String email="Email: " + u.getEmail() + "\n";
+    	String cuerpo= usuario + email+"Consulta: " + mensaje;
+    	this.enviar(cuerpo, asunto, "tualmacenegg@gmail.com");
+    	
+  	
+    }
+    @Transactional
+    public void reset(Usuario u) {  
+        this.enviar("Felicidades su password cambio exitosamente", "Cambio de password", u.getEmail());
+
+    }
     public void constructResetTokenEmail(String contextPath, Locale locale, String token, Usuario usuario) {
     	
         String url = contextPath + "/user/changePassword/" + token;

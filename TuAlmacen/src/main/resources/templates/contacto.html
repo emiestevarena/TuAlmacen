@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<div th:replace="fragments :: head_principal"></div>
+
+</head>
+
+<body>
+
+	<div th:replace="fragments :: nav_logueado"></div>
+
+	<div class="container mt-5 h-100">
+		<p>
+			<br />
+		</p>
+		<h3 style="color: red" th:if="${ok!=null}" th:text="${ok}"></h3>
+
+
+		<div class="row mx-auto">
+			<div class="col-md-9 mb-md-0 mb-5 mx-auto" >
+				
+						<form action="/contactar" method="POST">
+							<div class="row align-items-stretch mb-5 mx-auto">
+								<div class="col-md-6 mx-auto">
+									<div class="md-form mb-0">
+										<input type="hidden" name="id" th:value="${usuario.id}">
+										<label for="asunto">Asunto</label> <input type="text" name="asunto"
+											placeholder="asunto" class="form-control" maxlength="30">
+										<p class="help-block text-danger"></p>
+									</div>
+									<div class="md-form mb-0">
+										<label for="mensaje">Mensaje</label>
+										<textarea rows="3" type="text"
+											name="mensaje" maxlength="1000" 
+											placeholder="Cuerpo del mensaje"  class="form-control md-textarea" required></textarea>
+										<p class="help-block text-danger"></p>
+									</div>
+
+									<button type="submit" class="btn btn-success mt-1">Enviar</button>
+								</div>
+							</div>
+						</form>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- /.row -->
+
+	
+	<!-- /.col-lg-9 -->
+
+	
+	<!-- /.row -->
+
+
+	<!-- /.container -->
+
+	<!-- <div th:replace="fragments :: footer_principal"></div> -->
+
+	<div th:replace="fragments :: scripts_bootstrap"></div>
+
+</body>
+
+</html>

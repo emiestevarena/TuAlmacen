@@ -6,7 +6,10 @@ package com.egg.TuAlmacen.controlador;
 import java.util.Optional;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,8 +39,29 @@ public class PasswordResetTokenControlador {
     private NotificacionMail notificacionServicio;
     @Autowired
     private PasswordResetTokenService passwordResetTokenService;
+    @Autowired
+    private HttpSession session;
+    
+    @PreAuthorize("hasRole('ROLE_USUARIO')")
+    @GetMapping("/contacto")
+    public String contacto(ModelMap modelo){
+    	Usuario u = (Usuario)
+    	session.getAttribute("usuariosession");
+    	modelo.put("usuario", u);
+    	return "contacto.html";}
+    
+    @PostMapping("/contactar")
+    public String contactar(ModelMap modelo, @RequestParam(required=true) String id,@RequestParam(required=true) String asunto,@RequestParam(required=true) String mensaje) {
+    	Usuario u=usuarioServicio.buscarPorId(id);     	
+    	notificacionServicio.contactar(mensaje, asunto, u);
+    	modelo.put("ok", "mensaje enviado con exito");
+    	return contacto(modelo);	
+    }
+    
 
+       
     @PostMapping("/user/resetpassword")
+    
     public String resetPassword(HttpServletRequest request,ModelMap modelo, @RequestParam("email") String userEmail) throws Error {
 
         Usuario empleado = usuarioRepositorio.buscarPorEmail(userEmail);
@@ -65,6 +89,14 @@ public class PasswordResetTokenControlador {
         modelo.put("usuario", usuario);
         return "resetcontra.html";
     }
+    @GetMapping("/changePassword")
+    public String editar2(ModelMap modelo, @RequestParam String id) {
+
+        Usuario usuario = usuarioServicio.buscarPorId(id);
+        modelo.put("usuario", usuario);
+        return "resetcontra.html";
+    }
+    
     @PostMapping("/resetcontra")
     public String npasword(ModelMap modelo, @RequestParam String clave, @RequestParam String clave2, @RequestParam String id) throws ErrorService {
 
@@ -75,36 +107,22 @@ public class PasswordResetTokenControlador {
             	String encriptada = new BCryptPasswordEncoder().encode(clave);
                 u.setPassword(encriptada);               
                 usuarioRepositorio.save(u);
+                notificacionServicio.reset(u);
                // notificacionServicio.enviar("Felicidades su password cambio exitosamente", "Cambio de password", u.getEmail());
-                //modelo.put("titulo", "Felicidades");
-               // modelo.put("mensaje", "Su contraseña fue cambiada exitosamente");
+                modelo.put("titulo", "Felicidades");
+                modelo.put("mensaje", "Su contraseña fue cambiada exitosamente");
 
-                return "login.html";
+                return editar2(modelo,id);
             }
-           // modelo.put("titulo", "Algo Salio mal");
-          //  modelo.put("error", "intente mas tarde");
+            modelo.put("titulo", "Algo Salio mal");
+            modelo.put("error", "intente mas tarde");
 
-            return "Cambiocontra.html";
+            return editar2(modelo,id);
         }
-       // modelo.put("titulo", "Algo Salio mal");
-       // modelo.put("error", "Las contraseñas no coinciden");
-        return "Cambiocontra.html";
+         modelo.put("titulo", "Algo Salio mal");
+         modelo.put("error", "Las contraseñas no coinciden");
+           return editar2(modelo,id);
     }
+   
 
-    private static class GenericResponse {
-
-        private String message;
-        private String error;
-
-        public GenericResponse(String message) {
-            super();
-            this.message = message;
-        }
-
-        public GenericResponse(String message, String error) {
-            super();
-            this.message = message;
-            this.error = error;
-        }
-    }
 }
