@@ -22,7 +22,7 @@ public class NotificacionMail {
 
   
     
-    @Async("enviar")
+    @Async
     public void enviar(String cuerpo,String titulo, String mail){
          
         SimpleMailMessage mensaje = new SimpleMailMessage();
@@ -33,7 +33,7 @@ public class NotificacionMail {
         mailSender.send(mensaje);
     }
    
-    @Transactional
+    @Async
     public void contactar(String mensaje, String asunto,Usuario u) {    	
     	String usuario="usuario: " + u.getUsuario() + "\n";
     	String email="Email: " + u.getEmail() + "\n";

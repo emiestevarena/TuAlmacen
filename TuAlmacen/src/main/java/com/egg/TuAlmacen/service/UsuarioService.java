@@ -1,5 +1,7 @@
 package com.egg.TuAlmacen.service;
 
+import com.egg.TuAlmacen.entidad.Comentario;
+import com.egg.TuAlmacen.entidad.Pedido;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +24,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.egg.TuAlmacen.entidad.Usuario;
 import com.egg.TuAlmacen.enums.Rol;
 import com.egg.TuAlmacen.error.ErrorService;
+import com.egg.TuAlmacen.repositorio.PedidoRepositorio;
 import com.egg.TuAlmacen.repositorio.UsuarioRepositorio;
 
 @Service
@@ -33,6 +36,12 @@ public class UsuarioService implements UserDetailsService {
     @Autowired
     private NotificacionMail notificacionMail;
 
+    @Autowired
+    private PedidoRepositorio pedidoRepositorio;
+    
+    @Autowired
+    private ComentarioService comentarioService;
+    
     public Long count() {
 
         return usuarioRepositorio.count();
@@ -125,6 +134,28 @@ public class UsuarioService implements UserDetailsService {
 
             Usuario usu = respuesta.get();
 
+            Usuario eliminado = this.buscarPorRol(Rol.ELIMINADO);
+
+            if (eliminado == null) {
+                eliminado = new Usuario();
+                eliminado.setRol(Rol.ELIMINADO);
+                eliminado.setUsuario("Usuario Eliminado");
+                usuarioRepositorio.save(eliminado);
+            }
+
+            List<Pedido> pedidos = pedidoRepositorio.mispedidos(id);
+            
+            for (Pedido pedido : pedidos) {
+                pedido.setUsuario(eliminado);
+                pedidoRepositorio.save(pedido);
+            }
+            
+            List<Comentario> comentarios = comentarioService.listarComentariosPorUsuario(id);
+            
+            for (Comentario comentario : comentarios) {
+                comentarioService.eliminarComentario(comentario.getId());
+            }
+            
             usuarioRepositorio.delete(usu);
 
         } else {
@@ -192,4 +223,8 @@ public class UsuarioService implements UserDetailsService {
 
     }
 
+    @Transactional
+    public Usuario buscarPorRol(Rol rol) throws ErrorService {
+        return usuarioRepositorio.buscarPorRol(rol);
+    }
 }
