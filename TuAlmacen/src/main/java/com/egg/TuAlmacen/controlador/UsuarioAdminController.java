@@ -65,8 +65,8 @@ public class UsuarioAdminController {
                               @RequestParam(required=true) String id,
                               @RequestParam(required=false) String usuario,
                               @RequestParam(required=false) String email,
-                              @RequestParam(required=false) String password,
-                              @RequestParam(required=false) String repetir,
+                              @RequestParam(required=true) String password,
+                              @RequestParam(required=true) String repetir,
                               @RequestParam(required=false) String rol)throws ErrorService{
         try{
             Usuario u = usuarioService.buscarPorId(id);
@@ -76,7 +76,7 @@ public class UsuarioAdminController {
             if(rol.equals("usuario")){u.setRol(Rol.USUARIO);}
             if(rol.equals("admin")){u.setRol(Rol.ADMIN);}
             if(repetir!=null && !repetir.isEmpty() && repetir!=password){throw new ErrorService("las contraseñas no coinciden");}
-            usuarioService.modificarUsuario(u);
+            usuarioService.modificarUsuario(u.getId(), u.getUsuario(), u.getEmail(), password, repetir, u.getRol());;
             
             modelo.put("ok", "modificación exitosa");
         }catch(ErrorService ex){

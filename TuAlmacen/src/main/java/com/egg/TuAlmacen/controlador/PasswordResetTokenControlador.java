@@ -49,8 +49,7 @@ public class PasswordResetTokenControlador {
         notificacionServicio.constructResetTokenEmail("http://localhost:8080", request.getLocale(), token, empleado);
         //return new GenericResponse("message.resetPasswordEmail");
 		modelo.put("mensaje", "mensaje enviado");
-        return editar(modelo);
-        
+        return editar(modelo);    
     }
 
     @GetMapping("/user/changePassword")
