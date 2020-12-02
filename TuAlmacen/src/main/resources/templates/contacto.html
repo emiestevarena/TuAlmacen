@@ -15,11 +15,11 @@
 		<p>
 			<br />
 		</p>
-		<h3 style="color: red" th:if="${ok!=null}" th:text="${ok}"></h3>
-
-
+		
+		
 		<div class="row mx-auto">
-			<div class="col-md-9 mb-md-0 mb-5 mx-auto" >
+			<div class="col-md-9 mb-md-0 mb-5 mx-auto text-center" >
+				<h3 style="color: green" th:if="${ok!=null}" th:text="${ok}"></h3>
 				
 						<form action="/contactar" method="POST">
 							<div class="row align-items-stretch mb-5 mx-auto">

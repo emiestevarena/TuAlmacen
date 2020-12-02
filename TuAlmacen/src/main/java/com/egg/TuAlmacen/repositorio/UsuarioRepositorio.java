@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.egg.TuAlmacen.entidad.Usuario;
+import com.egg.TuAlmacen.enums.Rol;
 
 
 
@@ -17,5 +18,8 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario,String>{
 	public Usuario buscarPorUsuario(@Param("usuario")String usuario);
 	@Query("SELECT c FROM Usuario c WHERE c.email =:email")
 	public Usuario buscarPorEmail(@Param("email")String email);
+        @Query("SELECT c FROM Usuario c WHERE c.rol =:rol")
+	public Usuario buscarPorRol(@Param("rol")Rol rol);
+        
 	
 }

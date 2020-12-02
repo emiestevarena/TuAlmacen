@@ -16,10 +16,10 @@ import com.egg.TuAlmacen.entidad.Producto;
 @Repository
 public interface ComentarioRepositorio extends JpaRepository<Comentario,String>{
 
-	
-	@Query("SELECT c FROM Comentario c, IN(c.producto) p WHERE p.id LIKE :id")
+    @Query("SELECT c FROM Comentario c, IN(c.producto) p WHERE p.id LIKE :id")
     public List<Comentario>comentarioporproducto(@Param("id") String id);
 	
-	
+    @Query("SELECT c FROM Comentario c, IN(c.usuario) p WHERE p.id LIKE :id")
+    public List<Comentario>comentarioPorUsuario(@Param("id") String id);
 }
 

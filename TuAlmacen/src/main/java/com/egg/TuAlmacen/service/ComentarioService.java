@@ -131,4 +131,9 @@ public class ComentarioService {
 		}	
 		
 	}
+        
+        @Transactional
+	public List<Comentario> listarComentariosPorUsuario(String id) throws ErrorService {
+            return comentarioRepositorio.comentarioPorUsuario(id);
+        }
 }
