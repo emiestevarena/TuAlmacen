@@ -17,8 +17,10 @@
 			<div class="justify-content-center text-center">
 				<h1 class="display-4">Recuperar contrasena!</h1>
 				<p class="lead">Por favor coloque su nueva contrasena.</p>
+				<h5 th:if="${titulo !=null}" th:text="${titulo}" style="color: black;"></h5>
 				<h5 th:if="${error !=null}" th:text="${error}" style="color: red;"></h5>
 				<h5 th:if="${mensaje !=null}" th:text="${mensaje}" style="color: green;"></h5>
+				
 			</div>
 			<hr class="my-4">
 			<div class="container">

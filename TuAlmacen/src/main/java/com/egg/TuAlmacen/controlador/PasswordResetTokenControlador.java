@@ -71,28 +71,25 @@ public class PasswordResetTokenControlador {
 
         if (clave.equals(clave2)) {
             Usuario u= usuarioServicio.buscarPorId(id);
-            if (u!= null) {  
-            	
+            if (u!= null) {              	
             	
             	String encriptada = new BCryptPasswordEncoder().encode(clave);
                 u.setPassword(encriptada);               
                 usuarioRepositorio.save(u);
-                notificacionServicio.enviar("Felicidades su password cambio exitosamente", "Cambio de password", u.getEmail());
-                modelo.put("titulo", "Felicidades");
-                modelo.put("mensaje", "Su contraseña fue cambiada exitosamente");
+               // notificacionServicio.enviar("Felicidades su password cambio exitosamente", "Cambio de password", u.getEmail());
+                //modelo.put("titulo", "Felicidades");
+               // modelo.put("mensaje", "Su contraseña fue cambiada exitosamente");
 
-                return this.editar(modelo, id);
+                return "login.html";
             }
+           // modelo.put("titulo", "Algo Salio mal");
+          //  modelo.put("error", "intente mas tarde");
 
-            modelo.put("titulo", "Algo Salio mal");
-            modelo.put("error", "intente mas tarde");
-
-            return this.editar(modelo, id);
-
+            return "Cambiocontra.html";
         }
-        modelo.put("titulo", "Algo Salio mal");
-        modelo.put("error", "Las contraseñas no coinciden");
-        return this.editar(modelo, id);
+       // modelo.put("titulo", "Algo Salio mal");
+       // modelo.put("error", "Las contraseñas no coinciden");
+        return "Cambiocontra.html";
     }
 
     private static class GenericResponse {

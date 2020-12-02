@@ -30,10 +30,7 @@ public class NotificacionMail {
         mensaje.setText(cuerpo);
         mailSender.send(mensaje);
     }
-    @Async("enviar")
-    public void enviarr(SimpleMailMessage mensaje){
-        mailSender.send(mensaje);
-    }
+   
     public void constructResetTokenEmail(String contextPath, Locale locale, String token, Usuario usuario) {
     	
         String url = contextPath + "/user/changePassword/" + token;
@@ -43,15 +40,6 @@ public class NotificacionMail {
         
         //return constructEmail("Reset Password", message + " \r\n" + url, usuario);
     }
-     
-    private SimpleMailMessage constructEmail(String subject, String body, Usuario usuario) {
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setSubject(subject);
-        email.setText(body);
-        email.setTo(usuario.getEmail());
-        email.setFrom("tualmacenegg@gmail.com");
-        return email;
-    }
-        
+      
 }
 
