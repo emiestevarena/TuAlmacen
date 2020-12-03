@@ -16,6 +16,9 @@ body {
 datalist {
   display: none;
 }
+.bg-primary {
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(../img/17.jpg);
+}
 
 .ALIMENTOS {
   background-image: url("../img/1.jpg");
@@ -230,4 +233,11 @@ datalist {
   overflow: hidden;
   color: white;
 }
-
+.display-4 {
+    padding-top: 50px;
+    /* margin-bottom: 30px; */
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
