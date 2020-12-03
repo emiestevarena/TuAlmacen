@@ -44,11 +44,16 @@
                             </div>
                         </div>
                         <form class="ml-2" method="POST" action="/buscar">
-                            <input type="text" list="lista" name="producto">
+                            <input list="lista" name="producto" id="barraInput">
                             <datalist id="lista" style="display: none;">
-                                <option th:each="producto: ${productos}" th:text="${producto.nombre}">
-                                </option>
+                                <div th:each="producto: ${productos}">
+                                    <div>
+                                        <option th:text="${producto.nombre}">
+                                        </option>
+                                    </div>
+                                </div>
                             </datalist>
+                            <!-- <input th:list="${productos}" name="producto"> -->
                             <button class="btn btn-secondary" type="submit">Ir</button>
                         </form>
 

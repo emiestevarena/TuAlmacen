@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.egg.TuAlmacen.entidad.Pedido;
+import com.egg.TuAlmacen.entidad.Producto;
 import com.egg.TuAlmacen.enums.Estado;
 import java.util.Date;
 import java.util.List;
@@ -34,4 +35,7 @@ public interface PedidoRepositorio extends JpaRepository<Pedido, String> {
     @Query("select p from Pedido p where p.estado LIKE 'CONFIRMADO' and p.fecha between :start and :end")
     public List<Pedido> ventasEfectivasPorPeriodo(@Param("start") Date start, @Param("end") Date end);
 
+    @Query("SELECT p FROM Pedido p WHERE :producto member of p.productos")
+    public List<Pedido> pedidosPorProducto(@Param("producto") Producto producto);
+    
 }
