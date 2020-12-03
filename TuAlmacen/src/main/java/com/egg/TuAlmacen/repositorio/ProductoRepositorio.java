@@ -20,7 +20,10 @@ public interface ProductoRepositorio extends JpaRepository<Producto,String>{
         @Query("SELECT c FROM Producto c WHERE c.rubro LIKE :rubro")
 	public List<Producto> buscarPorRubro(@Param("rubro") Rubro rubro);
         
-        @Query("SELECT c FROM Producto c GROUP BY c.rubro")
+        @Query("SELECT c FROM Producto c WHERE c.rubro NOT LIKE 'DESHABILITADOS' GROUP BY c.rubro")
 	public List<Producto> buscarPrimeroRubro();
+        
+        @Query("SELECT c FROM Producto c WHERE c.rubro NOT LIKE 'DESHABILITADOS'")
+	public List<Producto> buscarHabilitados();
 	
 }

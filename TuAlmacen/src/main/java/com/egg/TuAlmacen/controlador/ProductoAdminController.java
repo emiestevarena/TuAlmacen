@@ -78,19 +78,26 @@ public class ProductoAdminController {
     @PostMapping("/modificarproducto")
     public String modificarproducto(ModelMap modelo,
             @RequestParam String id,
-            @RequestParam String nombre,
-            @RequestParam String precioCompra,
-            @RequestParam String precioVenta,
-            @RequestParam String cantidad,
-            @RequestParam String descripcion,
-            @RequestParam String rubro,
+            @RequestParam(required=false) String nombre,
+            @RequestParam(required=false) String precioCompra,
+            @RequestParam(required=false) String precioVenta,
+            @RequestParam(required=false) String cantidad,
+            @RequestParam(required=false) String descripcion,
+            @RequestParam(required=false) String rubro,
             MultipartFile archivo) throws ErrorService {
 
         try {
-
-            productoService.modificarProducto(id, nombre, Double.parseDouble(precioCompra),
-                    Integer.parseInt(cantidad), Double.parseDouble(precioVenta),
-                    descripcion, archivo, Rubro.valueOf(rubro));
+            
+            Producto producto = productoService.buscarPorId(id);
+            
+            if(nombre!=null&&!nombre.isEmpty()){producto.setNombre(nombre);}
+            if(precioCompra!=null&&!precioCompra.isEmpty()){producto.setPrecioCompra(Double.parseDouble(precioCompra));}
+            if(precioVenta!=null&&!precioVenta.isEmpty()){producto.setPrecioVenta(Double.parseDouble(precioVenta));}
+            if(cantidad!=null&&!cantidad.isEmpty()){producto.setCantidad(Integer.parseInt(cantidad));}
+            if(descripcion!=null&&!descripcion.isEmpty()){producto.setDescripcion(descripcion);}
+            if(rubro!=null&&!rubro.isEmpty()){producto.setRubro(Rubro.valueOf(rubro));}
+            
+            productoService.modificarProducto(producto, archivo);
 
 
         } catch (Exception e) {
