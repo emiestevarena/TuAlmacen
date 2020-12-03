@@ -50,12 +50,13 @@ public class UsuarioController {
         List<Producto> productos;
 
         Set<Rubro> rubros = EnumSet.allOf(Rubro.class);
+        rubros.remove(Rubro.DESHABILITADOS);
         modelo.put("rubros", rubros);
 
         if (rubro != null) {
             productos = productoService.listarProductosPorRubro(rubro);
         } else {
-            productos = productoService.listarProducto();
+            productos = productoService.listarHabilitados();
         }
 
         modelo.put("productos", productos);
@@ -67,7 +68,7 @@ public class UsuarioController {
             largoCarrito = p.getProductos().size();
         }
         modelo.put("largocarrito", largoCarrito);
-        }catch(ErrorService ex){
+        }catch(Exception ex){
             modelo.put("error", ex.getMessage());
             return "inicio.html";
         }

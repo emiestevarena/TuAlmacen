@@ -120,6 +120,20 @@ public class ProductoService {
 
     }
 
+        @Transactional
+    public void modificarProducto(Producto producto, MultipartFile archivo) throws ErrorService {
+
+        
+            if (archivo != null) {
+                Foto foto = fotoService.guardar(archivo);
+                producto.setFoto(foto);
+            }
+
+            productoRepositorio.save(producto);
+
+
+    }
+    
     @Transactional
     public void eliminarProducto(String id) throws ErrorService {
 
@@ -155,6 +169,10 @@ public class ProductoService {
 
     public List<Producto> listarSeis() {
         return productoRepositorio.buscarPrimeroRubro();
+    }
+    
+    public List<Producto> listarHabilitados() {
+        return productoRepositorio.buscarHabilitados();
     }
 
     public void validar(String nombre, Double precioCompra, Integer cantidad, Double precioVenta, String descripcion,
