@@ -362,4 +362,8 @@ public class PedidoService {
         return ganancias;
     }
 
+    @Transactional
+    public List<Pedido> pedidosPorProducto(Producto producto) {
+        return pedidoRepositorio.pedidosPorProducto(producto);
+    }
 }

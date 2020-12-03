@@ -1,5 +1,6 @@
 package com.egg.TuAlmacen.service;
 
+import com.egg.TuAlmacen.entidad.Comentario;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.egg.TuAlmacen.entidad.Foto;
+import com.egg.TuAlmacen.entidad.Pedido;
 import com.egg.TuAlmacen.entidad.Producto;
 import com.egg.TuAlmacen.enums.Rubro;
 import com.egg.TuAlmacen.error.ErrorService;
@@ -23,7 +25,10 @@ public class ProductoService {
     private ProductoRepositorio productoRepositorio;
     @Autowired
     private FotoRepositorio fotoRepositorio;
-
+    @Autowired
+    private PedidoService pedidoService;
+    @Autowired
+    private ComentarioService comentarioService;
     @Autowired
     private FotoService fotoService;
 
@@ -123,6 +128,19 @@ public class ProductoService {
         if (respuesta.isPresent()) {
 
             Producto producto = respuesta.get();
+                    
+            List<Pedido> pedidos = pedidoService.pedidosPorProducto(producto);
+            
+            for (Pedido pedido : pedidos) {
+                pedidoService.quitar(pedido, producto);
+            }
+            
+            List<Comentario> comentarios = comentarioService.listarComentariosPorProducto(id);
+            
+            for (Comentario comentario : comentarios) {
+                comentarioService.eliminarComentario(comentario.getId());
+            }
+            
             fotoRepositorio.delete(producto.getFoto());
             productoRepositorio.delete(producto);
 

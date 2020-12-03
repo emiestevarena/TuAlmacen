@@ -74,12 +74,12 @@ public class ComentarioUsuarioController {
     }
 
     @PostMapping("/buscar")
-    public String buscar(ModelMap modelo, @RequestParam String producto) throws ErrorService{
+    public String buscar(ModelMap modelo, @RequestParam(required=false) String producto) throws ErrorService{
         Producto p = productoService.buscarPorNombre(producto);
         if (p!=null){
             return this.comentariosproducto(modelo, p.getId());
         }else{
-            return null;
+            return "redirect:/inicio";
         }
     }
     
