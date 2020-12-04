@@ -1,5 +1,5 @@
 # TuAlmacen
-Una página web de compras desarrollada en Java, Spring y Thymleaf
+Una página web de compras desarrollada en Java, Spring y Thymeleaf
 
 # Funcionalidades
 - Comprar artículos y comentar sobre ellos
