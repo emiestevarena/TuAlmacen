@@ -12,6 +12,10 @@
             <properties>
                 <exec.args>-classpath %classpath com.egg.TuAlmacen.TuAlmacenApplication</exec.args>
                 <exec.executable>java</exec.executable>
+                <Env.DBSCHEMA>heroku_1f0366a57ed7915</Env.DBSCHEMA>
+                <Env.DBHOSTNAME>us-cdbr-east-02.cleardb.com</Env.DBHOSTNAME>
+                <Env.DBPASSWORD>02ab4e2d</Env.DBPASSWORD>
+                <Env.DBUSERNAME>bfe6ca48840204</Env.DBUSERNAME>
             </properties>
         </action>
     </actions>
