@@ -24,18 +24,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/miperfil">Mi perfil</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" th:if="${session.usuariosession.rol.toString() == 'USUARIO'}">
                             <a class="nav-link" href="/contacto">Contacto</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">Salir</a>
                         </li>
-                        <div th:if="${session.usuariosession.rol.toString() == 'ADMIN'}" class="dropdown ml-1">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div th:if="${session.usuariosession.rol.toString() == 'ADMIN'}" class="dropdown">
+                            <button class="btn btn-secondary" type="button">
                                 Administrar
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-content">
                                 <a class="dropdown-item" href="/usuarios">Usuarios</a>
                                 <a class="dropdown-item" href="/productos">Productos</a>
                                 <a class="dropdown-item" href="/pedido">Pedidos</a>
