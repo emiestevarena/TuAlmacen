@@ -18,3 +18,5 @@ Una página web de compras desarrollada en Java, Spring y Thymeleaf
 # Vistas:
 Accedé al siguiente [link](https://drive.google.com/drive/folders/1BcS3xLQwTkxzmyoRDfi8BFmgEepI6S-6?usp=sharing) para ver las vistas.
 
+# Probá la página (no hay negocio desplegado aún)
+http://tualmacen.herokuapp.com/
