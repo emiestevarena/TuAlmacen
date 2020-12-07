@@ -1,40 +1,40 @@
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\formato\Fecha.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\service\FotoService.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\ProductoAdminController.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\service\ComentarioService.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\entidad\Producto.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\formato\Ventas.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\LoginController.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\PedidoUsuarioController.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\entidad\Usuario.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\UsuarioController.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\EstadisticasController.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\error\ErrorService.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\repositorio\ComentarioRepositorio.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\IndexController.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\ComentarioAdminController.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\repositorio\FotoRepositorio.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\repositorio\ProductoRepositorio.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\service\PasswordResetTokenService.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\RegistroController.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\entidad\Pedido.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\service\PedidoService.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\PedidoAdminController.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\service\UsuarioService.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\ComentarioUsuarioController.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\enums\Rubro.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\entidad\PasswordResetToken.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\entidad\Foto.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\repositorio\UsuarioRepositorio.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\PasswordResetTokenControlador.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\configuracion\SecurityConfiguration.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\ErroresController.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\service\NotificacionMail.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\repositorio\PedidoRepositorio.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\enums\Rol.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\controlador\UsuarioAdminController.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\service\ProductoService.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\entidad\Comentario.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\enums\Estado.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\TuAlmacenApplication.java
-D:\Descargas\Egg\Proyecto Final\TuAlmacen\TuAlmacen\src\main\java\com\egg\TuAlmacen\repositorio\PasswordResetTokenRepositorio.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/PedidoAdminController.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/repositorio/PasswordResetTokenRepositorio.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/service/PasswordResetTokenService.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/ComentarioUsuarioController.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/RegistroController.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/repositorio/FotoRepositorio.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/enums/Estado.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/PasswordResetTokenControlador.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/EstadisticasController.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/service/PedidoService.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Producto.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/repositorio/ProductoRepositorio.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/service/UsuarioService.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/formato/Ventas.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/service/FotoService.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/UsuarioAdminController.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/repositorio/PedidoRepositorio.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/enums/Rol.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/service/ComentarioService.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/ComentarioAdminController.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/IndexController.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/LoginController.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/ErroresController.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/error/ErrorService.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/PedidoUsuarioController.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/service/ProductoService.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/service/NotificacionMail.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Foto.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/UsuarioController.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/TuAlmacenApplication.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/formato/Fecha.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Usuario.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Pedido.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/configuracion/SecurityConfiguration.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/enums/Rubro.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/repositorio/UsuarioRepositorio.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/Comentario.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/entidad/PasswordResetToken.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/repositorio/ComentarioRepositorio.java
+/home/emiliano/NetBeansProjects/TuAlmacen/TuAlmacen/src/main/java/com/egg/TuAlmacen/controlador/ProductoAdminController.java
